@@ -8,6 +8,12 @@ public class PlayerManager : MonoBehaviour
     
     public void OnPlayerJoin(PlayerInput playerInput)
     {
+        if (_playerList.Count >= 2)
+        {
+            Destroy(playerInput.gameObject);
+            return;
+        }
+        
         PlayerData pData = playerInput.gameObject.GetComponent<PlayerData>();
         if(DebugHelper.IsNull(pData, name, nameof(PlayerManager)))
            return;
