@@ -10,9 +10,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Data")] 
     [SerializeField] private float _speed = 5;
+    [SerializeField] private float _sprintMultiplier = 2f;
 
     [Header("Maths")] 
     private Vector3 _movementInput;
+    private bool _isSprinting = false;
 
 #if UNITY_EDITOR
     private void Awake()
@@ -25,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if(_movementInput != Vector3.zero)
+
             _rb.MovePosition(_rb.position + _movementInput * Time.fixedDeltaTime * _speed);
     }
     
@@ -36,6 +39,15 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(_movementInput, Vector3.up);
         }
         else
-            _movementInput = Vector3.zero;            
+            _movementInput = Vector3.zero;
+    }
+
+    public void OnPlayerSprint(InputAction.CallbackContext ctx)
+    {
+        _isSprinting = ctx.performed;
+        if (_isSprinting == true)
+        {
+            _speed *= _sprintMultiplier;
+        }
     }
 }
