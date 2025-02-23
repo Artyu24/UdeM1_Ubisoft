@@ -10,6 +10,8 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Data")] 
     [SerializeField, Min(0.1f)] private float _dist = 1;
+    [SerializeField, Min(0.1f)] private float _width = 0.4f;
+    [SerializeField, Min(0.1f)] private float _height = 1;
     private IGrabbable _grabbedObj;
     
     public void OnPlayerGrab(InputAction.CallbackContext ctx)
@@ -23,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
             
-            RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(0.2f, 1f, 0.2f), _grabPos.forward, Quaternion.identity, _dist);
+            RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_width, _height, _width), _grabPos.forward, Quaternion.identity, _dist);
             if (hits.Length > 0)
             {
                 foreach (var objectHit in hits)
