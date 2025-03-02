@@ -2,16 +2,19 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Transform _grabPos;
+    
+    [Header("Data Trigger Zone")] 
+    [SerializeField, Min(0.1f)] private float _boxDist = 1;
+    [SerializeField, Min(0.1f)] private float _boxWidth = 0.4f;
+    [SerializeField, Min(0.1f)] private float _boxHeight = 1;
 
-    [Header("Data")] 
-    [SerializeField, Min(0.1f)] private float _dist = 1;
-    [SerializeField, Min(0.1f)] private float _width = 0.4f;
-    [SerializeField, Min(0.1f)] private float _height = 1;
+    [Header("Grab")] 
     private IGrabbable _grabbedObj;
     
     public void OnPlayerGrab(InputAction.CallbackContext ctx)
@@ -25,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
             
-            RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_width, _height, _width), _grabPos.forward, Quaternion.identity, _dist);
+            RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_boxWidth, _boxHeight, _boxWidth), _grabPos.forward, Quaternion.identity, _boxDist);
             if (hits.Length > 0)
             {
                 foreach (var objectHit in hits)
@@ -43,8 +46,29 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
+
+    public void OnPlayerInteract(InputAction.CallbackContext ctx)
     {
-        Gizmos.DrawWireCube(_grabPos.position + _grabPos.forward, new Vector3(0.2f, 1f, 0.2f) * 2f);
+        if (ctx.started)
+        {
+            RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_boxWidth, _boxHeight, _boxWidth), _grabPos.forward, Quaternion.identity, _boxDist);
+            if (hits.Length > 0)
+            {
+                foreach (var objectHit in hits)
+                {
+                    IInteractable objectInteract = objectHit.transform.GetComponent<IInteractable>();
+                    if (objectInteract != null)
+                    {
+                        objectInteract.Interact();
+                        break;
+                    }
+                }
+            }
+        }
     }
+    
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireCube(_grabPos.position + _grabPos.forward, new Vector3(0.2f, 1f, 0.2f) * 2f);
+    //}
 }

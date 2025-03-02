@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Object : MonoBehaviour, IGrabbable
+public class GrabObject : ObjectBase, IGrabbable
 {
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Collider _col;
