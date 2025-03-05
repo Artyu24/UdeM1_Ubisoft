@@ -4,7 +4,12 @@ public class GrabObject : ObjectBase, IGrabbable
 {
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Collider _col;
-    
+
+    public ObjectBase GetObjectBase()
+    {
+        return this;
+    }
+
     public void OnGrab(Transform catcher)
     {
         transform.SetParent(catcher);
@@ -12,7 +17,7 @@ public class GrabObject : ObjectBase, IGrabbable
         if(_rb != null)
             _rb.constraints = RigidbodyConstraints.FreezeAll;
         if(_col != null)
-            _col.enabled = false;
+            _col.isTrigger = true;
     }
 
     public void OnRelease()
@@ -22,6 +27,6 @@ public class GrabObject : ObjectBase, IGrabbable
         if(_rb != null)
             _rb.constraints = RigidbodyConstraints.None;
         if(_col != null)
-            _col.enabled = true;
+            _col.isTrigger = false;
     }
 }

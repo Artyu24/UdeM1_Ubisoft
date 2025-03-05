@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void OnPlayerMove(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && ctx.ReadValue<Vector2>().sqrMagnitude > 0.1f)
         {
             _movementInput = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
             transform.rotation = Quaternion.LookRotation(_movementInput, Vector3.up);
