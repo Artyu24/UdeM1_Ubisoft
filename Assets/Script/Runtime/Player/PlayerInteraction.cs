@@ -16,7 +16,18 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Grab")] 
     private IGrabbable _grabbedObj;
-    
+    public IGrabbable GrabbedObj { get => _grabbedObj; }
+
+    [Header("Interact")] 
+    public Action OnPlayerInteractAction; 
+
+#if UNITY_EDITOR
+    private void Awake()
+    {
+        DebugHelper.IsNull(_grabPos, name, nameof(PlayerInteraction));
+    }
+#endif
+
     public void OnPlayerGrab(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
@@ -51,6 +62,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ctx.started)
         {
+            //If an Action is possible
+            if (OnPlayerInteractAction != null)
+            {
+                OnPlayerInteractAction.Invoke();
+                return;
+            }
+            
+            //Else, find some object to interact with
             RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_boxWidth, _boxHeight, _boxWidth), _grabPos.forward, Quaternion.identity, _boxDist);
             if (hits.Length > 0)
             {
