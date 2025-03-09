@@ -19,6 +19,8 @@ public class PlayerManager : MonoBehaviour
            return;
         
         pData.SetupPlayerData(playerInput.playerIndex);
+
+        playerInput.gameObject.transform.position = transform.position;
         
         _playerList.Add(playerInput);
     }
