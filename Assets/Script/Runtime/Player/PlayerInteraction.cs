@@ -34,8 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (_grabbedObj != null)
             {
-                _grabbedObj.OnRelease();
-                _grabbedObj = null;
+                ReleaseObject();
                 return;
             }
             
@@ -47,15 +46,26 @@ public class PlayerInteraction : MonoBehaviour
                     IGrabbable objectGrab = objectHit.transform.GetComponent<IGrabbable>();
                     if (objectGrab != null)
                     {
-                        objectGrab.OnGrab(transform);
-                        objectHit.transform.DOLocalMove(_grabPos.localPosition, 0.2f);
-
-                        _grabbedObj = objectGrab;
+                        GrabObject(objectGrab);
                         break;
                     }
                 }
             }
         }
+    }
+
+    public void GrabObject(IGrabbable objectGrab)
+    {
+        objectGrab.OnGrab(transform);
+        objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
+
+        _grabbedObj = objectGrab;
+    }
+
+    public void ReleaseObject()
+    {
+        _grabbedObj.OnRelease();
+        _grabbedObj = null;
     }
 
     public void OnPlayerInteract(InputAction.CallbackContext ctx)
