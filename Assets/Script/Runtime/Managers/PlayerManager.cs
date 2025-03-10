@@ -9,14 +9,17 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    private List<PlayerInput> _playerList = new List<PlayerInput>();
+    public List<PlayerInput> _playerList {  get; private set; }
 
     private void Awake()
     {
+        
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
+
+        _playerList = new List<PlayerInput>();
     }
 
     private void Start()
