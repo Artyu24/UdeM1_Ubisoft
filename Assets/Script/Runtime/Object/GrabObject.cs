@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GrabObject : ObjectBase, IGrabbable
 {
@@ -28,5 +29,8 @@ public class GrabObject : ObjectBase, IGrabbable
             _rb.constraints = RigidbodyConstraints.None;
         if(_col != null)
             _col.isTrigger = false;
+        
+        if(gameObject.scene != SceneManager.GetActiveScene())
+            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
     }
 }
