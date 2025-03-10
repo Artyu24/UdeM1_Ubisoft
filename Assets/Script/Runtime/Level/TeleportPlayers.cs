@@ -54,12 +54,12 @@ public class TeleportPlayers : MonoBehaviour
         }
         
         //Launch TP
-        StartCoroutine(TeleportDelay());
+        if(HUDManager.instance != null)
+            HUDManager.instance.FadeInTransition(LoadScene);
     }
 
-    private IEnumerator TeleportDelay()
+    private void LoadScene()
     {
-        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(_sceneName);
     }
     
