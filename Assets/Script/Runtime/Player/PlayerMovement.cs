@@ -31,8 +31,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_movementInput != Vector3.zero && !_isPushed)
-            _rb.MovePosition(_rb.position + _movementInput * Time.fixedDeltaTime * _moveSpeed);
+        if (_movementInput != Vector3.zero && !_isPushed)
+        {
+            Vector3 camFow = Camera.main.transform.forward;
+            Vector3 camRig = Camera.main.transform.right;
+
+            camFow.y = 0;
+            camRig.y = 0;
+
+            Vector3 fRel = _movementInput.z * camFow;
+            Vector3 rRel = _movementInput.x * camRig;
+
+            Vector3 moveDir = fRel + rRel;
+            
+            _rb.MovePosition(_rb.position + moveDir * Time.fixedDeltaTime * _moveSpeed);
+            
+            transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+        }
     }
     
     public void OnPlayerMove(InputAction.CallbackContext ctx)
@@ -40,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
         if (ctx.performed && ctx.ReadValue<Vector2>().sqrMagnitude > 0.1f)
         {
             _movementInput = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
-            transform.rotation = Quaternion.LookRotation(_movementInput, Vector3.up);
         }
         else
             _movementInput = Vector3.zero;            

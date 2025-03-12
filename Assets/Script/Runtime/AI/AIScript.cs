@@ -53,6 +53,8 @@ public class AIScript : MonoBehaviour
     void Start()
     {
         Wander();
+
+        AIEventHandler.instance.Ai.Add(this);
     }
     void Update()
     {
