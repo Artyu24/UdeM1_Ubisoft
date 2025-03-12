@@ -1,12 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TeleportPlayers : MonoBehaviour
 {
-    [Required("Need a Teleport Point !"), SerializeField] private Transform _teleportationPoint;
+    [InfoBox("Scene must be in Build Settings"), SerializeField, Scene] private string _sceneName;
 
     [SerializeField] private bool _needObject = false;
     [EnableIf("_needObject"), SerializeField] private ObjectBase _objectToGet;
@@ -14,42 +16,51 @@ public class TeleportPlayers : MonoBehaviour
     private List<PlayerInteraction> _playerInList = new List<PlayerInteraction>();
     private IGrabbable _objectGrabbed;
 
-#if UNITY_EDITOR
     private void Awake()
     {
-        DebugHelper.IsNull(_teleportationPoint, name, nameof(TeleportPlayers));
-        if(_needObject)
+        if (!_needObject)
+            _objectToGet = null;
+#if UNITY_EDITOR
+        else
             DebugHelper.IsNull(_objectToGet, name, nameof(TeleportPlayers));
-    }
 #endif
+    }
     
     private void LaunchTeleportation()
     {
         //Check TP Point not null & Player Number in the Collider
-        if(_teleportationPoint == null || _playerInList.Count < 2)
+        if(_playerInList.Count < 2)
             return;
         
         //If object needed, check if we have one
         if(_needObject && _objectGrabbed == null)
             return;
         
-        //TP of Players
+        //Setup Players
         for (int i = 0; i < _playerInList.Count; i++)
         {
             //If Player dont have the right object in head, we release it
             if(_playerInList[i].GrabbedObj != _objectGrabbed)
-                _playerInList[i].GrabbedObj.OnRelease();
+                _playerInList[i].ReleaseObject();
             
             _playerInList[i].OnPlayerInteractAction -= LaunchTeleportation;
-            _playerInList[i].transform.position = _teleportationPoint.position + new Vector3(0.5f * i, 0, 0.5f * i);
         }
 
         //If Object not in Player Hand
         if (_objectGrabbed != null)
         {
             if (_objectGrabbed.GetObjectBase().transform.parent == null)
-                _objectGrabbed.GetObjectBase().transform.position = _teleportationPoint.position;
+                _playerInList[0].GrabObject(_objectGrabbed);
         }
+        
+        //Launch TP
+        if(HUDManager.instance != null)
+            HUDManager.instance.FadeInTransition(LoadScene);
+    }
+
+    private void LoadScene()
+    {
+        SceneManager.LoadScene(_sceneName);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -69,7 +80,6 @@ public class TeleportPlayers : MonoBehaviour
                 if (_objectToGet == (ObjectBase)objectFind)
                 {
                     _objectGrabbed = objectFind;
-                    
                 }
             }
         }
