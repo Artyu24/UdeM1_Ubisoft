@@ -17,7 +17,11 @@ public class PlayerManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else
+        {
+            instance.TeleportPlayer(transform.position);
             Destroy(gameObject);
+            return;
+        }
 
         _playerList = new List<PlayerInput>();
     }
@@ -69,11 +73,17 @@ public class PlayerManager : MonoBehaviour
         {
             //Else, we keep the scene name
             PlayerPrefs.SetString("lastScene", SceneManager.GetActiveScene().name);
+        }
+    }
 
-            foreach (PlayerInput player in _playerList)
-            {
-                player.transform.position = transform.position;
-            }
+    private void TeleportPlayer(Vector3 position)
+    {
+        if(GameObject.FindFirstObjectByType(typeof(HubManager)))
+            return;
+        
+        foreach (PlayerInput player in _playerList)
+        {
+            player.transform.position = position;
         }
     }
 }
