@@ -8,13 +8,13 @@ public class LineOfSight : MonoBehaviour
     [SerializeField] private float _reactionTime = 1f;
     [SerializeField] private float _playerDistanceBeforePush = 1f;
     [field: SerializeField] public List<AIObject> InSight { get; set; }
-    
+    [field: SerializeField] public List<PlayerMovement> PlayerInSight { get; set; }
     private Coroutine _pushPlayer;
-
+    [SerializeField] private AIScript _AiBrain;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _AiBrain.LineOfSight=this;
     }
 
     // Update is called once per frame
@@ -71,20 +71,14 @@ public class LineOfSight : MonoBehaviour
     private void CheckIsPlayer(GameObject go)//method a refacto pour plus solide
     {
         if (go == null) return;
+        if (!go.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement)) return;
+
+        PlayerInSight.Add(playerMovement);
         Debug.Log((Vector3.Distance(go.transform.position, transform.parent.position)));
         if (Vector3.Distance(go.transform.position, transform.parent.position) > _playerDistanceBeforePush) return;
-        if(go.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
-        {
-            //playerMovement.OnIAPush(transform.parent.position);
-            if (_pushPlayer != null) return;
-            _pushPlayer=StartCoroutine(PushPlayer(playerMovement));
-        }
-    }
-    private IEnumerator PushPlayer(PlayerMovement playerMovement)
-    {
-        playerMovement.OnIAPush(transform.parent.position);
-        yield return new WaitForSeconds(1f);
-        _pushPlayer=null;
+
+
+        _AiBrain.ReactoPlayer(playerMovement);
 
     }
 

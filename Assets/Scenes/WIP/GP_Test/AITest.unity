@@ -1237,6 +1237,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1605808617305515399, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: _AiBrain
+      value: 
+      objectReference: {fileID: 8938291544264292675}
     - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _target
       value: 
@@ -1249,6 +1253,14 @@ PrefabInstance:
       propertyPath: _reactionZone
       value: 
       objectReference: {fileID: 24826688}
+    - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: _willPushPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: _willChasehPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: '_wanderPoints.Array.data[0]'
       value: 
@@ -1318,6 +1330,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+--- !u!114 &8938291544264292675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+  m_PrefabInstance: {fileID: 8938291544264292674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9c9bfa6d7f0914aafaea42d310e827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

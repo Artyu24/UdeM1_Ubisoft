@@ -20,6 +20,12 @@ public enum npcType
     wander,
     cleaner
 }
+
+public enum ReactionToplayer
+{
+    Push,
+    Chase,
+}
 public class AIScript : MonoBehaviour
 {
     private float anger;
@@ -37,19 +43,25 @@ public class AIScript : MonoBehaviour
     [SerializeField] private bool _isRunningAway;
 
     [Header("AI INFO")]
-    [SerializeField,Required] private LineOfSight _lineOfSight;
+    [SerializeField, Required] private LineOfSight _lineOfSight;
     [SerializeField] private LayerMask _viewMak;
     [SerializeField, Required] private NavMeshAgent _agent;
-    [SerializeField] private NavMeshSurface _navMesh;
-    [SerializeField] Transform _target;
-
-
-    
+    public LineOfSight LineOfSight { get; set; }//auto ref
+    [Header("Player Reactions")]
+    [SerializeField] ReactionToplayer _reactionToPlayer;
+    [SerializeField] private bool _isChasingPlayer=false;
+    Vector3 _lastPlayerSeenPosition = Vector3.zero;
     [field:SerializeField]public List<GameObject> interest { get; set; }
+    private Coroutine _pushPlayer;
+
 
     public UnityEvent Onflee;
     public UnityEvent OnReachDestination;
     public UnityEvent OnReachReactionDestination;
+    private void OnDrawGizmosSelected()
+    {
+        
+    }
     void Start()
     {
         Wander();
@@ -58,7 +70,7 @@ public class AIScript : MonoBehaviour
     }
     void Update()
     {
-        if (!_agent.pathPending)
+        if (!_agent.pathPending)//wandering loop, [refacto possible]
         {
             if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
@@ -67,7 +79,6 @@ public class AIScript : MonoBehaviour
                     if (!_isRunningAway && _wandererDelay==null)
                     {
                         OnReachDestination.Invoke();
-                        //transform.rotation = Quaternion.Euler(_guardRotation);
                         transform.DORotate(_guardRotation,0.5f);
                         _wandererDelay = StartCoroutine(DelayBeforeWandering());
                     }
@@ -77,8 +88,6 @@ public class AIScript : MonoBehaviour
                         LookForObject(_objectType);
                         
                     }
-                    //use the closest item at position? like a pick or something?
-                    //stay for an amount of time before going back to previous pos?
                 }
             }
         }
@@ -86,13 +95,11 @@ public class AIScript : MonoBehaviour
     [Button]
     public void fleeToPoint()
     {
-        //Vector3 dir = (target.position - transform.position).normalized;
-        //agent.SetDestination(transform.position - (dir * 2));
         _agent.destination = _reactionZone.position;
         _isRunningAway=true;
         StopAllCoroutines();
-        //StopCoroutine(_wandererDelay);
     }
+
     public void LookForObject(string objectType)
     {
         AIObject aIObject = _lineOfSight.GetSightObjectByType(objectType);
@@ -115,11 +122,6 @@ public class AIScript : MonoBehaviour
     {
         _agent.destination = _leavePoint.position;
     }
-    public void RunTo(Transform PosToGo)
-    {
-        _agent.destination = _target.position;
-        
-    }
     public void Wander()
     {
         _agent.destination = _wanderPoints[Random.Range(0,_wanderPoints.Count-1)].position;
@@ -130,24 +132,56 @@ public class AIScript : MonoBehaviour
         Wander();
         _wandererDelay=null;
     }
-        //void Update()
-        //{
-        //    RaycastHit hit;
-        //    Physics.Raycast( transform.position,(interest[0].transform.position - transform.position).normalized,out hit, 100, viewMak);
-        //    Debug.DrawRay(transform.position, (interest[0].transform.position - transform.position).normalized * hit.distance, Color.yellow);
 
-        //    if (hit.collider == interest[0].GetComponent<Collider>())//temp
-        //    {
-        //        if(Vector3.Distance(transform.position, interest[0].transform.position)<5&& agent.destination != interest[0].transform.position )
-        //        {
-        //            agent.destination= interest[0].transform.position;
-        //        }
-        //    }
-        //}
+    public void ReactoPlayer(PlayerMovement player)
+    {
+        if (player == null) return;
 
-        /* un system de vision des element d'interet,
-         tire un raycast si les points d'interet les plus proches, liste dynamique d'objet le points le plus proche a plus d'interet
+        switch (_reactionToPlayer)
+        {
+            case ReactionToplayer.Push:
+                if (_pushPlayer != null) return;//a move
+                _pushPlayer = StartCoroutine(PushPlayer(player));
+                break;
+            case ReactionToplayer.Chase:
+                break;
+            default:
+                break;
+        }
+    }
+    private IEnumerator PushPlayer(PlayerMovement playerMovement)
+    {
+        playerMovement.OnIAPush(transform.parent.position);
+        yield return new WaitForSeconds(1f);
+        _pushPlayer = null;
 
-         */
-         
+    }
+    private void ChasePlayer(PlayerMovement playerMovement)
+    {
+
+    }
+    private IEnumerator ChaseStates(PlayerMovement playerMovement)
+    {
+        bool Chasing = true;
+        _lastPlayerSeenPosition = playerMovement.transform.position;
+        while (Chasing) 
+        {
+            _agent.SetDestination(_lastPlayerSeenPosition);
+            if (LineOfSight.PlayerInSight.Contains(playerMovement))
+            {
+                _lastPlayerSeenPosition = playerMovement.transform.position;
+                //if reach player
+                //catch it and bring him outside the the area by throwing it
+            }
+            else 
+            {
+                yield return new WaitForSeconds(1.0f);
+                Wander();
+            }
+            
+        }
+        yield return new WaitForSeconds(1.0f);
+
+
+    }
 }
