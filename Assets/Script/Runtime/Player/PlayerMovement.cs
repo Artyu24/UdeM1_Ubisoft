@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -21,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Condition")] 
     private bool _isPushed = false;
 
+    [Header("Grab related")]
+    public UnityEvent OnGrab;
+    public UnityEvent OnRelease;
+    public bool _canmove=true;
 #if UNITY_EDITOR
     private void Awake()
     {
@@ -31,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_movementInput != Vector3.zero && !_isPushed)
+        if (_movementInput != Vector3.zero && !_isPushed && _canmove)
         {
             Vector3 camFow = Camera.main.transform.forward;
             Vector3 camRig = Camera.main.transform.right;
@@ -72,5 +77,19 @@ public class PlayerMovement : MonoBehaviour
         _isPushed = true;
         yield return new WaitForSeconds(0.5f);
         _isPushed = false;
+    }
+    public void SetIsGrabed(bool isgrabed = true)
+    {
+        if (isgrabed)
+        {
+            OnGrab.Invoke();
+            _canmove = false;
+            _rb.isKinematic = true;
+        }
+        else
+        {
+            _canmove = true;
+            _rb.isKinematic = false;
+        }
     }
 }
