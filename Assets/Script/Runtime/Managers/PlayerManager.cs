@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,6 +9,12 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
 
     public List<PlayerInput> _playerList {  get; private set; }
+
+    //Object Search
+    private bool _isObjectInHand = false;
+    public bool IsObjectInHand { get => _isObjectInHand; set => _isObjectInHand = value; }
+    private TeleportPlayers _teleportPlayersObject;
+    public TeleportPlayers TeleportPlayersObject => _teleportPlayersObject;
 
     private void Awake()
     {
@@ -30,6 +35,7 @@ public class PlayerManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += (arg0, mode) => SceneLoadedInit();
         PlayerPrefs.SetString("lastScene", "");
+        SceneLoadedInit();
     }
 
     public void OnPlayerJoin(PlayerInput playerInput)
@@ -53,6 +59,8 @@ public class PlayerManager : MonoBehaviour
 
     private void SceneLoadedInit()
     {
+        _isObjectInHand = false;
+        
         //Check if we are in the Hub Scene
         HubManager hub = GameObject.FindFirstObjectByType(typeof(HubManager)) as HubManager;
         if (hub != null)
@@ -73,6 +81,9 @@ public class PlayerManager : MonoBehaviour
         {
             //Else, we keep the scene name
             PlayerPrefs.SetString("lastScene", SceneManager.GetActiveScene().name);
+         
+            //Check Object Find
+            _teleportPlayersObject = GameObject.FindFirstObjectByType(typeof(TeleportPlayers)) as TeleportPlayers;
         }
     }
 
