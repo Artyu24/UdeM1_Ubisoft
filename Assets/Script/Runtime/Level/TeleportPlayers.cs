@@ -12,9 +12,11 @@ public class TeleportPlayers : MonoBehaviour
 
     [SerializeField] private bool _needObject = false;
     [EnableIf("_needObject"), SerializeField] private ObjectBase _objectToGet;
+    public ObjectBase ObjectToGet => _objectToGet;
     
     private List<PlayerInteraction> _playerInList = new List<PlayerInteraction>();
     private IGrabbable _objectGrabbed;
+
 
     private void Awake()
     {
