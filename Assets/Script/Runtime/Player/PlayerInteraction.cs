@@ -63,7 +63,7 @@ public class PlayerInteraction : MonoBehaviour
         objectGrab.OnGrab(transform);
         objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
 
-        if (PlayerManager.instance.TeleportPlayersObject.ObjectToGet == objectGrab)
+        if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
         {
             PlayerManager.instance.IsObjectInHand = true;
             _hasRightObjectInHand = true;
