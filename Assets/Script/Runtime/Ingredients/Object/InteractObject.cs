@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class InteractObject : ObjectBase, IInteractable
 {
-    [SerializeField] private UnityEvent _interactEvents;
+    [SerializeField] protected UnityEvent _interactEvents;
 
     [Button]
     public virtual void Interact()

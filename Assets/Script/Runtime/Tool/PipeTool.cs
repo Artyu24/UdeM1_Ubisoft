@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.Splines.ExtrusionShapes;
 
 public class PipeTool : MonoBehaviour
 {
@@ -12,12 +10,14 @@ public class PipeTool : MonoBehaviour
 
     [SerializeField] private SplineAnimate _pipeEffectPrefab;
     
-    public void PipeEffect()
+    public SplineAnimate PipeEffect()
     {
         SplineAnimate animEffect = Instantiate(_pipeEffectPrefab);
         animEffect.Container = _splineContainer;
         animEffect.Play();
         animEffect.Completed += () => { Destroy(animEffect.gameObject); };
+
+        return animEffect;
     }
     
     [SerializeField] private Transform _pipePrefab;
@@ -42,13 +42,24 @@ public class PipeTool : MonoBehaviour
                     break;
             }
         }
-        
-        if(transform.childCount != 0)
-            DestroyImmediate(transform.GetChild(0).gameObject);
+
+        //Reset Old Pipe
+        if (transform.childCount != 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).name == "PipeOffset")
+                {
+                    DestroyImmediate(transform.GetChild(i).gameObject);
+                    break;
+                }
+            }
+        }
             
         //Pipe
         GameObject parentObject = new GameObject("PipeOffset");
         parentObject.transform.parent = transform;
+        parentObject.transform.SetSiblingIndex(0);
         parentObject.transform.localPosition = Vector3.zero;
 
         for (int i = 1; i < _splineContainer.Spline.Knots.Count(); i++)
@@ -56,21 +67,29 @@ public class PipeTool : MonoBehaviour
             Transform pipe = Instantiate(_pipePrefab, parentObject.transform);
 
             (Axis, float) mostDistAxis = GetMostDistAxis(_splineContainer.Spline[i - 1].Position, _splineContainer.Spline[i].Position);
-            switch (mostDistAxis.Item1)
+            if (mostDistAxis.Item2 - 1 > 0)
             {
-                case Axis.X:
-                    pipe.eulerAngles = new Vector3(0, 0, 90);
-                    break;
-                case Axis.Y:
-                    pipe.eulerAngles = new Vector3(0, 0, 0);
-                    break;
-                case Axis.Z:
-                    pipe.eulerAngles = new Vector3(90, 0, 0);
-                    break;
-            }
+                switch (mostDistAxis.Item1)
+                {
+                    case Axis.X:
+                        pipe.eulerAngles = new Vector3(0, 0, 90);
+                        break;
+                    case Axis.Y:
+                        pipe.eulerAngles = new Vector3(0, 0, 0);
+                        break;
+                    case Axis.Z:
+                        pipe.eulerAngles = new Vector3(90, 0, 0);
+                        break;
+                }
 
-            pipe.localPosition = Vector3.Lerp(_splineContainer.Spline[i - 1].Position, _splineContainer.Spline[i].Position, 0.5f);
-            pipe.localScale = new Vector3(1, mostDistAxis.Item2 / 2 * 1.9f, 1);
+                pipe.localPosition = Vector3.Lerp(_splineContainer.Spline[i - 1].Position, _splineContainer.Spline[i].Position, 0.5f);
+                pipe.localScale = new Vector3(1, (mostDistAxis.Item2 - 1), 1);
+            }
+            else
+            {
+                DestroyImmediate(pipe.gameObject);
+            }
+            
 
             if (i < _splineContainer.Spline.Knots.Count() - 1)
             {
