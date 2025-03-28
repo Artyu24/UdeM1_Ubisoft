@@ -11,7 +11,7 @@ public class TeleportPlayers : MonoBehaviour
     [InfoBox("Scene must be in Build Settings"), SerializeField, Scene] private string _sceneName;
 
     [SerializeField] private bool _needObject = false;
-    [EnableIf("_needObject"), SerializeField] private ObjectBase _objectToGet;
+    [ShowIf("_needObject"), SerializeField] private ObjectBase _objectToGet;
     public ObjectBase ObjectToGet => _objectToGet;
     
     private List<PlayerInteraction> _playerInList = new List<PlayerInteraction>();
