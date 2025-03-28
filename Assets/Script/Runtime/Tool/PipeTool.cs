@@ -10,18 +10,26 @@ public class PipeTool : MonoBehaviour
 
     [SerializeField] private SplineAnimate _pipeEffectPrefab;
     
+    [SerializeField, ReadOnly] private DropWater _dropWaterPipe;
+    
     public SplineAnimate PipeEffect()
     {
         SplineAnimate animEffect = Instantiate(_pipeEffectPrefab);
         animEffect.Container = _splineContainer;
         animEffect.Play();
-        animEffect.Completed += () => { Destroy(animEffect.gameObject); };
+        animEffect.Completed += () =>
+        {
+            if(_dropWaterPipe)
+                _dropWaterPipe.DropWaterBelow();
+            Destroy(animEffect.gameObject);
+        };
 
         return animEffect;
     }
     
     [SerializeField] private Transform _pipePrefab;
     [SerializeField] private Transform _pipeTurningPrefab;
+    [SerializeField] private DropWater _dropWaterPrefab;
     
     [Button]
     private void CreatePipe()
@@ -103,6 +111,11 @@ public class PipeTool : MonoBehaviour
                 Vector3 rotationAxis = Vector3.Cross(directionBefore, directionAfter).normalized;
                 float angle = Vector3.Angle(directionBefore, directionAfter);
                 turningPipe.rotation = Quaternion.AngleAxis(angle, rotationAxis) * Quaternion.LookRotation(directionBefore, rotationAxis) * Quaternion.Euler(0, 0, 90);
+            }
+            else
+            {
+                _dropWaterPipe = Instantiate(_dropWaterPrefab, parentObject.transform);
+                _dropWaterPipe.transform.localPosition = _splineContainer.Spline[i].Position;
             }
         }
     }
