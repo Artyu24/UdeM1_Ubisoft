@@ -10,6 +10,16 @@ public class PipeTool : MonoBehaviour
 {
     [SerializeField] private SplineContainer _splineContainer;
 
+    [SerializeField] private SplineAnimate _pipeEffectPrefab;
+    
+    public void PipeEffect()
+    {
+        SplineAnimate animEffect = Instantiate(_pipeEffectPrefab);
+        animEffect.Container = _splineContainer;
+        animEffect.Play();
+        animEffect.Completed += () => { Destroy(animEffect.gameObject); };
+    }
+    
     [SerializeField] private Transform _pipePrefab;
     [SerializeField] private Transform _pipeTurningPrefab;
     
