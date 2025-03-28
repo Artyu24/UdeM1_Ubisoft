@@ -8,9 +8,8 @@ public class InteractObject : ObjectBase, IInteractable
     [SerializeField] private UnityEvent _interactEvents;
 
     [Button]
-    public void Interact()
+    public virtual void Interact()
     {
-        Debug.Log("Trigger Event");
         _interactEvents.Invoke();
     }
 }
