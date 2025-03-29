@@ -1,0 +1,63 @@
+using UnityEngine;
+using System.Collections;
+using NaughtyAttributes;
+public class AIRunAway : AIBehavior
+{
+    [Header("Running away")]
+    [SerializeField] private Transform _reactionZone;
+    [SerializeField] private Transform _leavePoint;
+    [SerializeField] private string _objectType;
+    [field: SerializeField] public bool IsRunningAway { get; set; }
+
+
+    public void LookForObject(string objectType)
+    {
+        AIObject aIObject = AiBrain.LineOfSight.GetSightObjectByType(objectType);
+        if (aIObject == null)
+        {
+            AiBrain.State = npcState.leaving;
+            LeaveZone();
+        }
+        else
+            UseObject(aIObject);
+    }
+    public void UseObject(AIObject ob)
+    {
+        StartCoroutine(ItemUseDelay());
+        IEnumerator ItemUseDelay()
+        {
+            yield return new WaitForSeconds(ob.useTime);
+            Wander();
+            IsRunningAway = false;
+        }
+    }
+    protected IEnumerator PushPlayer(PlayerMovement playerMovement)
+    {
+        playerMovement.OnIAPush(transform.position);
+        yield return new WaitForSeconds(1f);
+        _reactionCoroutine = null;
+    }
+    [Button]
+    public void fleeToPoint()
+    {
+        AiBrain._agent.destination = _reactionZone.position;
+        AiBrain.State = npcState.leaving;
+        IsRunningAway = true;
+        StopAllCoroutines();// kill all action running
+    }
+
+    public void LeaveZone()
+    {
+        AiBrain.SetDestination(_leavePoint.position);
+    }
+    public override void ReactToPlayer(PlayerMovement player)
+    {
+        if (AiBrain.State == npcState.chasing || _isGnoringPlayer || AiBrain.State == npcState.Stunned) return;
+        if (player == null) return;
+        if (_reactionCoroutine != null) return;//a move
+
+        _reactionCoroutine = StartCoroutine(PushPlayer(player));
+
+
+    }
+}
