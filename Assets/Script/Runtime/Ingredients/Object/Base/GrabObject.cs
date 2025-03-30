@@ -21,7 +21,7 @@ public class GrabObject : ObjectBase, IGrabbable
             _col.isTrigger = true;
     }
 
-    public void OnRelease()
+    public virtual void OnRelease()
     {
         transform.SetParent(null);
         
