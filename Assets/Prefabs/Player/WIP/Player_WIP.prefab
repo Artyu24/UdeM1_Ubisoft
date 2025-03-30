@@ -392,7 +392,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &3788683361519199537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +466,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 00efc51b-55e1-4d7c-beca-d5d306141924
     m_ActionName: 'Player/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4748530237700234042}
+        m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
+        m_MethodName: OnPlayerSearch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eedafee7-ba3e-4ca4-9cc6-92c739f5aa00
+    m_ActionName: 'Player/Search[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -514,4 +530,5 @@ MonoBehaviour:
   _grabPos: {fileID: 4881619102536916019}
   _boxDist: 1
   _boxWidth: 0.4
-  _boxHeight: 1
+  _boxHeight: 3
+  _findTargetPrefab: {fileID: 5972425707889199669, guid: c2885759f0b074f4b9dc5c1020307b2d, type: 3}

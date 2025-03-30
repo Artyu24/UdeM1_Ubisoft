@@ -20,7 +20,11 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Interact")] 
     public Action OnPlayerInteractAction; 
-
+    
+    [Header("Search Object")] 
+    [SerializeField] private FindTarget _findTargetPrefab;
+    private bool _hasRightObjectInHand;
+    
 #if UNITY_EDITOR
     private void Awake()
     {
@@ -59,12 +63,25 @@ public class PlayerInteraction : MonoBehaviour
         objectGrab.OnGrab(transform);
         objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
 
+        if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
+        {
+            PlayerManager.instance.IsObjectInHand = true;
+            _hasRightObjectInHand = true;
+        }
+        
         _grabbedObj = objectGrab;
     }
 
     public void ReleaseObject()
     {
         _grabbedObj.OnRelease();
+
+        if (_hasRightObjectInHand)
+        {
+            PlayerManager.instance.IsObjectInHand = false;
+            _hasRightObjectInHand = false;
+        }
+        
         _grabbedObj = null;
     }
 
@@ -93,6 +110,21 @@ public class PlayerInteraction : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    
+    public void OnPlayerSearch(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if(PlayerManager.instance.TeleportPlayersObject == null)
+                return;
+
+            FindTarget _findTarget = Instantiate(_findTargetPrefab, transform.position, Quaternion.identity);
+            if(PlayerManager.instance.IsObjectInHand)
+                _findTarget.Init(PlayerManager.instance.TeleportPlayersObject.transform.position);
+            else
+                _findTarget.Init(PlayerManager.instance.TeleportPlayersObject.ObjectToGet.transform.position);
         }
     }
     

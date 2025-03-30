@@ -311,6 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8818555602721292495}
   - component: {fileID: 1716494851953690406}
+  - component: {fileID: 8262381727052222496}
   m_Layer: 0
   m_Name: TargetGroup
   m_TagString: Untagged
@@ -350,3 +351,16 @@ MonoBehaviour:
   UpdateMethod: 2
   Targets: []
   m_LegacyTargets: []
+--- !u!114 &8262381727052222496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709793108410560282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc691c2530d02524a8c03620b5545e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetGroup: {fileID: 1716494851953690406}
