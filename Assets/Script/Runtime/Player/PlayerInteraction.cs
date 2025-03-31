@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] private PlayerData _data;
     [SerializeField] private Transform _grabPos;
     
     [Header("Data Trigger Zone")] 
@@ -38,6 +39,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (_grabbedObj != null)
             {
+                _data.AnimController.SetBool("IsGrabbing", false);
                 ReleaseObject();
                 return;
             }
@@ -50,6 +52,7 @@ public class PlayerInteraction : MonoBehaviour
                     IGrabbable objectGrab = objectHit.transform.GetComponent<IGrabbable>();
                     if (objectGrab != null)
                     {
+                        _data.AnimController.SetBool("IsGrabbing", true);
                         GrabObject(objectGrab);
                         break;
                     }
@@ -96,6 +99,10 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
             
+            //Cant Interact with an Item in Hand
+            if(_grabbedObj != null)
+                return;
+            
             //Else, find some object to interact with
             RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_boxWidth, _boxHeight, _boxWidth), _grabPos.forward, Quaternion.identity, _boxDist);
             if (hits.Length > 0)
@@ -127,9 +134,4 @@ public class PlayerInteraction : MonoBehaviour
                 _findTarget.Init(PlayerManager.instance.TeleportPlayersObject.ObjectToGet.transform.position);
         }
     }
-    
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawWireCube(_grabPos.position + _grabPos.forward, new Vector3(0.2f, 1f, 0.2f) * 2f);
-    //}
 }

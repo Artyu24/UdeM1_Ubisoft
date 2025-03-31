@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_movementInput != Vector3.zero && !_isPushed && _canmove)
         {
+            _data.AnimController.SetFloat("Speed", 1);
+            
             Vector3 camFow = Camera.main.transform.forward;
             Vector3 camRig = Camera.main.transform.right;
 
@@ -48,10 +50,15 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rRel = _movementInput.x * camRig;
 
             Vector3 moveDir = fRel + rRel;
+            moveDir.Normalize();
             
             _rb.MovePosition(_rb.position + moveDir * Time.fixedDeltaTime * _moveSpeed);
             
             transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+        }
+        else
+        {
+            _data.AnimController.SetFloat("Speed", 0);
         }
     }
     

@@ -4,7 +4,7 @@ public class DropWater : MonoBehaviour
 {
     public void DropWaterBelow()
     {
-        RaycastHit[] rayHits = Physics.RaycastAll(transform.position, -transform.up);
+        RaycastHit[] rayHits = Physics.BoxCastAll(transform.position, new Vector3(0.5f, 0.5f, 0.5f), -transform.up, Quaternion.identity, 100f);
         if(rayHits.Length == 0)
             return;
 
