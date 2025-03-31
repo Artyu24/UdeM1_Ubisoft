@@ -22,8 +22,6 @@ public class DoublePressurePlate : MonoBehaviour
 
     private void PressurePlatePushed()
     {
-        Debug.Log("Pushed");
-        
         _playerCount++;
         if(_playerCount == 2)
             _onDoublePressurePlatePushed.Invoke();
@@ -31,8 +29,6 @@ public class DoublePressurePlate : MonoBehaviour
 
     private void PressurePlateRelease()
     {
-        Debug.Log("Release");
-        
         _playerCount--;
     }
 }
