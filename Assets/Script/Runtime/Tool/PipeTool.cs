@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
 using Unity.Mathematics;
@@ -6,11 +8,24 @@ using UnityEngine.Splines;
 
 public class PipeTool : MonoBehaviour
 {
-    [SerializeField] private SplineContainer _splineContainer;
-
-    [SerializeField] private SplineAnimate _pipeEffectPrefab;
+    [Header("Data")] 
+    [SerializeField] private bool _dropPuddleAtEnd;
+    [SerializeField] private List<LeakPuddle> _leakPuddlesList = new List<LeakPuddle>();
     
+    [Header("Components")]
+    [SerializeField] private SplineContainer _splineContainer;
     [SerializeField, ReadOnly] private DropWater _dropWaterPipe;
+    [SerializeField, ReadOnly] private List<DropWater> _leakDropWaterList = new List<DropWater>();
+    private List<DropWater> _alreadyLeakDropWaterList = new List<DropWater>();
+    
+    [Header("Prefab")]
+    [SerializeField] private Transform _pipePrefab;
+    [SerializeField] private Transform _pipeTurningPrefab;
+    [SerializeField] private DropWater _dropWaterPrefab;
+    [SerializeField] private SplineAnimate _pipeEffectPrefab;
+
+    private float _effectDuration;
+    private float _timer = 100f;
     
     public SplineAnimate PipeEffect()
     {
@@ -24,13 +39,34 @@ public class PipeTool : MonoBehaviour
             Destroy(animEffect.gameObject);
         };
 
+        _effectDuration = animEffect.Duration;
+        _timer = 0;
+        _alreadyLeakDropWaterList.Clear();
+        
         return animEffect;
     }
-    
-    [SerializeField] private Transform _pipePrefab;
-    [SerializeField] private Transform _pipeTurningPrefab;
-    [SerializeField] private DropWater _dropWaterPrefab;
-    
+
+    private void Update()
+    {
+        if(_timer > _effectDuration)
+            return;
+        
+        _timer += Time.deltaTime;
+        float percent = Mathf.Lerp(0, 1, _timer / _effectDuration);
+
+        for (int i = 0; i < _leakDropWaterList.Count; i++)
+        {
+            if(_alreadyLeakDropWaterList.Contains(_leakDropWaterList[i]))
+                continue;
+
+            if (_leakPuddlesList[i].LeakPercentPath < percent)
+            {
+                _leakDropWaterList[i].DropWaterBelow();
+                _alreadyLeakDropWaterList.Add(_leakDropWaterList[i]);
+            }
+        }
+    }
+
     [Button]
     private void CreatePipe()
     {
@@ -62,6 +98,8 @@ public class PipeTool : MonoBehaviour
                     break;
                 }
             }
+            
+            _leakDropWaterList.Clear();
         }
             
         //Pipe
@@ -116,7 +154,17 @@ public class PipeTool : MonoBehaviour
             {
                 _dropWaterPipe = Instantiate(_dropWaterPrefab, parentObject.transform);
                 _dropWaterPipe.transform.localPosition = _splineContainer.Spline[i].Position;
+                _dropWaterPipe.DropPuddle = _dropPuddleAtEnd;
             }
+        }
+
+        for (int i = 0; i < _leakPuddlesList.Count; i++)
+        {
+            DropWater dropWaterLeak = Instantiate(_dropWaterPrefab, parentObject.transform);
+            dropWaterLeak.transform.position = _splineContainer.EvaluatePosition(_leakPuddlesList[i].LeakPercentPath);
+            dropWaterLeak.gameObject.name = "Leak_" + (i + 1);
+            dropWaterLeak.DropPuddle = true;
+            _leakDropWaterList.Add(dropWaterLeak);
         }
     }
 
@@ -139,5 +187,12 @@ public class PipeTool : MonoBehaviour
         X,
         Y,
         Z
+    }
+    
+    [Serializable]
+    private struct LeakPuddle
+    {
+        [SerializeField, Range(0f, 1f)] private float _leakPercentPath;
+        public float LeakPercentPath => _leakPercentPath;
     }
 }
