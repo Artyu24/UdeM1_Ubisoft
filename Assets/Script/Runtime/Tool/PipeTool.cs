@@ -10,22 +10,23 @@ public class PipeTool : MonoBehaviour
 {
     [Header("Data")] 
     [SerializeField] private bool _dropPuddleAtEnd;
+    
+    [Header("Leak")]
     [SerializeField] private List<LeakPuddle> _leakPuddlesList = new List<LeakPuddle>();
+    [SerializeField, ReadOnly] private List<DropWater> _leakDropWaterList = new List<DropWater>();
+    private List<DropWater> _alreadyLeakDropWaterList = new List<DropWater>();
+    private float _effectDuration;
+    private float _timer = 100f;
     
     [Header("Components")]
     [SerializeField] private SplineContainer _splineContainer;
     [SerializeField, ReadOnly] private DropWater _dropWaterPipe;
-    [SerializeField, ReadOnly] private List<DropWater> _leakDropWaterList = new List<DropWater>();
-    private List<DropWater> _alreadyLeakDropWaterList = new List<DropWater>();
     
     [Header("Prefab")]
     [SerializeField] private Transform _pipePrefab;
     [SerializeField] private Transform _pipeTurningPrefab;
     [SerializeField] private DropWater _dropWaterPrefab;
     [SerializeField] private SplineAnimate _pipeEffectPrefab;
-
-    private float _effectDuration;
-    private float _timer = 100f;
     
     public SplineAnimate PipeEffect()
     {
@@ -39,6 +40,7 @@ public class PipeTool : MonoBehaviour
             Destroy(animEffect.gameObject);
         };
 
+        //Leak
         _effectDuration = animEffect.Duration;
         _timer = 0;
         _alreadyLeakDropWaterList.Clear();
@@ -136,7 +138,7 @@ public class PipeTool : MonoBehaviour
                 DestroyImmediate(pipe.gameObject);
             }
             
-
+            //Turning Pipe
             if (i < _splineContainer.Spline.Knots.Count() - 1)
             {
                 Transform turningPipe = Instantiate(_pipeTurningPrefab, parentObject.transform);
@@ -152,12 +154,14 @@ public class PipeTool : MonoBehaviour
             }
             else
             {
+                //Drop Water At End
                 _dropWaterPipe = Instantiate(_dropWaterPrefab, parentObject.transform);
                 _dropWaterPipe.transform.localPosition = _splineContainer.Spline[i].Position;
                 _dropWaterPipe.DropPuddle = _dropPuddleAtEnd;
             }
         }
 
+        //Add Leak
         for (int i = 0; i < _leakPuddlesList.Count; i++)
         {
             DropWater dropWaterLeak = Instantiate(_dropWaterPrefab, parentObject.transform);
