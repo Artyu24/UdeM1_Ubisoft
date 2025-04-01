@@ -109,7 +109,8 @@ public class PipeTool : MonoBehaviour
         parentObject.transform.parent = transform;
         parentObject.transform.SetSiblingIndex(0);
         parentObject.transform.localPosition = Vector3.zero;
-
+        parentObject.transform.localScale = Vector3.one;
+        
         for (int i = 1; i < _splineContainer.Spline.Knots.Count(); i++)
         {
             Transform pipe = Instantiate(_pipePrefab, parentObject.transform);
