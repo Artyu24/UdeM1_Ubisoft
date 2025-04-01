@@ -5,18 +5,23 @@ using UnityEngine;
 
 public class AIBehavior : MonoBehaviour, IInteractable
 {
-    [field: SerializeField] public AIScript AiBrain { get; private set; }
+    [field: SerializeField] public AIScript AiBrain { get; set; }
     protected bool _isGnoringPlayer = false;
     protected Coroutine _lookingArroundCorou;
     protected Coroutine _reactionCoroutine;
-    protected Coroutine _wandererDelay;
+    protected Coroutine _wandererDelay=null;
 
     protected Transform _destinationPoint;
+
+    int _WanderIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _destinationPoint = AiBrain.WanderPoints[Random.Range(0, AiBrain.WanderPoints.Count - 1)];
-        AiBrain.SetDestination(_destinationPoint.position);
+        //_destinationPoint = AiBrain.WanderPoints[Random.Range(0, AiBrain.WanderPoints.Count - 1)];
+        if (AiBrain.WanderPoints.Count==0)
+            return;
+
+        //AiBrain.SetDestination(_destinationPoint.position);
         Wander();
     }
     protected void InterruptCorouAction(Coroutine corouAction)
@@ -49,29 +54,15 @@ public class AIBehavior : MonoBehaviour, IInteractable
     {
         if (AiBrain.State == npcState.chasing || _isGnoringPlayer) return;
         if (player == null) return;
-        if (_reactionCoroutine != null) return;//a move
-        //switch (AiBrain._reactionToPlayer)
-        //{
-        //    case ReactionToplayer.Push:
-        //        //_reactionCoroutine = StartCoroutine(PushPlayer(player));
-        //        break;
-        //    case ReactionToplayer.Chase:
-        //        //InitChase(player);
-        //        //_reactionCoroutine = StartCoroutine(ChaseStates(player));
-        //        break;
-        //    default:
-        //        break;
-        //}
+        if (_reactionCoroutine != null) return;
     }
     public virtual void ReachAIDestination()
     {
         switch (AiBrain.State)
         {
             case npcState.wandering:
-                if (_wandererDelay == null)//no
+                if (_wandererDelay == null)
                 {
-                    //OnReachDestination.Invoke();
-                    transform.DORotate(_destinationPoint.rotation.eulerAngles, 0.5f);
                     _wandererDelay = StartCoroutine(DelayBeforeWandering());
                 }
                 break;
@@ -81,19 +72,18 @@ public class AIBehavior : MonoBehaviour, IInteractable
                 break;
             case npcState.LookingArround:
                 break;
-
-            case npcState.Reacting:
-                //OnReachReactionDestination.Invoke();
-                //LookForObject(_objectType);
-                break;
-
             default:
                 break;
         }
     }
     public void Wander()
     {
-        _destinationPoint = AiBrain.WanderPoints[Random.Range(0, AiBrain.WanderPoints.Count - 1)];
+        if (_WanderIndex >= AiBrain.WanderPoints.Count - 1)
+            _WanderIndex = 0;
+        else
+            _WanderIndex++;
+
+        _destinationPoint = AiBrain.WanderPoints[_WanderIndex];
         AiBrain.SetDestination(_destinationPoint.position);
     }
     protected IEnumerator DelayBeforeWandering()
@@ -105,12 +95,7 @@ public class AIBehavior : MonoBehaviour, IInteractable
     
     public virtual void Interact()
     {
-        //OnHited.Invoke();
-        //if (_grabbedPlayer != null)
-        //{
-        //    EjectPLayer();
-        //    StartCoroutine(StunnedDelay());
-        //}
+
     }
     protected IEnumerator StunnedDelay()
     {

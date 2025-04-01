@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -20,11 +21,13 @@ public enum npcState
     LookingArround,
     yeetPlayer
 }
-public enum npcType
+public enum NPCType
 {
     notmoving,
-    wander,
-    cleaner
+    RunAway,
+    cleaner,
+    Guarde,
+    Wanderer,
 }
 
 public enum ReactionToplayer
@@ -36,32 +39,53 @@ public class AIScript : MonoBehaviour
 {
     private float anger;
     private float fear;
+    [Header("Player Reactions")]
+    [field: SerializeField, OnValueChanged("TypeChangeCallback")] NPCType TypeNPC { get; set; }
 
-
-    [Header("AI Data")]
-
+    [SerializeField, Required("Must not be null "), Tooltip("add the corresponding componement (eg AIChase...) and put it there")]
+    private AIBehavior _behavior;
 
     [Header("Wander")]
     [field: SerializeField] public List<Transform> WanderPoints { get; set; }
     [field: SerializeField] public float WanderCoolDownTime { get; set; } = 1f;
 
 
-
     [Header("AI INFO")]
-    //[field:SerializeField, Required("AI Need a line of sight")] public LineOfSight LineOfSight { get; set; }
     [SerializeField] private LayerMask _viewMak;
     [field:SerializeField, Required] public NavMeshAgent _agent {  get; set; }
     public LineOfSight LineOfSight { get; set; }//auto ref
+    [SerializeField] float _stopingdistance=0;
 
-    [field: SerializeField] public npcState State { get; set; }
+    public npcState State { get; set; }
 
-    [Header("Player Reactions")]
-    [field: SerializeField] ReactionToplayer ReactionToPlayer { get; set; }
+
+    private void TypeChangeCallback()
+    {
+        DestroyImmediate(GetComponent<AIBehavior>());
+        switch (TypeNPC)
+        {
+            case NPCType.notmoving:
+                break;
+            case NPCType.RunAway:
+                _behavior=gameObject.AddComponent<AIRunAway>();
+                break;
+            case NPCType.Guarde:
+                _behavior=gameObject.AddComponent<AiPlayerChase>();
+                break;
+            case NPCType.Wanderer:
+                _behavior= gameObject.AddComponent<AIBehavior>();
+                break;
+            case NPCType.cleaner:
+                _behavior = gameObject.AddComponent<AICleaner>();
+                break;
+            default:
+                break;
+        }
+        _behavior.AiBrain=this;
+    }
     Vector3 _lastPlayerSeenPosition = Vector3.zero;
     private Coroutine _reactionCoroutine;
     private Coroutine _lookingArroundCorou;
-
-    [Header("Player Reactions")]
 
 
     [Header("grab")]
@@ -69,18 +93,21 @@ public class AIScript : MonoBehaviour
     [field: SerializeField] public float StunTime { get; set; } = 3f;
     [SerializeField] Transform _DropPosition;
     private PlayerMovement _grabbedPlayer;
-    bool _isGnoringPlayer = false;
 
+    [Foldout("Event")]
     public UnityEvent Onflee;
+    [Foldout("Event")]
     public UnityEvent OnReachDestination;
+    [Foldout("Event")]
     public UnityEvent OnReachReactionDestination;
+    [Foldout("Event")]
     public UnityEvent OnHited;
 
 
-    [SerializeField] private AIBehavior _behavior;
+
     private void OnDrawGizmosSelected()
     {
-    
+
     }
     void Start()
     {
@@ -91,7 +118,7 @@ public class AIScript : MonoBehaviour
 
         if (!_agent.pathPending)//check is succes to go to destination
         {
-            if (_agent.remainingDistance <= _agent.stoppingDistance)
+            if (_agent.remainingDistance <= _agent.stoppingDistance+_stopingdistance)
             {
                 if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                 {
@@ -112,6 +139,7 @@ public class AIScript : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         _agent.destination=destination;
+        _agent.stoppingDistance = +_stopingdistance;
     }
 
     internal void fleeToPoint()

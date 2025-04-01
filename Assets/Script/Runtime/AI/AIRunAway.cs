@@ -13,6 +13,7 @@ public class AIRunAway : AIBehavior
     public void LookForObject(string objectType)
     {
         AIObject aIObject = AiBrain.LineOfSight.GetSightObjectByType(objectType);
+        AiBrain.State = npcState.LookingArround;
         if (aIObject == null)
         {
             AiBrain.State = npcState.leaving;
@@ -44,6 +45,7 @@ public class AIRunAway : AIBehavior
         AiBrain.State = npcState.leaving;
         IsRunningAway = true;
         StopAllCoroutines();// kill all action running
+        AiBrain.State=npcState.Reacting;
     }
 
     public void LeaveZone()
@@ -57,7 +59,17 @@ public class AIRunAway : AIBehavior
         if (_reactionCoroutine != null) return;//a move
 
         _reactionCoroutine = StartCoroutine(PushPlayer(player));
+    }
+    public override void ReachAIDestination()
+    {
 
 
+        switch(AiBrain.State)
+        {
+            case npcState.Reacting:
+                LookForObject(_objectType);
+                break;
+
+        }
     }
 }

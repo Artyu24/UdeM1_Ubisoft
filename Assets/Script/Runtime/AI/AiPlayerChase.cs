@@ -20,7 +20,6 @@ public class AiPlayerChase : AIBehavior
 {
     [Header("grab")]
     [SerializeField] Transform _grabPosition;
-    [SerializeField] float _StunTime = 3f;
     [SerializeField] Transform _DropPosition;
     private PlayerMovement _grabbedPlayer;
 

@@ -1,8 +1,11 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class WaterPuddle : MonoBehaviour
 {
     [SerializeField] private bool _doesContainsOil;
+
+    [field: SerializeField] private int CleanValue = 3;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -11,5 +14,14 @@ public class WaterPuddle : MonoBehaviour
         {
             slideableCharacter.OnSlide(_doesContainsOil);
         }
+    }
+    public int CleanPuddle()
+    {
+        CleanValue--;
+        if (CleanValue == 0) 
+        { 
+            transform.DOScale(Vector3.zero, 1f);
+        }
+        return CleanValue;
     }
 }

@@ -26,13 +26,4 @@ public class AIEventHandler : MonoBehaviour
             Debug.Log(distance);   
         }
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        //MakeAIRunAway(transform);
-    }
 }
