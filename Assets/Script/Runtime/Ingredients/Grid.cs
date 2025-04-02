@@ -2,15 +2,31 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int requiredObjectCount = 1;
+    private bool isOpen = false;
+
+    private void OnEnable()
     {
-        
+        Throne.OnThroneUpdated += CheckIfShouldOpen;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        Throne.OnThroneUpdated -= CheckIfShouldOpen;
+    }
+
+    void CheckIfShouldOpen(int currentCount)
+    {
+        if (!isOpen && currentCount >= requiredObjectCount)
+        {
+            Open();
+        }
+    }
+
+    void Open()
+    {
+        Debug.Log(gameObject.name + " is opening!");
+        gameObject.SetActive(false);
+        isOpen = true;
     }
 }
