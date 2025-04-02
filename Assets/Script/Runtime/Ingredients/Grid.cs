@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public int requiredObjectCount = 1;
+    public int requiredObjectCount = 0;
     private bool isOpen = false;
 
     private void OnEnable()
@@ -28,5 +28,8 @@ public class Grid : MonoBehaviour
         Debug.Log(gameObject.name + " is opening!");
         gameObject.SetActive(false);
         isOpen = true;
+
+        Vector3 direction = new Vector3(0, -1, 0);
+        transform.Translate(direction);
     }
 }
