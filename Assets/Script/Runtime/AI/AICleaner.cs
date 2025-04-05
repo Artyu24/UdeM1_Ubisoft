@@ -20,17 +20,21 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
     [SerializeField] GameObject _balise;
 
     [field: SerializeField] public List<WaterPuddle> ToClean { get; set; } = new List<WaterPuddle>();
+    [field: SerializeField] public List<WaterPuddle> ToBalise { get; set; } = new List<WaterPuddle>();
 
     private Coroutine _DropBaliseCorou;
-
+    private Vector3 _startPoint;
     private void Start()
     {
-        GoToFirstPuddle();
+        _startPoint = transform.position;
+        GoToNewWater(null);
     }
-    public void AddWater(WaterPuddle waterToClean)
-    {
-        ToClean.Add(waterToClean);
-        AiBrain.SetDestination(waterToClean.transform.position);
+    public void AddWater(WaterPuddle waterToAdd)
+    {   
+        ToBalise.Add(waterToAdd);
+        ToClean.Add(waterToAdd);
+        GoToNewWater(null);
+         //AiBrain.SetDestination(waterToClean.transform.position);
     }
     //Got to wate,  State: WalkToWater
     public override void ReachAIDestination()
@@ -39,6 +43,7 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
         {
             case CleanerState.WalkToNewWater:
                 DropBalise(ToClean[ToClean.Count - 1].transform);
+
                 break;
             case CleanerState.WalkToFirstPuddle:
                 Clean();
@@ -46,10 +51,17 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
         }
     }
     [Button]
-    public void GoToNewWater()
+    public void GoToNewWater(WaterPuddle oldWater)
     {
-        AiBrain.SetDestination(ToClean[ToClean.Count-1].transform.position);
-        _cleanerState = CleanerState.WalkToNewWater;
+        if (ToBalise.Contains(oldWater))
+        {
+            ToBalise.Remove(oldWater);
+        }
+        if (ToBalise.Count > 0)
+        {
+            AiBrain.SetDestination(ToBalise[0].transform.position);
+            _cleanerState = CleanerState.WalkToNewWater;
+        }
     }
     public void Clean()
     {
@@ -58,27 +70,46 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
     }
     public void GoToFirstPuddle()
     {
-        AiBrain.SetDestination(ToClean[0].transform.position);
-        _cleanerState = CleanerState.WalkToFirstPuddle;
+        if (ToClean.Count > 0)
+        {
+            AiBrain.SetDestination(ToClean[0].transform.position);
+            _cleanerState = CleanerState.WalkToFirstPuddle;
+        }
+        else
+            GoToStart();
     }
     public void DropBalise(Transform position)
     {
-        Instantiate(_balise,position.position,Quaternion.identity);
+        if (ToBalise.Count <= 0)
+        {
+            return;
+        }
+            Instantiate(_balise, ToBalise[0].transform.position,Quaternion.identity);
         _cleanerState = CleanerState.Balising;
         if(_DropBaliseCorou == null)
             _DropBaliseCorou = StartCoroutine(DropBaliseAction());
     }
     private IEnumerator DropBaliseAction() 
     {
+
         yield return new WaitForSeconds(1);
         _DropBaliseCorou = null;
-        GoToFirstPuddle();
+        ToBalise.RemoveAt(0);
+        if (ToBalise.Count > 0)
+        {
+            AiBrain.SetDestination(ToBalise[0].transform.position);
+            _cleanerState = CleanerState.WalkToNewWater;
+            GoToNewWater(ToBalise[0]);
+        }
+        else
+            GoToFirstPuddle();
     }
     private IEnumerator CleanCoroutine()
     {
         while(_cleanerState == CleanerState.cleaning)
         {
             yield return new WaitForSeconds(1f);
+            if(ToClean.Count > 0)
             if (ToClean[0].CleanPuddle() < 0)
             {
                 ToClean.RemoveAt(0);
@@ -89,5 +120,17 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
     private void GoToNextPuddle()
     {
         _cleanerState = CleanerState.WalkToFirstPuddle;
+    }
+    public void OncompleteCleaning(WaterPuddle wp)
+    {
+        if (ToClean.Contains(wp))
+        {
+            ToClean.Remove(wp);
+            GoToFirstPuddle();
+        }
+    }
+    private void GoToStart()
+    {
+        AiBrain.SetDestination(_startPoint);
     }
 }

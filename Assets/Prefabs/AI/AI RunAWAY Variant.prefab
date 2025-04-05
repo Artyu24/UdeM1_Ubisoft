@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1605808617305515399, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: _rangePlayerView
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _behavior
       value: 
@@ -103,7 +107,7 @@ MonoBehaviour:
   <AiBrain>k__BackingField: {fileID: 1960813202380975925}
   _reactionZone: {fileID: 0}
   _leavePoint: {fileID: 0}
-  _objectType: 
+  _objectType: A
   <IsRunningAway>k__BackingField: 0
 --- !u!195 &8925825356562089975 stripped
 NavMeshAgent:

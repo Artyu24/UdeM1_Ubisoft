@@ -211,7 +211,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
 --- !u!114 &5931385766150706859
 MonoBehaviour:
@@ -237,6 +237,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 160
   <_agent>k__BackingField: {fileID: 8416480372459594926}
+  _stopingdistance: 0
   _grabPosition: {fileID: 5656396018402636506}
   <StunTime>k__BackingField: 3
   _DropPosition: {fileID: 0}
