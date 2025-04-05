@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class Throne : MonoBehaviour
@@ -6,6 +7,7 @@ public class Throne : MonoBehaviour
     public static event Action<int> OnThroneUpdated;
     [SerializeField]int ObjectCounter;
 
+    [Button]
     public void AddObject()
     {
         // new object

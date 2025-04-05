@@ -26,7 +26,11 @@ public class Grid : MonoBehaviour
     void Open()
     {
         Debug.Log(gameObject.name + " is opening!");
-        gameObject.SetActive(false);
         isOpen = true;
+
+        Vector3 direction = new Vector3(0, -1, 0);
+        transform.Translate(direction);
+
+        gameObject.SetActive(false);
     }
 }
