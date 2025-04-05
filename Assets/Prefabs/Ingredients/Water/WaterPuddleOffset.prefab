@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doesContainsOil: 0
+  _meshRenderer: {fileID: 5054141901563139519}
 --- !u!65 &3716163139649634523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -145,6 +146,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aec7ac50906c14567a9ea8ac74d6919b, type: 3}
+--- !u!23 &5054141901563139519 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: aec7ac50906c14567a9ea8ac74d6919b, type: 3}
+  m_PrefabInstance: {fileID: 5900418004720814395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6226445926044102352 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aec7ac50906c14567a9ea8ac74d6919b, type: 3}
