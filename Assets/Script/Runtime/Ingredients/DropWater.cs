@@ -7,9 +7,6 @@ public class DropWater : MonoBehaviour
     
     [SerializeField] private WaterPuddle _waterPuddlePrefab;
     
-    [SerializeField, ReadOnly] private bool _dropPuddle;
-    public bool DropPuddle { set => _dropPuddle = value; }
-
     public void DropWaterBelow()
     {
         RaycastHit[] rayHits = Physics.BoxCastAll(transform.position, new Vector3(0.5f, 0.5f, 0.5f), -transform.up, Quaternion.identity, 100f);
@@ -25,9 +22,6 @@ public class DropWater : MonoBehaviour
                 bucket.FillBucket();
                 break;
             }
-            
-            if(!_dropPuddle)
-                continue;
             
             //Already a Puddle
             WaterPuddle puddle = rayHits[i].transform.GetComponent<WaterPuddle>();

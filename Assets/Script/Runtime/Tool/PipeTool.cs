@@ -21,13 +21,14 @@ public class PipeTool : MonoBehaviour
     [Header("Components")]
     [SerializeField] private SplineContainer _splineContainer;
     [SerializeField, ReadOnly] private DropWater _dropWaterPipe;
+    public DropWater DropWaterPipe => _dropWaterPipe;
     
     [Header("Prefab")]
     [SerializeField] private Transform _pipePrefab;
     [SerializeField] private Transform _pipeTurningPrefab;
     [SerializeField] private DropWater _dropWaterPrefab;
     [SerializeField] private SplineAnimate _pipeEffectPrefab;
-    
+
     public SplineAnimate PipeEffect()
     {
         SplineAnimate animEffect = Instantiate(_pipeEffectPrefab);
@@ -35,8 +36,6 @@ public class PipeTool : MonoBehaviour
         animEffect.Play();
         animEffect.Completed += () =>
         {
-            if(_dropWaterPipe)
-                _dropWaterPipe.DropWaterBelow();
             Destroy(animEffect.gameObject);
         };
 
@@ -158,7 +157,6 @@ public class PipeTool : MonoBehaviour
                 //Drop Water At End
                 _dropWaterPipe = Instantiate(_dropWaterPrefab, parentObject.transform);
                 _dropWaterPipe.transform.localPosition = _splineContainer.Spline[i].Position;
-                _dropWaterPipe.DropPuddle = _dropPuddleAtEnd;
             }
         }
 
@@ -168,7 +166,6 @@ public class PipeTool : MonoBehaviour
             DropWater dropWaterLeak = Instantiate(_dropWaterPrefab, parentObject.transform);
             dropWaterLeak.transform.position = _splineContainer.EvaluatePosition(_leakPuddlesList[i].LeakPercentPath);
             dropWaterLeak.gameObject.name = "Leak_" + (i + 1);
-            dropWaterLeak.DropPuddle = true;
             _leakDropWaterList.Add(dropWaterLeak);
         }
     }
