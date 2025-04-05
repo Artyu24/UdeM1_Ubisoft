@@ -17,17 +17,17 @@ public class Door : MonoBehaviour
     public void OpenDoor()
     {
         if (_isSlidingDoor)
-            transform.DOMove(_finalPosition, _doorAnimTime);
+            transform.DOLocalMove(_finalPosition, _doorAnimTime);
         else
-            transform.DORotate(_finalRotation, _doorAnimTime);
+            transform.DOLocalRotate(_finalRotation, _doorAnimTime);
     }
     
     public void CloseDoor()
     {
         if (_isSlidingDoor)
-            transform.DOMove(_defaultPosition, _doorAnimTime);
+            transform.DOLocalMove(_defaultPosition, _doorAnimTime);
         else
-            transform.DORotate(_defaultRotation, _doorAnimTime);
+            transform.DOLocalRotate(_defaultRotation, _doorAnimTime);
     }
 
 #if UNITY_EDITOR

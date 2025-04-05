@@ -65,6 +65,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         objectGrab.OnGrab(transform);
         objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
+        objectGrab.GetObjectBase().transform.DOLocalRotate(Vector3.zero, 0.2f);
 
         if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
         {
