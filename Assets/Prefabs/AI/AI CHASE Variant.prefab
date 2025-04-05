@@ -80,6 +80,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2363909046023011900}
     - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: <TypeNPC>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _wanderPoints.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -143,7 +147,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8949245252916025334, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8327681990949139391, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
@@ -177,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AiBrain>k__BackingField: {fileID: 4622550471839979262}
+  _fallenTime: 2
   _grabPosition: {fileID: 3390675552061168892}
   _DropPosition: {fileID: 0}
   _chaseState: 0

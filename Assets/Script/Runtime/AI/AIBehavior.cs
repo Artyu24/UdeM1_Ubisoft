@@ -3,17 +3,21 @@ using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
 
-public class AIBehavior : MonoBehaviour, IInteractable
+public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
 {
     [field: SerializeField] public AIScript AiBrain { get; set; }
     protected bool _isGnoringPlayer = false;
     protected Coroutine _lookingArroundCorou;
     protected Coroutine _reactionCoroutine;
-    protected Coroutine _wandererDelay=null;
+    protected Coroutine _wandererDelay = null;
 
     protected Transform _destinationPoint;
 
     int _WanderIndex = 0;
+    private bool _isSliding;
+    [SerializeField] private float _fallenTime;
+    bool _canSlip=true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -109,5 +113,46 @@ public class AIBehavior : MonoBehaviour, IInteractable
         Wander();
     }
 
+    public void OnSlide(bool doesContainsOil)
+    {
+        if (!_canSlip)
+            return;
 
+        if (!doesContainsOil)
+        {
+            //Fall
+            AiBrain._agent.isStopped = true;
+            //_rangeColliderPush.enabled = false;
+
+            StartCoroutine(IAFalling());
+        }
+        else
+        {
+            //Slide
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit))
+            {
+                AiBrain._agent.destination = hit.point;
+                _isSliding = true;
+                
+            }
+            return;
+        }
+    }
+
+    private IEnumerator IAFalling()
+    {
+        _canSlip = false;
+        _isGnoringPlayer = true;
+        AiBrain._agent.isStopped = true;
+        //AiBrain.State = npcState.Slide;
+        yield return new WaitForSeconds(_fallenTime);
+        _isGnoringPlayer = true;
+        AiBrain._agent.isStopped = false;
+        //AiBrain.State = npcState.wandering;
+        //Wander();
+        //_rangeColliderPush.enabled = true;
+        yield return new WaitForSeconds(_fallenTime);
+        _canSlip = true;
+    }
 }

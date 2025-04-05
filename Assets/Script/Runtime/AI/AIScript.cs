@@ -19,7 +19,8 @@ public enum npcState
     leaving,
     HoldPlayer,
     LookingArround,
-    yeetPlayer
+    yeetPlayer,
+    Slide
 }
 public enum NPCType
 {
