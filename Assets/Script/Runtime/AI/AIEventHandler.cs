@@ -18,8 +18,6 @@ public class AIEventHandler : MonoBehaviour
     {
         foreach (var ai in Ai) 
         {
-            //on check la distance de chaque IA
-            //
             float distance = Vector2.Distance(position.position,ai.transform.position);
             if (distance < 5) 
             {
@@ -27,14 +25,5 @@ public class AIEventHandler : MonoBehaviour
             }
             Debug.Log(distance);   
         }
-    }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        //MakeAIRunAway(transform);
     }
 }
