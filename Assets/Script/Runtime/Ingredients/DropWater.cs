@@ -1,3 +1,4 @@
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -6,8 +7,22 @@ public class DropWater : MonoBehaviour
     [SerializeField, Layer] private int _groundLayer;
     
     [SerializeField] private WaterPuddle _waterPuddlePrefab;
+
+    [SerializeField] private ParticleSystem _waterParticle;
+
+    private bool _dropPuddle;
     
-    public void DropWaterBelow()
+    public void DropWaterBelow(bool mustDropPuddle)
+    {
+        if(_waterParticle != null)
+            _waterParticle.Play();
+
+        _dropPuddle = mustDropPuddle;
+        
+        StartCoroutine(LaunchBehaviourDelay());
+    }
+
+    private void DoBehaviour()
     {
         RaycastHit[] rayHits = Physics.BoxCastAll(transform.position, new Vector3(0.5f, 0.5f, 0.5f), -transform.up, Quaternion.identity, 100f);
         if(rayHits.Length == 0)
@@ -23,11 +38,14 @@ public class DropWater : MonoBehaviour
                 break;
             }
             
+            if(!_dropPuddle)
+                return;
+
             //Already a Puddle
             WaterPuddle puddle = rayHits[i].transform.GetComponent<WaterPuddle>();
             if (puddle != null)
                 break;
-
+                
             //Place Puddle on Ground
             if (rayHits[i].transform.gameObject.layer == _groundLayer)
             {
@@ -36,5 +54,11 @@ public class DropWater : MonoBehaviour
                 break;
             }
         }
+    }
+    
+    private IEnumerator LaunchBehaviourDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        DoBehaviour();
     }
 }
