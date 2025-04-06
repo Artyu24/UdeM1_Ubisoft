@@ -8,9 +8,6 @@ using UnityEngine.Splines;
 
 public class PipeTool : MonoBehaviour
 {
-    [Header("Data")] 
-    [SerializeField] private bool _dropPuddleAtEnd;
-    
     [Header("Leak")]
     [SerializeField] private List<LeakPuddle> _leakPuddlesList = new List<LeakPuddle>();
     [SerializeField, ReadOnly] private List<DropWater> _leakDropWaterList = new List<DropWater>();
@@ -34,10 +31,6 @@ public class PipeTool : MonoBehaviour
         SplineAnimate animEffect = Instantiate(_pipeEffectPrefab);
         animEffect.Container = _splineContainer;
         animEffect.Play();
-        animEffect.Completed += () =>
-        {
-            Destroy(animEffect.gameObject);
-        };
 
         //Leak
         _effectDuration = animEffect.Duration;
@@ -62,7 +55,7 @@ public class PipeTool : MonoBehaviour
 
             if (_leakPuddlesList[i].LeakPercentPath < percent)
             {
-                _leakDropWaterList[i].DropWaterBelow();
+                _leakDropWaterList[i].DropWaterBelow(true);
                 _alreadyLeakDropWaterList.Add(_leakDropWaterList[i]);
             }
         }

@@ -39,10 +39,10 @@ public class DoubleValve : MonoBehaviour
                     _OnDoubleInteractionEvent.Invoke();
                 }
                 
-                if (_mustDropWater && _firstValve != null)
+                if (_firstValve != null)
                 {
                     if(_firstValve.Pipe.DropWaterPipe != null)
-                        _firstValve.Pipe.DropWaterPipe.DropWaterBelow();
+                        _firstValve.Pipe.DropWaterPipe.DropWaterBelow(_mustDropWater);
                 }
             };
         }

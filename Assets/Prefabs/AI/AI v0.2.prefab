@@ -70,8 +70,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   _reactionTime: 1
-  _playerDistanceBeforePush: 2
+  _rangePlayerView: 1
   <InSight>k__BackingField: []
+  <PlayerInSight>k__BackingField: []
+  <Inrange>k__BackingField: []
+  _AiBrain: {fileID: 4294519397563726272}
 --- !u!1 &7374758635256746468
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,6 +89,7 @@ GameObject:
   - component: {fileID: 7649435515330235829}
   - component: {fileID: 6589295440230994178}
   - component: {fileID: 4294519397563726272}
+  - component: {fileID: 8949245252916025334}
   m_Layer: 0
   m_Name: AI v0.2
   m_TagString: Untagged
@@ -220,26 +224,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9c9bfa6d7f0914aafaea42d310e827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guardRotation: {x: 0, y: 0, z: 0}
-  _wanderPoints:
+  <TypeNPC>k__BackingField: 2
+  _behavior: {fileID: 8949245252916025334}
+  <WanderPoints>k__BackingField:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  WanderCoolDownTime: 1
-  _reactionZone: {fileID: 0}
-  _leavePoint: {fileID: 0}
-  _objectType: A
-  _isRunningAway: 0
-  _lineOfSight: {fileID: 1605808617305515399}
+  <WanderCoolDownTime>k__BackingField: 1
   _viewMak:
     serializedVersion: 2
     m_Bits: 0
-  _agent: {fileID: 6589295440230994178}
-  _navMesh: {fileID: 0}
-  _target: {fileID: 0}
-  <interest>k__BackingField:
-  - {fileID: 0}
+  <_agent>k__BackingField: {fileID: 6589295440230994178}
+  _stopingdistance: 2
+  _grabPosition: {fileID: 0}
+  <StunTime>k__BackingField: 3
+  _DropPosition: {fileID: 0}
   Onflee:
     m_PersistentCalls:
       m_Calls: []
@@ -249,6 +246,25 @@ MonoBehaviour:
   OnReachReactionDestination:
     m_PersistentCalls:
       m_Calls: []
+  OnHited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8949245252916025334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7374758635256746468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d8b9cccc124744983464c92d63ff93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AiBrain>k__BackingField: {fileID: 4294519397563726272}
+  _cleanerState: 0
+  _balise: {fileID: 8014348794740947304, guid: 6aa3d2aa9151d5a48a95c8f48be1282f, type: 3}
+  <ToClean>k__BackingField: []
 --- !u!1001 &3105457621482046942
 PrefabInstance:
   m_ObjectHideFlags: 0
