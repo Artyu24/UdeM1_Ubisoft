@@ -16,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     private TeleportPlayers _teleportPlayersObject;
     public TeleportPlayers TeleportPlayersObject => _teleportPlayersObject;
 
+    public bool isRestoLevel = false;
+
     private void Awake()
     {
         
@@ -55,6 +57,18 @@ public class PlayerManager : MonoBehaviour
         playerInput.transform.position = transform.position;
         
         _playerList.Add(playerInput);
+
+
+
+        // for resto level
+
+        if (isRestoLevel)
+        {
+            if(_playerList.Count == 2)
+            {
+               
+            }
+        }
     }
 
     private void SceneLoadedInit()
@@ -92,9 +106,9 @@ public class PlayerManager : MonoBehaviour
         if(GameObject.FindFirstObjectByType(typeof(HubManager)))
             return;
         
-        foreach (PlayerInput player in _playerList)
+        for (int i = 0; i < _playerList.Count; i++)
         {
-            player.transform.position = position;
+            _playerList[i].transform.position = position + new Vector3(0.75f * i, 0, 0.75f * i);
         }
     }
 }

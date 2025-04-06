@@ -8,6 +8,7 @@ public class Valve : InteractObject
     [Header("Simple Pipe")]
     [SerializeField] private Transform _valve;
     [SerializeField] private PipeTool _pipeTool;
+    [SerializeField] private bool _dropPuddleAtEnd;
     
     [Header("Double Pipe Mod")]
     public PipeTool Pipe => _pipeTool;
@@ -36,7 +37,7 @@ public class Valve : InteractObject
                 anim.Completed += () =>
                 {
                     _interactEvents.Invoke();
-                    _pipeTool.DropWaterPipe.DropWaterBelow();
+                    _pipeTool.DropWaterPipe.DropWaterBelow(_dropPuddleAtEnd);
                 };
             }
             
