@@ -20,11 +20,18 @@ public class PlayerInteraction : MonoBehaviour
     public IGrabbable GrabbedObj { get => _grabbedObj; }
 
     [Header("Interact")] 
-    public Action OnPlayerInteractAction; 
+    public Action OnPlayerInteractAction;
+    [SerializeField] private float _interactCD = 1f;
+    private float _interactTimer;
+    private bool _canInteract;
     
     [Header("Search Object")] 
     [SerializeField] private FindTarget _findTargetPrefab;
     private bool _hasRightObjectInHand;
+    [SerializeField] private float _findTargetCD = 1f;
+    private float _findTargetTimer;
+    private bool _canFindTarget;
+    
     
 #if UNITY_EDITOR
     private void Awake()
@@ -33,13 +40,30 @@ public class PlayerInteraction : MonoBehaviour
     }
 #endif
 
+    private void Update()
+    {
+        UpdateCD(ref _interactTimer, _interactCD, ref _canInteract);
+        UpdateCD(ref _findTargetTimer, _findTargetCD, ref _canFindTarget);
+    }
+
+    private void UpdateCD(ref float timer, float maxCD, ref bool canDoAction)
+    {
+        if (timer > maxCD)
+        {
+            if (!canDoAction)
+                canDoAction = true;
+            return;
+        }
+        
+        timer += Time.deltaTime;
+    }
+
     public void OnPlayerGrab(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
             if (_grabbedObj != null)
             {
-                _data.AnimController.SetBool("IsGrabbing", false);
                 ReleaseObject();
                 return;
             }
@@ -52,7 +76,6 @@ public class PlayerInteraction : MonoBehaviour
                     IGrabbable objectGrab = objectHit.transform.GetComponent<IGrabbable>();
                     if (objectGrab != null)
                     {
-                        _data.AnimController.SetBool("IsGrabbing", true);
                         GrabObject(objectGrab);
                         break;
                     }
@@ -63,8 +86,11 @@ public class PlayerInteraction : MonoBehaviour
 
     public void GrabObject(IGrabbable objectGrab)
     {
+        _data.AnimController.SetBool("IsGrabbing", true);
+        
         objectGrab.OnGrab(transform);
         objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
+        objectGrab.GetObjectBase().transform.DOLocalRotate(Vector3.zero, 0.2f);
 
         if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
         {
@@ -77,6 +103,11 @@ public class PlayerInteraction : MonoBehaviour
 
     public void ReleaseObject()
     {
+        _data.AnimController.SetBool("IsGrabbing", false);
+        
+        if(_grabbedObj == null)
+            return;
+        
         _grabbedObj.OnRelease();
 
         if (_hasRightObjectInHand)
@@ -100,7 +131,7 @@ public class PlayerInteraction : MonoBehaviour
             }
             
             //Cant Interact with an Item in Hand
-            if(_grabbedObj != null)
+            if(_grabbedObj != null || !_canInteract)
                 return;
             
             //Else, find some object to interact with
@@ -113,6 +144,9 @@ public class PlayerInteraction : MonoBehaviour
                     if (objectInteract != null)
                     {
                         objectInteract.Interact();
+
+                        _interactTimer = 0;
+                        _canInteract = false;
                         break;
                     }
                 }
@@ -124,7 +158,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ctx.started)
         {
-            if(PlayerManager.instance.TeleportPlayersObject == null)
+            if(PlayerManager.instance.TeleportPlayersObject == null || !_canFindTarget)
                 return;
 
             FindTarget _findTarget = Instantiate(_findTargetPrefab, transform.position, Quaternion.identity);
@@ -132,6 +166,9 @@ public class PlayerInteraction : MonoBehaviour
                 _findTarget.Init(PlayerManager.instance.TeleportPlayersObject.transform.position);
             else
                 _findTarget.Init(PlayerManager.instance.TeleportPlayersObject.ObjectToGet.transform.position);
+
+            _findTargetTimer = 0;
+            _canFindTarget = false;
         }
     }
 }

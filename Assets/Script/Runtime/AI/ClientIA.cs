@@ -89,7 +89,6 @@ public class ClientIA : MonoBehaviour, ISlideable
                 _isSliding = true;
                 _wanderIndex--;
             }
-            return;
         }
     }
 
@@ -99,5 +98,4 @@ public class ClientIA : MonoBehaviour, ISlideable
         _clientAgent.isStopped = false;
         _rangeColliderPush.enabled = true;
     }
-    
 }
