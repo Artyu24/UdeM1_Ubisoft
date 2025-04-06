@@ -78,6 +78,9 @@ public class PlayerInteraction : MonoBehaviour
 
     public void ReleaseObject()
     {
+        if(_grabbedObj == null)
+            return;
+        
         _grabbedObj.OnRelease();
 
         if (_hasRightObjectInHand)
