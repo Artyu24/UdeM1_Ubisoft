@@ -31,10 +31,6 @@ public class PipeTool : MonoBehaviour
         SplineAnimate animEffect = Instantiate(_pipeEffectPrefab);
         animEffect.Container = _splineContainer;
         animEffect.Play();
-        animEffect.Completed += () =>
-        {
-            Destroy(animEffect.gameObject);
-        };
 
         //Leak
         _effectDuration = animEffect.Duration;
