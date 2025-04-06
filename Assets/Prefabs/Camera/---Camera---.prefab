@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3208816200491662003}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.9396927, z: 0.3420201, w: 0}
-  m_LocalPosition: {x: -46.034966, y: -2.889758, z: -1.4914279}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: -47.033207, y: -10.496979, z: -7.898587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4344079086714407972}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!20 &1748784395265218813
 Camera:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 69.62651
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -180,6 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 977718979714182424}
   - component: {fileID: 3541389154047674462}
+  - component: {fileID: 3683029960531675605}
   - component: {fileID: 3138863247949938362}
   m_Layer: 0
   m_Name: CinemachineCamera
@@ -196,13 +197,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4721330507847177298}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.9396927, z: 0.3420201, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: -46.595, y: -13.74, z: -14.536026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4344079086714407972}
-  m_LocalEulerAnglesHint: {x: 40, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!114 &3541389154047674462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +247,25 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &3683029960531675605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721330507847177298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrackerSettings:
+    BindingMode: 4
+    PositionDamping: {x: 1, y: 1, z: 1}
+    AngularDampingMode: 0
+    RotationDamping: {x: 1, y: 1, z: 1}
+    QuaternionDamping: 1
+  FollowOffset: {x: 0, y: 0, z: -10}
 --- !u!114 &3138863247949938362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,9 +282,9 @@ MonoBehaviour:
   FramingSize: 0.722
   CenterOffset: {x: 0.07, y: -0.12}
   Damping: 2
-  SizeAdjustment: 2
+  SizeAdjustment: 1
   LateralAdjustment: 0
-  FovRange: {x: 69.62651, y: 114.62651}
+  FovRange: {x: 42.37279, y: 56.814854}
   DollyRange: {x: -5, y: 3}
   OrthoSizeRange: {x: 1, y: 1000}
 --- !u!1 &6900795559019854764
@@ -292,7 +312,7 @@ Transform:
   m_GameObject: {fileID: 6900795559019854764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.595, y: 5.91, z: 4.536026}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -328,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 8709793108410560282}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -46.595, y: -5.91, z: -4.536026}
+  m_LocalPosition: {x: -46.595, y: -13.74, z: -4.536026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
