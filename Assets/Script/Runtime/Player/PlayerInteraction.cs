@@ -39,7 +39,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (_grabbedObj != null)
             {
-                _data.AnimController.SetBool("IsGrabbing", false);
                 ReleaseObject();
                 return;
             }
@@ -52,7 +51,6 @@ public class PlayerInteraction : MonoBehaviour
                     IGrabbable objectGrab = objectHit.transform.GetComponent<IGrabbable>();
                     if (objectGrab != null)
                     {
-                        _data.AnimController.SetBool("IsGrabbing", true);
                         GrabObject(objectGrab);
                         break;
                     }
@@ -63,6 +61,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void GrabObject(IGrabbable objectGrab)
     {
+        _data.AnimController.SetBool("IsGrabbing", true);
+        
         objectGrab.OnGrab(transform);
         objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
         objectGrab.GetObjectBase().transform.DOLocalRotate(Vector3.zero, 0.2f);
@@ -78,6 +78,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void ReleaseObject()
     {
+        _data.AnimController.SetBool("IsGrabbing", false);
+        
         if(_grabbedObj == null)
             return;
         

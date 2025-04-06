@@ -36,6 +36,9 @@ public class Throne : MonoBehaviour
     [Button]
     private void AddObject()
     {
+        if(_objectGrabbed == null)
+            return;
+        
         // new object
         ObjectCounter++;
         Debug.Log("Throne Count : " + ObjectCounter);
@@ -43,12 +46,18 @@ public class Throne : MonoBehaviour
         
         if (_throneObjectDataDict.ContainsKey(_objectGrabbed.GetObjectBase().ObjectType))
         {
-            _objectGrabbed.OnRelease();
+            for (int i = 0; i < _playerInList.Count; i++)
+            {
+                _playerInList[i].ReleaseObject();
+            }
+            
             _objectGrabbed.OnGrab(transform);
 
             ObjectTypeEnum objType = _objectGrabbed.GetObjectBase().ObjectType;
             _objectGrabbed.GetObjectBase().transform.DOLocalMove(_throneObjectDataDict[objType].Position, 0.2f);
             _objectGrabbed.GetObjectBase().transform.DOLocalRotate(_throneObjectDataDict[objType].Rotation, 0.2f);
+
+            _objectGrabbed = null;
         }
     }
     
@@ -57,7 +66,10 @@ public class Throne : MonoBehaviour
         //Check if we are in the Hub Scene
         HubManager hub = GameObject.FindFirstObjectByType(typeof(HubManager)) as HubManager;
         if (hub != null)
+        {
             gameObject.SetActive(true);
+            OnThroneUpdated?.Invoke(ObjectCounter);
+        }
         else
             gameObject.SetActive(false);
     }
