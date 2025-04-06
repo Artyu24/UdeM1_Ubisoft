@@ -17,7 +17,8 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     private bool _isSliding;
     [SerializeField] private float _fallenTime;
     bool _canSlip=true;
-
+    
+    [SerializeField] private float _ignorePlayerTime=1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,7 +38,8 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     protected IEnumerator IgnorePlayer()
     {
         _isGnoringPlayer = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(_ignorePlayerTime);
+        _isGnoringPlayer = false;
     }
     protected IEnumerator LookArround()
     {
