@@ -6,6 +6,8 @@ public class FindTarget : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _moveToTarget;
 
+    [SerializeField] private ParticleSystem _particleSystem;
+    
     private void Awake()
     {
         Destroy(gameObject, 10f);
@@ -24,7 +26,10 @@ public class FindTarget : MonoBehaviour
             {
                 if (!_moveToTarget.hasPath || _moveToTarget.velocity.sqrMagnitude == 0f)
                 {
-                    Destroy(gameObject);
+                    _particleSystem.Stop();
+                    
+                    if(_particleSystem.particleCount == 0)
+                        Destroy(gameObject);
                 }
             }
         }

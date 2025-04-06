@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 2900377499422469281}
   - component: {fileID: 2173970552638608880}
   - component: {fileID: 2839816674879883216}
+  - component: {fileID: 4529116526922353093}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -305,7 +306,30 @@ MonoBehaviour:
   _boxDist: 1
   _boxWidth: 0.4
   _boxHeight: 3
+  _interactCD: 1
   _findTargetPrefab: {fileID: 5972425707889199669, guid: c2885759f0b074f4b9dc5c1020307b2d, type: 3}
+  _findTargetCD: 1
+--- !u!114 &4529116526922353093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195024159608292087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7f5cc78733716409bc97830ab22ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 640
+  Target: {fileID: 6180030832911167072}
+  FadedAlpha: 0.33
+  RetainShadows: 1
+  TargetPositionOffset: {x: 0, y: 1, z: 0}
+  FadeSpeed: 1
+  ObjectsBlockingView: []
 --- !u!1001 &5125009504189408042
 PrefabInstance:
   m_ObjectHideFlags: 0
