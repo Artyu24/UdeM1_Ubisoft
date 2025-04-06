@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredObjectCount: 1
+  teleportHitbox: {fileID: 251277967}
 --- !u!1 &108449647
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredObjectCount: 2
+  teleportHitbox: {fileID: 251071033}
 --- !u!1 &163166042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,6 +1583,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af4f297b87cb9a4499ed39655e077f76, type: 3}
+--- !u!1 &251071033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855512533246283849, guid: af7c63fbc934f704da5a27f55f694d6f, type: 3}
+  m_PrefabInstance: {fileID: 1364610371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &251277967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855512533246283849, guid: af7c63fbc934f704da5a27f55f694d6f, type: 3}
+  m_PrefabInstance: {fileID: 1746537223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &252159646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10586,6 +10598,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredObjectCount: 0
+  teleportHitbox: {fileID: 2087836015}
+--- !u!1 &2087836015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855512533246283849, guid: af7c63fbc934f704da5a27f55f694d6f, type: 3}
+  m_PrefabInstance: {fileID: 252159646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2091739284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4407199971322259597, guid: 34ad25c58ac6f9d4994b6839110283f2, type: 3}
@@ -10821,7 +10839,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2687120849460976461, guid: 03736b00025726a47bfe2839693c2348, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.0156703
+      value: 8.0234
       objectReference: {fileID: 0}
     - target: {fileID: 2687120849460976461, guid: 03736b00025726a47bfe2839693c2348, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10829,7 +10847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2687120849460976461, guid: 03736b00025726a47bfe2839693c2348, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0240601
+      value: 1.0240594
       objectReference: {fileID: 0}
     - target: {fileID: 4344079086714407972, guid: 03736b00025726a47bfe2839693c2348, type: 3}
       propertyPath: m_LocalPosition.x
