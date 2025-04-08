@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2878815599591374696}
-  m_Layer: 0
+  - component: {fileID: 2484348497336432146}
+  - component: {fileID: 1501858873150108088}
+  m_Layer: 7
   m_Name: VegContCarrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,6 +52,43 @@ Transform:
   - {fileID: 6406384828874190571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2484348497336432146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787401192219177432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65de4b2f40a51ea4296c017295fcbedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
+  Position: {x: 0, y: 0, z: 0}
+  Materials: []
+  InitialAlpha: 0
+--- !u!65 &1501858873150108088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787401192219177432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.23, y: 1, z: 1.45}
+  m_Center: {x: 3.25, y: 9.53, z: -9.41}
 --- !u!1001 &512418578127208171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -188,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -261,6 +308,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_14
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -336,6 +387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -409,6 +464,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -484,6 +543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_10
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -557,6 +620,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -632,6 +699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_12
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -705,6 +776,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -780,6 +855,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_7
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -853,6 +932,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8ddad06df580f49d097ee25b7dfc76c6, type: 3}
       propertyPath: m_Name
       value: VeggieBox_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8ddad06df580f49d097ee25b7dfc76c6, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -928,6 +1011,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1001,6 +1088,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1076,6 +1167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_15
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1149,6 +1244,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1224,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carrot_8
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1297,6 +1400,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a58c084dde7244272b5c68cef91239b5, type: 3}
       propertyPath: m_Name
       value: carrotStack
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a58c084dde7244272b5c68cef91239b5, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1372,6 +1479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: carrotStack_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a58c084dde7244272b5c68cef91239b5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1445,6 +1556,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
       propertyPath: m_Name
       value: Carrot_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d42ced0bd749a4df68e7c9a37124606d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
