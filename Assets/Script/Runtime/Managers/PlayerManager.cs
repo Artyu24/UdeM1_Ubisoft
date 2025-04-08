@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     private TeleportPlayers _teleportPlayersObject;
     public TeleportPlayers TeleportPlayersObject => _teleportPlayersObject;
 
-    public bool isRestoLevel = false;
+   
 
     private void Awake()
     {
@@ -60,15 +60,9 @@ public class PlayerManager : MonoBehaviour
 
 
 
-        // for resto level
+    
 
-        if (isRestoLevel)
-        {
-            if(_playerList.Count == 2)
-            {
-               
-            }
-        }
+      
     }
 
     private void SceneLoadedInit()
