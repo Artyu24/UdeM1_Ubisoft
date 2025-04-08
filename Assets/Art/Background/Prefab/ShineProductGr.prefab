@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5563811285225338852}
-  m_Layer: 0
+  - component: {fileID: 5645663264042778661}
+  - component: {fileID: 733975110572464930}
+  m_Layer: 7
   m_Name: ShineProductGr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,6 +45,43 @@ Transform:
   - {fileID: 384095677237575934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5645663264042778661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007282857370178267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65de4b2f40a51ea4296c017295fcbedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
+  Position: {x: 0, y: 0, z: 0}
+  Materials: []
+  InitialAlpha: 0
+--- !u!65 &733975110572464930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007282857370178267}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.52, y: 1, z: 1}
+  m_Center: {x: -18.37, y: 1.35, z: 7.5}
 --- !u!1001 &431178483208959998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,6 +90,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -103,9 +146,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -125,6 +184,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -177,9 +240,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -199,6 +278,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -251,9 +334,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -273,6 +372,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -325,9 +428,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -347,6 +466,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -399,9 +522,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -421,6 +560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -473,9 +616,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -495,6 +654,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -547,9 +710,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -569,6 +748,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -621,9 +804,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -643,6 +842,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -695,9 +898,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -717,6 +936,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -769,9 +992,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -791,6 +1030,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -843,9 +1086,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -865,6 +1124,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5563811285225338852}
     m_Modifications:
+    - target: {fileID: 1419399321381477728, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2774545907908736139, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5256145
@@ -917,9 +1180,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064682215944659204, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
       propertyPath: m_Name
       value: ShineProduct_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299724971778616881, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782944150497646563, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637588336427131693, guid: 7f07f265aad0ee54bbebfd2782b877e1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
