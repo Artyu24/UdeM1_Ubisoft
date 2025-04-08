@@ -42,6 +42,7 @@ public class AIScript : MonoBehaviour
     private float fear;
     [Header("Player Reactions")]
     [field: SerializeField, OnValueChanged("TypeChangeCallback")] NPCType TypeNPC { get; set; }
+    [SerializeField] bool _willTurnIntoGuarde=false;
 
     [SerializeField, Required("Must not be null "), Tooltip("add the corresponding componement (eg AIChase...) and put it there")]
     private AIBehavior _behavior;
@@ -55,7 +56,6 @@ public class AIScript : MonoBehaviour
     [SerializeField] private LayerMask _viewMak;
     [field:SerializeField, Required] public NavMeshAgent _agent {  get; set; }
     public LineOfSight LineOfSight { get; set; }//auto ref
-    [SerializeField] float _stopingdistance=0;
 
     public npcState State { get; set; }
 
@@ -90,10 +90,12 @@ public class AIScript : MonoBehaviour
 
 
     [Header("grab")]
-    [SerializeField] Transform _grabPosition;
+    [field: SerializeField,Tooltip("position where the player is moved when transported")] public Transform GrabPosition { get; set; }
     [field: SerializeField] public float StunTime { get; set; } = 3f;
-    [SerializeField] Transform _DropPosition;
+    [SerializeField, Tooltip("Position where the player is going to be dropped")] Transform _DropPosition;
+    public Transform DropPosition { get=>_DropPosition; set => _DropPosition = value; }
     private PlayerMovement _grabbedPlayer;
+
 
     [Foldout("Event")]
     public UnityEvent Onflee;
@@ -113,13 +115,15 @@ public class AIScript : MonoBehaviour
     void Start()
     {
         AIEventHandler.instance.Ai.Add(this);
+        if(_willTurnIntoGuarde)
+            PlayerManager.instance.OnGrabFinalObject.AddListener(TurnIntoGuard);
     }
     void LateUpdate()
     {
 
         if (!_agent.pathPending)//check is succes to go to destination
         {
-            if (_agent.remainingDistance <= _agent.stoppingDistance+_stopingdistance)
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
                 if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                 {
@@ -140,10 +144,9 @@ public class AIScript : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         _agent.destination=destination;
-        _agent.stoppingDistance = +_stopingdistance;
     }
 
-    internal void fleeToPoint()
+    public void fleeToPoint()
     {
         AIRunAway ra = (AIRunAway)_behavior;
 
@@ -151,5 +154,13 @@ public class AIScript : MonoBehaviour
         {
             ra.fleeToPoint();
         }
+    }
+    [Button]
+    private void TurnIntoGuard()
+    {
+        _behavior = gameObject.AddComponent<AiPlayerChase>();
+        _behavior.AiBrain=this;
+        PlayerManager.instance.OnGrabFinalObject.RemoveListener(TurnIntoGuard);
+        
     }
 }

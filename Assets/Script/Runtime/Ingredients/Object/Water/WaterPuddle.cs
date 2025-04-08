@@ -1,21 +1,24 @@
 using DG.Tweening;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 public delegate void OnWaterDry(WaterPuddle wp);
 public class WaterPuddle : MonoBehaviour
 {
     [SerializeField] private bool _doesContainsOil;
-
-    [field: SerializeField] private int CleanValue = 3;
-    public OnWaterDry onWaterDry;
-
-
+    [SerializeField, Required] Transform _Watermesh;
     [SerializeField] private float initialScale = 1f;
+    [SerializeField] private int CleanValue = 3;
+
+    public OnWaterDry onWaterDry;
     private int maxCleanValue;
-    
+    public GameObject Sign { get;set; }
+
+    public UnityEvent OnDry;
     private void Awake()
     {
         maxCleanValue = CleanValue; 
-        transform.localScale = Vector3.one * initialScale;
+        _Watermesh.transform.localScale = Vector3.one * initialScale;
         
     }
     private void OnTriggerEnter(Collider other)
@@ -41,6 +44,11 @@ public class WaterPuddle : MonoBehaviour
         //transform.DOScale(Vector3.zero, 1f);
         onWaterDry.Invoke(this);
         onWaterDry=null;
+        if(Sign.TryGetComponent<SlideSign>(out SlideSign sign))
+        {
+            sign.disappear();
+        }
+        OnDry.Invoke();
     }
     private void UpdateScale()
     {
@@ -49,7 +57,7 @@ public class WaterPuddle : MonoBehaviour
         // Calcul de la nouvelle échelle
         Vector3 newScale = Vector3.one * initialScale * scaleFactor;
         // Animation de l'échelle avec DOTween
-        transform.DOScale(newScale, 0.5f);
+        _Watermesh.transform.DOScale(newScale, 0.5f);
     }
 
 }

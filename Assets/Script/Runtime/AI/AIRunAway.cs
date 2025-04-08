@@ -62,7 +62,7 @@ public class AIRunAway : AIBehavior
     }
     public override void ReachAIDestination()
     {
-
+        base.ReachAIDestination();
 
         switch(AiBrain.State)
         {
