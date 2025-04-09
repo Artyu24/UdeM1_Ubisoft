@@ -19,8 +19,6 @@ public enum ChaseState
 public class AiPlayerChase : AIBehavior
 {
     [Header("grab")]
-    [SerializeField] Transform _grabPosition;
-    [SerializeField] Transform _DropPosition;
     private PlayerMovement _grabbedPlayer;
 
 
@@ -128,7 +126,7 @@ public class AiPlayerChase : AIBehavior
     public void GoToPlayerReleasePoint()
     {
         _isGnoringPlayer = true;
-        AiBrain.SetDestination(_DropPosition.position);
+        AiBrain.SetDestination(AiBrain.DropPosition.position);
         
     }
     [Button]
@@ -149,7 +147,7 @@ public class AiPlayerChase : AIBehavior
             if (AiBrain.State != npcState.chasing) return;
             _grabbedPlayer = playerMovement;
             playerMovement.SetIsGrabed(true);
-            playerMovement.transform.position = _grabPosition.position;
+            playerMovement.transform.position = AiBrain.GrabPosition.position;
             playerMovement.gameObject.transform.SetParent(transform);                   
             _chaseState = ChaseState.HoldPlayer;
             GoToPlayerReleasePoint();

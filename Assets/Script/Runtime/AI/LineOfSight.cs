@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LineOfSight : MonoBehaviour
 {
+    [SerializeField] private Transform _sightStart;
     [SerializeField] private LayerMask viewMask;
     [SerializeField] private float _reactionTime = 1f;
     [SerializeField] private float _rangePlayerView = 1f;
@@ -12,6 +13,7 @@ public class LineOfSight : MonoBehaviour
     [field: SerializeField] public List<PlayerMovement> Inrange { get; set; }
     private Coroutine _pushPlayer;
     [SerializeField] private AIScript _AiBrain;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,9 +21,8 @@ public class LineOfSight : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(transform.parent.position, transform.parent.forward * _rangePlayerView,Color.red);
+        Debug.DrawRay(_sightStart.position, _sightStart.forward * _rangePlayerView,Color.red);
     }
-    // Update is called once per frame
     void Update()
     {
 
@@ -119,8 +120,8 @@ public class LineOfSight : MonoBehaviour
     private Collider SightCheck(Collider other)
     {
         RaycastHit hit;
-        Physics.Raycast(transform.parent.position, (other.transform.position - transform.parent.position).normalized, out hit, 100, viewMask);
-        Debug.DrawRay(transform.parent.position, (other.transform.position - transform.parent.position).normalized * hit.distance, Color.yellow);
+        Physics.Raycast(_sightStart.position, (other.transform.position - _sightStart.position).normalized, out hit, 100, viewMask);
+        Debug.DrawRay(_sightStart.position, (other.transform.position - _sightStart.position).normalized * hit.distance, Color.yellow);
         if(hit.collider != other)
             return null;
         else
@@ -129,8 +130,8 @@ public class LineOfSight : MonoBehaviour
     private Collider SightCheck(GameObject other)
     {
         RaycastHit hit;
-        Physics.Raycast(transform.parent.position, (other.transform.position - transform.parent.position).normalized, out hit, 100, viewMask);
-        Debug.DrawRay(transform.parent.position, (other.transform.position - transform.parent.position).normalized * hit.distance, Color.yellow);
+        Physics.Raycast(_sightStart.position, (other.transform.position - _sightStart.position).normalized, out hit, 100, viewMask);
+        Debug.DrawRay(_sightStart.position, (other.transform.position - _sightStart.position).normalized * hit.distance, Color.yellow);
         if (hit.collider.gameObject != other)
             return null;
         else
@@ -143,7 +144,7 @@ public class LineOfSight : MonoBehaviour
 
 
         //Debug.Log((Vector3.Distance(go.transform.position, transform.parent.position)));
-        if (Vector3.Distance(go.transform.position, transform.parent.position) > (_AiBrain.State == npcState.chasing? _rangePlayerView :  _rangePlayerView)) return;
+        if (Vector3.Distance(go.transform.position, _sightStart.position) > (_AiBrain.State == npcState.chasing? _rangePlayerView :  _rangePlayerView)) return;
             _AiBrain.ReactoPlayer(playerMovement);
     }
 
