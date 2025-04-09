@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIEventHandler : MonoBehaviour
 {
-    [field:SerializeField]public List<AIScript> Ai {  get; set; }
+    [field:SerializeField]public List<AIRunAway> Ai {  get; set; }
     public static AIEventHandler instance;
     private void Awake()
     {
@@ -12,7 +12,7 @@ public class AIEventHandler : MonoBehaviour
             instance = this;
         else
             Destroy(this);
-        Ai = new List<AIScript>();
+        Ai = new List<AIRunAway>();
     }
     public void MakeAIRunAway(Transform position)
     {
