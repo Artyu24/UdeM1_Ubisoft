@@ -1,8 +1,10 @@
 using DG.Tweening;
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -10,144 +12,155 @@ using UnityEngine.Rendering;
 
 public enum npcState
 {
-    Normal,
-    Agressive,
-    Fear
+    wandering,
+    chasing,
+    Reacting,
+    Stunned,
+    leaving,
+    HoldPlayer,
+    LookingArround,
+    yeetPlayer,
+    Slide
 }
-public enum npcType
+public enum NPCType
 {
     notmoving,
-    wander,
-    cleaner
+    RunAway,
+    cleaner,
+    Guarde,
+    Wanderer,
+}
+
+public enum ReactionToplayer
+{
+    Push,
+    Chase,
 }
 public class AIScript : MonoBehaviour
 {
     private float anger;
     private float fear;
+    [Header("Player Reactions")]
+    [field: SerializeField, OnValueChanged("TypeChangeCallback")] NPCType TypeNPC { get; set; }
+    [SerializeField] bool _willTurnIntoGuarde=false;
+
+    [SerializeField, Required("Must not be null "), Tooltip("add the corresponding componement (eg AIChase...) and put it there")]
+    private AIBehavior _behavior;
 
     [Header("Wander")]
-    [SerializeField] private Vector3 _guardRotation;
-    [SerializeField] private List<Transform> _wanderPoints = new List<Transform>();
-    [SerializeField] private float WanderCoolDownTime = 1f;
-    private Coroutine _wandererDelay;
-    [Header("Running away")]
-    [SerializeField] private Transform _reactionZone;
-    [SerializeField] private Transform _leavePoint;
-    [SerializeField] private string _objectType;
-    [SerializeField] private bool _isRunningAway;
+    [field: SerializeField] public List<Transform> WanderPoints { get; set; }
+    [field: SerializeField] public float WanderCoolDownTime { get; set; } = 1f;
+
 
     [Header("AI INFO")]
-    [SerializeField,Required] private LineOfSight _lineOfSight;
     [SerializeField] private LayerMask _viewMak;
-    [SerializeField, Required] private NavMeshAgent _agent;
-    [SerializeField] private NavMeshSurface _navMesh;
-    [SerializeField] Transform _target;
+    [field:SerializeField, Required] public NavMeshAgent _agent {  get; set; }
+    public LineOfSight LineOfSight { get; set; }//auto ref
+
+    public npcState State { get; set; }
 
 
-    
-    [field:SerializeField]public List<GameObject> interest { get; set; }
+    private void TypeChangeCallback()
+    {
+        DestroyImmediate(GetComponent<AIBehavior>());
+        switch (TypeNPC)
+        {
+            case NPCType.notmoving:
+                break;
+            case NPCType.RunAway:
+                _behavior=gameObject.AddComponent<AIRunAway>();
+                break;
+            case NPCType.Guarde:
+                _behavior=gameObject.AddComponent<AiPlayerChase>();
+                break;
+            case NPCType.Wanderer:
+                _behavior= gameObject.AddComponent<AIBehavior>();
+                break;
+            case NPCType.cleaner:
+                _behavior = gameObject.AddComponent<AICleaner>();
+                break;
+            default:
+                break;
+        }
+        _behavior.AiBrain=this;
+    }
+    Vector3 _lastPlayerSeenPosition = Vector3.zero;
+    private Coroutine _reactionCoroutine;
+    private Coroutine _lookingArroundCorou;
 
+
+    [Header("grab")]
+    [field: SerializeField,Tooltip("position where the player is moved when transported")] public Transform GrabPosition { get; set; }
+    [field: SerializeField] public float StunTime { get; set; } = 3f;
+    [SerializeField, Tooltip("Position where the player is going to be dropped")] Transform _DropPosition;
+    public Transform DropPosition { get=>_DropPosition; set => _DropPosition = value; }
+    private PlayerMovement _grabbedPlayer;
+
+
+    [Foldout("Event")]
     public UnityEvent Onflee;
+    [Foldout("Event")]
     public UnityEvent OnReachDestination;
+    [Foldout("Event")]
     public UnityEvent OnReachReactionDestination;
+    [Foldout("Event")]
+    public UnityEvent OnHited;
+
+
+
+    private void OnDrawGizmosSelected()
+    {
+
+    }
     void Start()
     {
-        Wander();
-
         AIEventHandler.instance.Ai.Add(this);
+        if(_willTurnIntoGuarde)
+            PlayerManager.instance.OnGrabFinalObject.AddListener(TurnIntoGuard);
     }
-    void Update()
+    void LateUpdate()
     {
-        if (!_agent.pathPending)
+
+        if (!_agent.pathPending)//check is succes to go to destination
         {
             if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
                 if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                 {
-                    if (!_isRunningAway && _wandererDelay==null)
-                    {
-                        OnReachDestination.Invoke();
-                        //transform.rotation = Quaternion.Euler(_guardRotation);
-                        transform.DORotate(_guardRotation,0.5f);
-                        _wandererDelay = StartCoroutine(DelayBeforeWandering());
-                    }
-                    else if (_isRunningAway)
-                    {
-                        OnReachReactionDestination.Invoke();
-                        LookForObject(_objectType);
-                        
-                    }
-                    //use the closest item at position? like a pick or something?
-                    //stay for an amount of time before going back to previous pos?
+                    _behavior.ReachAIDestination();
                 }
             }
         }
+
     }
-    [Button]
+
+    public void ReactoPlayer(PlayerMovement player)
+    {
+        _behavior.ReactToPlayer(player);
+    }
+
+
+
+    public void SetDestination(Vector3 destination)
+    {
+        _agent.destination=destination;
+    }
+
     public void fleeToPoint()
     {
-        //Vector3 dir = (target.position - transform.position).normalized;
-        //agent.SetDestination(transform.position - (dir * 2));
-        _agent.destination = _reactionZone.position;
-        _isRunningAway=true;
-        StopAllCoroutines();
-        //StopCoroutine(_wandererDelay);
-    }
-    public void LookForObject(string objectType)
-    {
-        AIObject aIObject = _lineOfSight.GetSightObjectByType(objectType);
-        if (aIObject == null)
-            LeaveZone();
-        else
-            UseObject(aIObject);
-    }
-    public void UseObject(AIObject ob)
-    {
-        StartCoroutine(ItemUseDelay());
-        IEnumerator ItemUseDelay()
+        AIRunAway ra = (AIRunAway)_behavior;
+
+        if (ra!=null)
         {
-            yield return new WaitForSeconds(ob.useTime);
-            Wander();
-            _isRunningAway = false;
+            ra.fleeToPoint();
         }
     }
-    public void LeaveZone()
+    [Button]
+    private void TurnIntoGuard()
     {
-        _agent.destination = _leavePoint.position;
-    }
-    public void RunTo(Transform PosToGo)
-    {
-        _agent.destination = _target.position;
+        _behavior = gameObject.AddComponent<AiPlayerChase>();
+        _behavior.AiBrain=this;
+        PlayerManager.instance.OnGrabFinalObject.RemoveListener(TurnIntoGuard);
         
     }
-    public void Wander()
-    {
-        _agent.destination = _wanderPoints[Random.Range(0,_wanderPoints.Count-1)].position;
-    }
-    IEnumerator DelayBeforeWandering()
-    {
-        yield return new WaitForSeconds(WanderCoolDownTime);
-        Wander();
-        _wandererDelay=null;
-    }
-        //void Update()
-        //{
-        //    RaycastHit hit;
-        //    Physics.Raycast( transform.position,(interest[0].transform.position - transform.position).normalized,out hit, 100, viewMak);
-        //    Debug.DrawRay(transform.position, (interest[0].transform.position - transform.position).normalized * hit.distance, Color.yellow);
-
-        //    if (hit.collider == interest[0].GetComponent<Collider>())//temp
-        //    {
-        //        if(Vector3.Distance(transform.position, interest[0].transform.position)<5&& agent.destination != interest[0].transform.position )
-        //        {
-        //            agent.destination= interest[0].transform.position;
-        //        }
-        //    }
-        //}
-
-        /* un system de vision des element d'interet,
-         tire un raycast si les points d'interet les plus proches, liste dynamique d'objet le points le plus proche a plus d'interet
-
-         */
-         
 }
