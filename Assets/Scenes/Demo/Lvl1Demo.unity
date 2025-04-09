@@ -7212,6 +7212,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bcf1f74305de54d609ee266d74388c8b, type: 3}
   m_PrefabInstance: {fileID: 353095489}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &96362680 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3390675552061168892, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
+  m_PrefabInstance: {fileID: 1048285330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &97473595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91190,10 +91195,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI CHASE Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3390675552061168892, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3390675552061168892, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3390675552061168892, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.276
+      objectReference: {fileID: 0}
     - target: {fileID: 4622550471839979262, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
       propertyPath: _DropPosition
       value: 
       objectReference: {fileID: 1698035328}
+    - target: {fileID: 4622550471839979262, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
+      propertyPath: <GrabPosition>k__BackingField
+      value: 
+      objectReference: {fileID: 96362680}
     - target: {fileID: 4622550471839979262, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
       propertyPath: <WanderPoints>k__BackingField.Array.size
       value: 3
