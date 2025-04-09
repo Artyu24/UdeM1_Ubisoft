@@ -33,7 +33,6 @@ public class Throne : MonoBehaviour
         SceneManager.sceneLoaded += (arg0, mode) => SceneLoadedInit();
     }
     
-    [Button]
     private void AddObject()
     {
         if(_objectGrabbed == null)
@@ -125,5 +124,13 @@ public class Throne : MonoBehaviour
         [SerializeField] private Vector3 _rotation;
         public Vector3 Position => _position;
         public Vector3 Rotation => _rotation;
+    }
+
+    [Button]
+    public void EditorTest()
+    {
+        ObjectCounter++;
+        Debug.Log("Throne Count : " + ObjectCounter);
+        OnThroneUpdated?.Invoke(ObjectCounter); // broadcast event
     }
 }

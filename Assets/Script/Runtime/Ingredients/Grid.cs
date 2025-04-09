@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
@@ -35,12 +36,14 @@ public class Grid : MonoBehaviour
         Debug.Log(gameObject.name + " is opening!");
         isOpen = true;
 
-        Vector3 direction = new Vector3(0, -1, 0);
-        transform.Translate(direction);
+        //Vector3 direction = new Vector3(0, -1, 0);
+        //transform.Translate(direction);
+
+        transform.DOMove(transform.position + Vector3.down, 2f).SetEase(Ease.InOutCirc).Loops();
 
         if (teleportHitbox != null)
             teleportHitbox.SetActive(true);
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }
