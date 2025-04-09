@@ -19,7 +19,6 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     bool _canSlip=true;
     
     [SerializeField] private float _ignorePlayerTime=1f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //_destinationPoint = AiBrain.WanderPoints[Random.Range(0, AiBrain.WanderPoints.Count - 1)];

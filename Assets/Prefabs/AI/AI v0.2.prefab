@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d42837686d6a44c86a6ad2707fbc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sightStart: {fileID: 8327681990949139391}
   viewMask:
     serializedVersion: 2
     m_Bits: 192
@@ -225,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <TypeNPC>k__BackingField: 2
+  _willTurnIntoGuarde: 0
   _behavior: {fileID: 8949245252916025334}
   <WanderPoints>k__BackingField:
   - {fileID: 0}
@@ -233,8 +235,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   <_agent>k__BackingField: {fileID: 6589295440230994178}
-  _stopingdistance: 2
-  _grabPosition: {fileID: 0}
+  <GrabPosition>k__BackingField: {fileID: 0}
   <StunTime>k__BackingField: 3
   _DropPosition: {fileID: 0}
   Onflee:
@@ -262,9 +263,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AiBrain>k__BackingField: {fileID: 4294519397563726272}
+  _fallenTime: 0
+  _ignorePlayerTime: 1
   _cleanerState: 0
   _balise: {fileID: 8014348794740947304, guid: 6aa3d2aa9151d5a48a95c8f48be1282f, type: 3}
   <ToClean>k__BackingField: []
+  <ToBalise>k__BackingField: []
 --- !u!1001 &3105457621482046942
 PrefabInstance:
   m_ObjectHideFlags: 0

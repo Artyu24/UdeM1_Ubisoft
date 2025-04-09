@@ -84,7 +84,9 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
         {
             return;
         }
-            Instantiate(_balise, ToBalise[0].transform.position,Quaternion.identity);
+        GameObject newbalise= Instantiate(_balise, ToBalise[0].transform.position,Quaternion.identity);
+        newbalise.transform.SetParent(ToBalise[0].transform);
+        ToBalise[0].Sign = newbalise;
         _cleanerState = CleanerState.Balising;
         if(_DropBaliseCorou == null)
             _DropBaliseCorou = StartCoroutine(DropBaliseAction());
