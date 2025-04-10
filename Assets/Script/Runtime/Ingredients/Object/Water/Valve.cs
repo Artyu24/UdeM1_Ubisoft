@@ -23,9 +23,12 @@ public class Valve : InteractObject
     
     public override void Interact()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_VALVE);
+        
         if (_valve != null)
             _valve.DOLocalRotate(new Vector3(_valve.localEulerAngles.x, _valve.localEulerAngles.y, _valve.localEulerAngles.z + 170), 1f);
-
+        
         //If Valve is in Simple Mode, play Interact Event as Usual
         if (_pipeTool != null)
         {

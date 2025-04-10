@@ -68,6 +68,9 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
             
+            if(AudioManager.instance != null)
+                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_HIT);
+            
             RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_boxWidth, _boxHeight, _boxWidth), _grabPos.forward, Quaternion.identity, _boxDist);
             if (hits.Length > 0)
             {

@@ -28,6 +28,9 @@ public class PressurePlate : MonoBehaviour
             _playerNumberOnIt++;
             if (!_isPushed)
             {
+                if(AudioManager.instance != null)
+                    AudioManager.instance.PlayRandom(SoundState.SFX_PRESSURE_PLATE);
+                
                 _meshRenderer.material.color = Color.green;
                 _isPushed = true;
                 _onPressurePlatePushed.Invoke();

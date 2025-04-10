@@ -16,6 +16,9 @@ public class Door : MonoBehaviour
     
     public void OpenDoor()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_PORTE);
+        
         if (_isSlidingDoor)
             transform.DOLocalMove(_finalPosition, _doorAnimTime);
         else
@@ -24,6 +27,9 @@ public class Door : MonoBehaviour
     
     public void CloseDoor()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_PORTE);
+        
         if (_isSlidingDoor)
             transform.DOLocalMove(_defaultPosition, _doorAnimTime);
         else

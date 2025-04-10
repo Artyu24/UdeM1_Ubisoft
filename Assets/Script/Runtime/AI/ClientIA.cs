@@ -36,6 +36,9 @@ public class ClientIA : MonoBehaviour, ISlideable
         if(_wanderPoints.Count == 0)
             return;
         
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_HUMAN_FOOTSTEPS);
+        
         if (!_clientAgent.pathPending)
         {
             if (_clientAgent.remainingDistance <= _clientAgent.stoppingDistance)
