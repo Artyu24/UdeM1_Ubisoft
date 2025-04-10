@@ -114,7 +114,7 @@ public class AIScript : MonoBehaviour
     }
     void Start()
     {
-        AIEventHandler.instance.Ai.Add(this);
+        
         if(_willTurnIntoGuarde)
             PlayerManager.instance.OnGrabFinalObject.AddListener(TurnIntoGuard);
     }

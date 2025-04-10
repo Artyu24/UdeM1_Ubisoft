@@ -9,7 +9,15 @@ public class AIRunAway : AIBehavior
     [SerializeField] private string _objectType;
     [field: SerializeField] public bool IsRunningAway { get; set; }
 
+    void Start()
+    {
+        if (AiBrain.WanderPoints.Count==0)
+            return;
 
+        //AiBrain.SetDestination(_destinationPoint.position);
+        Wander();
+        AIEventHandler.instance.Ai.Add(this); 
+    }
     public void LookForObject(string objectType)
     {
         AIObject aIObject = AiBrain.LineOfSight.GetSightObjectByType(objectType);
