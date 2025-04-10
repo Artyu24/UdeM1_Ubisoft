@@ -6,6 +6,7 @@ public delegate void OnWaterDry(WaterPuddle wp);
 public class WaterPuddle : MonoBehaviour
 {
     [SerializeField] private bool _doesContainsOil;
+    [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField, Required] Transform _Watermesh;
     [SerializeField] private float initialScale = 1f;
     [SerializeField] private int CleanValue = 3;
@@ -27,6 +28,17 @@ public class WaterPuddle : MonoBehaviour
         if (slideableCharacter != null)
         {
             slideableCharacter.OnSlide(_doesContainsOil);
+            return;
+        }
+        
+        Oil oil = other.transform.GetComponent<Oil>();
+        if (oil != null)
+        {
+            oil.MeltsOil(() =>
+            {
+                _doesContainsOil = true;
+                _meshRenderer.material.color = Color.blue;
+            });
         }
     }
     public int CleanPuddle()
@@ -54,9 +66,9 @@ public class WaterPuddle : MonoBehaviour
     {
         // Calcul du facteur proportionnel
         float scaleFactor = (float)CleanValue / maxCleanValue;
-        // Calcul de la nouvelle échelle
+        // Calcul de la nouvelle ï¿½chelle
         Vector3 newScale = Vector3.one * initialScale * scaleFactor;
-        // Animation de l'échelle avec DOTween
+        // Animation de l'ï¿½chelle avec DOTween
         _Watermesh.transform.DOScale(newScale, 0.5f);
     }
 
