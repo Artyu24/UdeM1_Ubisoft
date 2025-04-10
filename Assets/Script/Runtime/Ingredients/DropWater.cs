@@ -39,7 +39,7 @@ public class DropWater : MonoBehaviour
             }
             
             if(!_dropPuddle)
-                return;
+                continue;
 
             //Already a Puddle
             WaterPuddle puddle = rayHits[i].transform.GetComponent<WaterPuddle>();
