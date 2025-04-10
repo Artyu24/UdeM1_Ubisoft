@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")] 
     [SerializeField] private PlayerData _data;
     [SerializeField] private Rigidbody _rb;
+    [SerializeField] private Transform _playerMesh;
     
     [Header("Data")] 
     [SerializeField] private float _moveSpeed = 5;
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             
             _rb.MovePosition(_rb.position + moveDir * Time.fixedDeltaTime * _moveSpeed);
             
-            transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            _playerMesh.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
         else
         {

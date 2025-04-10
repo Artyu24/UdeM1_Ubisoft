@@ -24,7 +24,10 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float _interactCD = 1f;
     private float _interactTimer;
     private bool _canInteract;
-    
+    //Check if in Interact CD / Object Grabbed / Action Possible
+    public bool CanInteract => _canInteract && _grabbedObj == null;
+    public bool DoPlayerInteractActionPossible => OnPlayerInteractAction != null;
+
     [Header("Search Object")] 
     [SerializeField] private FindTarget _findTargetPrefab;
     private bool _hasRightObjectInHand;
@@ -91,8 +94,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         _data.AnimController.SetBool("IsGrabbing", true);
         
-        objectGrab.OnGrab(transform);
-        objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
+        objectGrab.OnGrab(_grabPos);
+        objectGrab.GetObjectBase().transform.DOLocalMove(Vector3.zero, 0.2f);
         objectGrab.GetObjectBase().transform.DOLocalRotate(Vector3.zero, 0.2f);
 
         if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
