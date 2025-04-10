@@ -90,7 +90,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            throw new ArgumentNullException();
+            Debug.Log("No Sound of type : " + soundState.ToString());
         }   
     }
 }
