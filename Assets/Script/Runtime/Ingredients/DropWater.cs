@@ -24,6 +24,9 @@ public class DropWater : MonoBehaviour
 
     private void DoBehaviour()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_GOUTELETTE_EAU_VALVE);
+        
         RaycastHit[] rayHits = Physics.BoxCastAll(transform.position, new Vector3(0.5f, 0.5f, 0.5f), -transform.up, Quaternion.identity, 100f);
         if(rayHits.Length == 0)
             return;
@@ -39,7 +42,7 @@ public class DropWater : MonoBehaviour
             }
             
             if(!_dropPuddle)
-                return;
+                continue;
 
             //Already a Puddle
             WaterPuddle puddle = rayHits[i].transform.GetComponent<WaterPuddle>();

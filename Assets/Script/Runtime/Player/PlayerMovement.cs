@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent OnGrab;
     public UnityEvent OnRelease;
     public bool _canmove=true;
+    
 #if UNITY_EDITOR
     private void Awake()
     {
@@ -39,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
         if (_movementInput != Vector3.zero && !_isPushed && _canmove)
         {
             _data.AnimController.SetFloat("Speed", 1);
+            
+            if(AudioManager.instance != null)
+                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_WALK);
             
             Vector3 camFow = Camera.main.transform.forward;
             Vector3 camRig = Camera.main.transform.right;
@@ -59,6 +63,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _data.AnimController.SetFloat("Speed", 0);
+            
+            if(AudioManager.instance != null)
+                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_IDLE);
         }
     }
     

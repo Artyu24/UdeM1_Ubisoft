@@ -16,6 +16,9 @@ public class Door : MonoBehaviour
     
     public void OpenDoor()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_PORTE);
+        
         if (_isSlidingDoor)
             transform.DOLocalMove(_finalPosition, _doorAnimTime);
         else
@@ -24,6 +27,9 @@ public class Door : MonoBehaviour
     
     public void CloseDoor()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_PORTE);
+        
         if (_isSlidingDoor)
             transform.DOLocalMove(_defaultPosition, _doorAnimTime);
         else
@@ -35,18 +41,18 @@ public class Door : MonoBehaviour
     private void EditorOpenDoor()
     {
         if (_isSlidingDoor)
-            transform.position = _finalPosition;
+            transform.localPosition = _finalPosition;
         else
-            transform.eulerAngles = _finalRotation;
+            transform.localEulerAngles = _finalRotation;
     }
     
     [Button]
     private void ResetDoor()
     {
         if (_isSlidingDoor)
-            transform.position = _defaultPosition;
+            transform.localPosition = _defaultPosition;
         else
-            transform.eulerAngles = _defaultRotation;
+            transform.localEulerAngles = _defaultRotation;
     }
 #endif
 }
