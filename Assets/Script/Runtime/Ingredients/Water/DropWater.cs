@@ -31,13 +31,19 @@ public class DropWater : MonoBehaviour
         if(rayHits.Length == 0)
             return;
         
+        //Memory
+        DropWaterAction actionState = DropWaterAction.NONE;
+        Bucket bucket = null;
+        Vector3 puddlePos = default;
+        
+        //Select Action
         for (int i = 0; i < rayHits.Length; i++)
         {
             //Fill Bucket
-            Bucket bucket = rayHits[i].transform.GetComponent<Bucket>();
+            bucket = rayHits[i].transform.GetComponent<Bucket>();
             if (bucket != null)
             {
-                bucket.FillBucket();
+                actionState = DropWaterAction.FILL_BUCKET;
                 break;
             }
             
@@ -47,15 +53,35 @@ public class DropWater : MonoBehaviour
             //Already a Puddle
             WaterPuddle puddle = rayHits[i].transform.GetComponent<WaterPuddle>();
             if (puddle != null)
-                break;
+            {
+                if (actionState != DropWaterAction.FILL_BUCKET)
+                    actionState = DropWaterAction.ALREADY_PUDDLE;
+            }
                 
             //Place Puddle on Ground
-            if (rayHits[i].transform.gameObject.layer == _groundLayer)
+            if (rayHits[i].transform.gameObject.layer == _groundLayer && actionState != DropWaterAction.SPAWN_PUDDLE)
             {
-                WaterPuddle waterPuddle = Instantiate(_waterPuddlePrefab, rayHits[i].point, Quaternion.identity);
+                if (actionState == DropWaterAction.NONE)
+                    actionState = DropWaterAction.SPAWN_PUDDLE;
+
+                puddlePos = rayHits[i].point;
+            }
+        }
+
+        //Do Action
+        switch (actionState)
+        {
+            case DropWaterAction.NONE:
+            case DropWaterAction.ALREADY_PUDDLE:
+                break;
+            case DropWaterAction.FILL_BUCKET:
+                if(bucket != null)
+                    bucket.FillBucket();
+                break;
+            case DropWaterAction.SPAWN_PUDDLE:
+                WaterPuddle waterPuddle = Instantiate(_waterPuddlePrefab, puddlePos, Quaternion.identity);
                 waterPuddle.transform.eulerAngles = new Vector3(0, Random.Range(0f, 360f), 0);
                 break;
-            }
         }
     }
     
@@ -63,5 +89,13 @@ public class DropWater : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         DoBehaviour();
+    }
+    
+    private enum DropWaterAction
+    {
+        NONE,
+        FILL_BUCKET,
+        ALREADY_PUDDLE,
+        SPAWN_PUDDLE
     }
 }
