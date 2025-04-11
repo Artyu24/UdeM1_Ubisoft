@@ -7,7 +7,8 @@ public class ContextUI : MonoBehaviour
     [Header("Data")]
     [SerializeField] private Sprite _textureB;
     [SerializeField] private Sprite _textureX;
-    private bool interactionContextOn; 
+    private bool _interactionContextOn;
+    private bool _doPlayerInteractActionMem;
     
     [Header("Component")] 
     [SerializeField] private Image _image;
@@ -15,7 +16,8 @@ public class ContextUI : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (!_playerInteraction.CanInteract && !_playerInteraction.DoPlayerInteractActionPossible)
+        if (!_playerInteraction.CanInteract && !_playerInteraction.DoPlayerInteractActionPossible ||
+            !_playerInteraction.DoPlayerInteractActionPossible && _doPlayerInteractActionMem)
         {
             HideContextUI();
             return;
@@ -26,9 +28,10 @@ public class ContextUI : MonoBehaviour
             _image.sprite = _textureX;
             _image.enabled = true;
             
-            interactionContextOn = true;
+            _interactionContextOn = true;
+            _doPlayerInteractActionMem = _playerInteraction.DoPlayerInteractActionPossible;
         }
-        else if (other.GetComponent<IGrabbable>() != null && !interactionContextOn)
+        else if (other.GetComponent<IGrabbable>() != null && !_interactionContextOn)
         {
             _image.sprite = _textureB;
             _image.enabled = true;
@@ -37,7 +40,7 @@ public class ContextUI : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<IInteractable>() != null || other.GetComponent<IGrabbable>() != null)
+        if (other.GetComponent<IInteractable>() != null || other.GetComponent<IGrabbable>() != null || other.GetComponent<TeleportPlayers>() != null)
             HideContextUI();
     }
 
@@ -45,6 +48,7 @@ public class ContextUI : MonoBehaviour
     {
         _image.enabled = false;
 
-        interactionContextOn = false;
+        _interactionContextOn = false;
+        _doPlayerInteractActionMem = false;
     }
 }

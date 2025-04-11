@@ -36,15 +36,19 @@ public class PlayerMovement : MonoBehaviour
         DebugHelper.IsNull(_rb, name, nameof(PlayerMovement));
     }
 #endif
-
+    
     private void FixedUpdate()
     {
         if (_movementInput != Vector3.zero && !_isPushed && _canmove)
         {
             _data.AnimController.SetFloat("Speed", 1);
-            
-            if(AudioManager.instance != null)
-                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_WALK);
+
+            if (_data.DoSound)
+            {
+                if(AudioManager.instance != null)
+                    AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_WALK);
+                _data.DoSound = false;
+            }
             
             Vector3 camFow = Camera.main.transform.forward;
             Vector3 camRig = Camera.main.transform.right;
@@ -66,8 +70,12 @@ public class PlayerMovement : MonoBehaviour
         {
             _data.AnimController.SetFloat("Speed", 0);
             
-            if(AudioManager.instance != null)
-                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_IDLE);
+            if (_data.DoSound)
+            {
+                if(AudioManager.instance != null)
+                    AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_IDLE);
+                _data.DoSound = false;
+            }
         }
     }
     
