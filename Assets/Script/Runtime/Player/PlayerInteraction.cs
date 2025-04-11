@@ -165,7 +165,9 @@ public class PlayerInteraction : MonoBehaviour
                     if (objectInteract != null)
                     {
                         objectInteract.Interact();
-
+                        
+                        _data.AnimController.SetTrigger("Interact");
+                        
                         _interactTimer = 0;
                         _canInteract = false;
                         break;
