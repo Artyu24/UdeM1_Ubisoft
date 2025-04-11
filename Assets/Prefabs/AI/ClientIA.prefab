@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 5453165697119923408}
   - component: {fileID: 2607050545423959231}
   - component: {fileID: 2490862373050949066}
+  - component: {fileID: 2665070011068710994}
   m_Layer: 0
   m_Name: ClientIA
   m_TagString: Untagged
@@ -266,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59b1de32d92804419a53fd6a7347371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _musicTimer: {fileID: 2665070011068710994}
   _clientAgent: {fileID: 6274065407348692037}
   _rangeColliderPush: {fileID: 5775110512483328048}
   _wanderPoints:
@@ -275,6 +277,21 @@ MonoBehaviour:
   _fallenTime: 2
   _iaMesh: {fileID: 8075485182503153670}
   _rotationSpeedAnim: 500
+--- !u!114 &2665070011068710994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8185830549684622974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d8323bd94e37a4ba46d6c7e1b03785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerSoundCd: 0.5
+  _timerRandomSoundMinCd: 2
+  _timerRandomSoundMaxCd: 5
 --- !u!1001 &6006604538725908980
 PrefabInstance:
   m_ObjectHideFlags: 0
