@@ -5,5 +5,6 @@ public enum ObjectTypeEnum
 {
     NOTHING,
     WOOD_PLANK,
-    IDKWHATELSE
+    SKATEBOARD,
+    PIZZA
 }
