@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: --- AUDIO MANAGER ---
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,10 +46,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Background Music
-    clip: {fileID: 8300000, guid: c0b214f31dafc2447ba0e3d8362be4d5, type: 3}
+    clip: {fileID: 8300000, guid: 5b11b75071b8808408bff113d5026203, type: 3}
     volume: 0.2
     pitch: 1
-    loop: 1
-    atStart: 1
+    loop: 0
+    atStart: 0
     audioMixer: {fileID: 0}
     actualSound: 1
+  - name: Valve
+    clip: {fileID: 8300000, guid: 3a0a05d9fc0f6c548840647695377699, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    atStart: 0
+    audioMixer: {fileID: 0}
+    actualSound: 5
+  - name: Pressure Plate
+    clip: {fileID: 8300000, guid: f945db2fce8c0ba438414d2e765c1c40, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    atStart: 0
+    audioMixer: {fileID: 0}
+    actualSound: 7
+  - name: Eau Coulante
+    clip: {fileID: 8300000, guid: bc1d2a4ab05c5cf4d8a36eeb2a24f08c, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    atStart: 0
+    audioMixer: {fileID: 0}
+    actualSound: 8
