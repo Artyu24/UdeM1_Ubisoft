@@ -339,6 +339,7 @@ GameObject:
   - component: {fileID: 2173970552638608880}
   - component: {fileID: 2839816674879883216}
   - component: {fileID: 4529116526922353093}
+  - component: {fileID: 5005357992562918443}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -533,6 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 1618240685636673211}
+  _musicTimer: {fileID: 5005357992562918443}
 --- !u!114 &2173970552638608880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +552,7 @@ MonoBehaviour:
   _playerMesh: {fileID: 2383748412682635548}
   _moveSpeed: 5
   _pushForce: 300
+  _iaPushCD: 2
   OnGrab:
     m_PersistentCalls:
       m_Calls: []
@@ -599,6 +602,21 @@ MonoBehaviour:
   TargetPositionOffset: {x: 0, y: 1, z: 0}
   FadeSpeed: 0.5
   ObjectsBlockingView: []
+--- !u!114 &5005357992562918443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195024159608292087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d8323bd94e37a4ba46d6c7e1b03785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerSoundCd: 0.5
+  _timerRandomSoundMinCd: 2
+  _timerRandomSoundMaxCd: 5
 --- !u!1 &7389812644634210739
 GameObject:
   m_ObjectHideFlags: 0

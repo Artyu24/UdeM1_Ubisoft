@@ -105,7 +105,7 @@ public class PlayerInteraction : MonoBehaviour
         _data.AnimController.SetBool("IsGrabbing", true);
 
         if(AudioManager.instance != null)
-            AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_HIT);
+            AudioManager.instance.PlayRandom(SoundState.SFX_GRAB);
         
         if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
         {
@@ -167,6 +167,9 @@ public class PlayerInteraction : MonoBehaviour
                         objectInteract.Interact();
                         
                         _data.AnimController.SetTrigger("Interact");
+                        
+                        if(AudioManager.instance != null)
+                            AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_HIT);
                         
                         _interactTimer = 0;
                         _canInteract = false;

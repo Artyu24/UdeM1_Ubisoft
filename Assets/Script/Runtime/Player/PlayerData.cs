@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerData : MonoBehaviour
 {
@@ -10,11 +11,11 @@ public class PlayerData : MonoBehaviour
     [Header("Data")]
     private int _index;
 
-    private float _timerSound;
-    private float _timerSoundCD = 0.5f;
-    private bool _doSound;
-    public bool DoSound { get => _doSound; set => _doSound = value; }
-
+    [Header("Sound")] 
+    [SerializeField] private MusicTimer _musicTimer;
+    public MusicTimer Timer => _musicTimer;
+    
+    
     public bool SetupPlayerData(int index)
     {
         _index = index;
@@ -22,15 +23,5 @@ public class PlayerData : MonoBehaviour
         name = "Player_" + (index + 1);
         
         return true;
-    }
-
-    private void Update()
-    {
-        _timerSound += Time.deltaTime;
-
-        if (_timerSound > _timerSoundCD)
-        {
-            _timerSound = 0;
-        }
     }
 }
