@@ -106,8 +106,6 @@ public class AIScript : MonoBehaviour
     [Foldout("Event")]
     public UnityEvent OnReachDestination;
     [Foldout("Event")]
-    public UnityEvent OnReachReactionDestination;
-    [Foldout("Event")]
     public UnityEvent OnHited;
     [Foldout("Event")]
     public UnityEvent OnFall;
