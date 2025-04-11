@@ -7,7 +7,7 @@ public class AIRunAway : AIBehavior
     [SerializeField] private Transform _reactionZone;
     [SerializeField] private Transform _leavePoint;
     [SerializeField] private string _objectType;
-    [field: SerializeField] public bool IsRunningAway { get; set; }
+    public bool IsRunningAway { get; set; }
 
     void Start()
     {
