@@ -19,10 +19,17 @@ public enum SoundState
 
     SFX_HUMAN_FOOTSTEPS, // Only on client IA, need to try
     SFX_HUMAN_GRUNT_HURT,
+    SFX_HUMAN_SLIP_ON_WATER,
+    SFX_HUMAN_THROWRACOON_TRASH,
+    SFX_HUMAN_VOICES,
+    SFX_HUMAN_ALARMED,
 
     SFX_RACOON_IDLE, //need to try
     SFX_RACOON_WALK, //need to try
     SFX_RACOON_HIT, //Hit != Interaction or Same ? -> Both for the moment
+
+    SFX_WATERPUDDLE_APPEAR,
+    SFX_MIXWATER_AND_OIL,
+    SFX_TRANSITION_PIPEWALKING
     
-    MUSIC
 }
