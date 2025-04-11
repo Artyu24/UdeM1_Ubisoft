@@ -5,13 +5,15 @@ public class GrabObject : ObjectBase, IGrabbable
 {
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Collider _col;
+    private bool _isGrabbed;
+    public bool IsGrabbed => _isGrabbed;
 
     public ObjectBase GetObjectBase()
     {
         return this;
     }
 
-    public void OnGrab(Transform catcher)
+    public virtual bool OnGrab(Transform catcher)
     {
         transform.SetParent(catcher);
         
@@ -19,6 +21,10 @@ public class GrabObject : ObjectBase, IGrabbable
             _rb.constraints = RigidbodyConstraints.FreezeAll;
         if(_col != null)
             _col.isTrigger = true;
+
+        _isGrabbed = true;
+        
+        return true;
     }
 
     public virtual void OnRelease()
@@ -32,5 +38,7 @@ public class GrabObject : ObjectBase, IGrabbable
         
         if(gameObject.scene != SceneManager.GetActiveScene())
             SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        
+        _isGrabbed = false;
     }
 }
