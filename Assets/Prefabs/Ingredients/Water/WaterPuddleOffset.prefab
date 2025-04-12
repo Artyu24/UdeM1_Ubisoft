@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4454580546120446885}
+  - component: {fileID: 4693698909272632627}
+  - component: {fileID: 4609386149016691418}
   m_Layer: 0
   m_Name: WateMeshParent
   m_TagString: Untagged
@@ -32,6 +34,57 @@ Transform:
   - {fileID: 6226445926044102352}
   m_Father: {fileID: 4407497376902286874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4693698909272632627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056326482077647886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff62b2343054ad4aad49c55d832d9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7858484188267639348}
+        m_TargetAssemblyTypeName: WaterPuddle, Assembly-CSharp
+        m_MethodName: TriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &4609386149016691418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056326482077647886}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.36, y: 0.22394335, z: 1.4}
+  m_Center: {x: 0, y: 0.11802834, z: 0}
 --- !u!1 &6491873078981753418
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +95,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4407497376902286874}
   - component: {fileID: 7858484188267639348}
-  - component: {fileID: 3716163139649634523}
   - component: {fileID: 739179499905420189}
   m_Layer: 0
   m_Name: WaterPuddleOffset
@@ -87,27 +139,6 @@ MonoBehaviour:
   OnDry:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &3716163139649634523
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6491873078981753418}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.36, y: 0.22394335, z: 1.4}
-  m_Center: {x: 0, y: 0.11802834, z: 0}
 --- !u!54 &739179499905420189
 Rigidbody:
   m_ObjectHideFlags: 0
