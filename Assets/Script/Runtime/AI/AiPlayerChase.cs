@@ -48,6 +48,7 @@ public class AiPlayerChase : AIBehavior
     {
         if (_grabbedPlayer != null)
         {
+            GetComponent<Rigidbody>().isKinematic = false;
             StartCoroutine(IgnorePlayer());
             _grabbedPlayer.SetIsGrabed(false);
             _grabbedPlayer.transform.parent = null;
@@ -82,6 +83,7 @@ public class AiPlayerChase : AIBehavior
     private void InitChase(PlayerMovement playerMovement)
     {
         AiBrain.State = npcState.chasing;
+        _chaseState = ChaseState.Chasing;
         if (_lookingArroundCorou != null)
         {
             InterruptCorouAction(_lookingArroundCorou);
@@ -150,6 +152,7 @@ public class AiPlayerChase : AIBehavior
             playerMovement.transform.position = AiBrain.GrabPosition.position;
             playerMovement.gameObject.transform.SetParent(transform);                   
             _chaseState = ChaseState.HoldPlayer;
+            GetComponent<Rigidbody>().isKinematic = true;
             GoToPlayerReleasePoint();
         }
     }

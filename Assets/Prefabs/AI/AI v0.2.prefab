@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d42837686d6a44c86a6ad2707fbc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sightStart: {fileID: 8327681990949139391}
+  _sightStart: {fileID: 4969769072416150539}
   viewMask:
     serializedVersion: 2
     m_Bits: 192
@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 6589295440230994178}
   - component: {fileID: 4294519397563726272}
   - component: {fileID: 8949245252916025334}
+  - component: {fileID: 566911605594937707}
   m_Layer: 0
   m_Name: AI v0.2
   m_TagString: Untagged
@@ -270,6 +271,33 @@ MonoBehaviour:
   _balise: {fileID: 8014348794740947304, guid: 6aa3d2aa9151d5a48a95c8f48be1282f, type: 3}
   <ToClean>k__BackingField: []
   <ToBalise>k__BackingField: []
+--- !u!54 &566911605594937707
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7374758635256746468}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &4343526192665929101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,5 +400,10 @@ Animator:
 --- !u!4 &4309372488884175462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e529ca41623c61da9bcc406256c2ffa5, type: 3}
+  m_PrefabInstance: {fileID: 4343526192665929101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4969769072416150539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8700783698680967558, guid: e529ca41623c61da9bcc406256c2ffa5, type: 3}
   m_PrefabInstance: {fileID: 4343526192665929101}
   m_PrefabAsset: {fileID: 0}
