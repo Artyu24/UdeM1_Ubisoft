@@ -63,8 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 moveDir = fRel + rRel;
             moveDir.Normalize();
-            
-            _rb.MovePosition(_rb.position + moveDir * Time.fixedDeltaTime * _moveSpeed);
+
+            Vector3 velocity = moveDir * Time.fixedDeltaTime * _moveSpeed;
+            _rb.linearVelocity = new Vector3(velocity.x, _rb.linearVelocity.y, velocity.z);
             
             _data.PlayerMesh.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
@@ -88,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
             _movementInput = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
         }
         else
+        {
             _movementInput = Vector3.zero;            
+            _rb.linearVelocity = Vector3.zero;
+        }
     }
 
     public void OnIAPush(Vector3 iaPos)
