@@ -1,10 +1,5 @@
-using DG.Tweening;
 using NaughtyAttributes;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
