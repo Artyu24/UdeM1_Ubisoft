@@ -12,7 +12,7 @@ public class PipePathEffect : MonoBehaviour
     private void Start()
     {
         if(AudioManager.instance != null)
-            AudioManager.instance.PlayRandom(SoundState.SFX_EAU_QUI_TRAVERSE_LE_TUYAUX);
+            AudioManager.instance.PlayRandom(SoundState.SFX_EAU_QUI_TRAVERSE_LE_TUYAU);
         
         _splineAnimate.Completed += () => { _canBeDestroy = true; };
     }

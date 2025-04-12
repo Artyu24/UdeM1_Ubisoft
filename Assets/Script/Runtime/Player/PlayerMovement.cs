@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Data")] 
     [SerializeField] private float _moveSpeed = 5;
     [SerializeField] private float _pushForce = 300;
+    [SerializeField] private float _iaPushCD = 2;
 
     [Header("Maths")] 
     private Vector3 _movementInput;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Grab related")]
     public UnityEvent OnGrab;
     public UnityEvent OnRelease;
-    public bool _canmove=true;
+    public bool _canMove = true;
     
 #if UNITY_EDITOR
     private void Awake()
@@ -34,15 +35,22 @@ public class PlayerMovement : MonoBehaviour
         DebugHelper.IsNull(_rb, name, nameof(PlayerMovement));
     }
 #endif
-
+    
     private void FixedUpdate()
     {
-        if (_movementInput != Vector3.zero && !_isPushed && _canmove)
+        if(_data.IsInTuto)
+            return;
+        
+        if (_movementInput != Vector3.zero && !_isPushed && _canMove)
         {
             _data.AnimController.SetFloat("Speed", 1);
-            
-            if(AudioManager.instance != null)
-                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_WALK);
+
+            if (_data.Timer.DoSound)
+            {
+                if(AudioManager.instance != null)
+                    AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_WALK);
+                _data.Timer.DoSound = false;
+            }
             
             Vector3 camFow = Camera.main.transform.forward;
             Vector3 camRig = Camera.main.transform.right;
@@ -58,14 +66,18 @@ public class PlayerMovement : MonoBehaviour
             
             _rb.MovePosition(_rb.position + moveDir * Time.fixedDeltaTime * _moveSpeed);
             
-            transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            _data.PlayerMesh.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
         else
         {
             _data.AnimController.SetFloat("Speed", 0);
             
-            if(AudioManager.instance != null)
-                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_IDLE);
+            if (_data.Timer.DoRandomSound)
+            {
+                if(AudioManager.instance != null)
+                    AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_IDLE);
+                _data.Timer.DoRandomSound = false;
+            }
         }
     }
     
@@ -81,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnIAPush(Vector3 iaPos)
     {
+        _data.AnimController.SetTrigger("Pushed");
+        
         Vector3 dir = transform.position - iaPos;
         _rb.AddForce(dir.normalized * _pushForce);
         StartCoroutine(PushedCoroutine());
@@ -89,20 +103,24 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator PushedCoroutine()
     {
         _isPushed = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_iaPushCD);
         _isPushed = false;
     }
     public void SetIsGrabed(bool isgrabed = true)
     {
         if (isgrabed)
         {
+            _data.AnimController.SetBool("IAGrab", true);
+            
             OnGrab.Invoke();
-            _canmove = false;
+            _canMove = false;
             _rb.isKinematic = true;
         }
         else
         {
-            _canmove = true;
+            _data.AnimController.SetBool("IAGrab", false);
+            
+            _canMove = true;
             _rb.isKinematic = false;
         }
     }

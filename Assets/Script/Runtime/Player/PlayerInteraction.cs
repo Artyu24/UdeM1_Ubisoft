@@ -16,6 +16,9 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField, Min(0.1f)] private float _boxHeight = 1;
 
     [Header("Grab")] 
+    [SerializeField] private float _grabCD = 0.4f;
+    private float _grabTimer;
+    private bool _canDoGrab;
     private IGrabbable _grabbedObj;
     public IGrabbable GrabbedObj { get => _grabbedObj; }
 
@@ -24,7 +27,10 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float _interactCD = 1f;
     private float _interactTimer;
     private bool _canInteract;
-    
+    //Check if in Interact CD / Object Grabbed / Action Possible
+    public bool CanInteract => _canInteract && _grabbedObj == null && _canDoGrab;
+    public bool DoPlayerInteractActionPossible => OnPlayerInteractAction != null;
+
     [Header("Search Object")] 
     [SerializeField] private FindTarget _findTargetPrefab;
     private bool _hasRightObjectInHand;
@@ -43,6 +49,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         UpdateCD(ref _interactTimer, _interactCD, ref _canInteract);
+        UpdateCD(ref _grabTimer, _grabCD, ref _canDoGrab);
         UpdateCD(ref _findTargetTimer, _findTargetCD, ref _canFindTarget);
     }
 
@@ -62,14 +69,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ctx.started)
         {
+            if(!_canDoGrab)
+                return;
+            
             if (_grabbedObj != null)
             {
                 ReleaseObject();
                 return;
             }
-            
-            if(AudioManager.instance != null)
-                AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_HIT);
             
             RaycastHit[] hits = Physics.BoxCastAll(_grabPos.position, new Vector3(_boxWidth, _boxHeight, _boxWidth), _grabPos.forward, Quaternion.identity, _boxDist);
             if (hits.Length > 0)
@@ -89,12 +96,17 @@ public class PlayerInteraction : MonoBehaviour
 
     public void GrabObject(IGrabbable objectGrab)
     {
-        _data.AnimController.SetBool("IsGrabbing", true);
+        if(!objectGrab.OnGrab(_grabPos))
+            return;
         
-        objectGrab.OnGrab(transform);
-        objectGrab.GetObjectBase().transform.DOLocalMove(_grabPos.localPosition, 0.2f);
+        objectGrab.GetObjectBase().transform.DOLocalMove(Vector3.zero, 0.2f);
         objectGrab.GetObjectBase().transform.DOLocalRotate(Vector3.zero, 0.2f);
+        
+        _data.AnimController.SetBool("IsGrabbing", true);
 
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_GRAB);
+        
         if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
         {
             PlayerManager.instance.IsObjectInHand = true;
@@ -102,16 +114,19 @@ public class PlayerInteraction : MonoBehaviour
         }
         
         _grabbedObj = objectGrab;
+        
+        _canDoGrab = false;
+        _grabTimer = 0;
     }
 
     public void ReleaseObject()
     {
-        _data.AnimController.SetBool("IsGrabbing", false);
-        
         if(_grabbedObj == null)
             return;
         
         _grabbedObj.OnRelease();
+        
+        _data.AnimController.SetBool("IsGrabbing", false);
 
         if (_hasRightObjectInHand)
         {
@@ -120,6 +135,9 @@ public class PlayerInteraction : MonoBehaviour
         }
         
         _grabbedObj = null;
+        
+        _canDoGrab = false;
+        _grabTimer = 0;
     }
 
     public void OnPlayerInteract(InputAction.CallbackContext ctx)
@@ -147,7 +165,12 @@ public class PlayerInteraction : MonoBehaviour
                     if (objectInteract != null)
                     {
                         objectInteract.Interact();
-
+                        
+                        _data.AnimController.SetTrigger("Interact");
+                        
+                        if(AudioManager.instance != null)
+                            AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_HIT);
+                        
                         _interactTimer = 0;
                         _canInteract = false;
                         break;
