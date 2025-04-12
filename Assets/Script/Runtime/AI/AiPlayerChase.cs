@@ -44,11 +44,11 @@ public class AiPlayerChase : AIBehavior
                 break;
         }
     }
-    private void EjectPLayer()
+    public void EjectPLayer()
     {
         if (_grabbedPlayer != null)
         {
-            GetComponent<Rigidbody>().isKinematic = false;
+            AiBrain._animator.SetBool("HoldPlayer",false);
             StartCoroutine(IgnorePlayer());
             _grabbedPlayer.SetIsGrabed(false);
             _grabbedPlayer.transform.parent = null;
@@ -57,6 +57,7 @@ public class AiPlayerChase : AIBehavior
             _grabbedPlayer = null;
             if (AiBrain.State == npcState.Stunned) return;
             AiBrain.State = npcState.wandering;
+            
         }
     }
     private void ChasePlayer(PlayerMovement playerMovement)
@@ -101,6 +102,7 @@ public class AiPlayerChase : AIBehavior
             case ChaseState.Chasing:
                 if (_lookingArroundCorou == null)
                     _lookingArroundCorou = StartCoroutine(LookArround());
+                _chaseState = ChaseState.LookingArround;
                 break;
             case ChaseState.LookingArround:
                 break;
@@ -127,6 +129,7 @@ public class AiPlayerChase : AIBehavior
     }
     public void GoToPlayerReleasePoint()
     {
+        AiBrain._animator.SetBool("HoldPlayer",true);
         _isGnoringPlayer = true;
         AiBrain.SetDestination(AiBrain.DropPosition.position);
         
@@ -152,7 +155,7 @@ public class AiPlayerChase : AIBehavior
             playerMovement.transform.position = AiBrain.GrabPosition.position;
             playerMovement.gameObject.transform.SetParent(transform);                   
             _chaseState = ChaseState.HoldPlayer;
-            GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<Rigidbody>().isKinematic = true;
             GoToPlayerReleasePoint();
         }
     }
