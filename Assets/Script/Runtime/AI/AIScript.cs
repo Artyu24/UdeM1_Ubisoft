@@ -54,6 +54,9 @@ public class AIScript : MonoBehaviour
 
     public npcState State { get; set; }
 
+    [SerializeField,Tooltip("if the npc have an object")]private GrabObject _grabObject;
+
+    //[SerializeField, Tooltip("position where the object willsnap")]private Transform _objectpos;
 
     private void TypeChangeCallback()
     {
@@ -89,6 +92,7 @@ public class AIScript : MonoBehaviour
     [field: SerializeField] public float StunTime { get; set; } = 3f;
     [SerializeField, Tooltip("Position where the player is going to be dropped")] Transform _DropPosition;
     public Transform DropPosition { get=>_DropPosition; set => _DropPosition = value; }
+    
     private PlayerMovement _grabbedPlayer;
 
 
@@ -97,9 +101,9 @@ public class AIScript : MonoBehaviour
     [Foldout("Event")]
     public UnityEvent OnReachDestination;
     [Foldout("Event")]
-    public UnityEvent OnReachReactionDestination;
-    [Foldout("Event")]
     public UnityEvent OnHited;
+    [Foldout("Event")]
+    public UnityEvent OnFall;
 
 
 
@@ -109,7 +113,11 @@ public class AIScript : MonoBehaviour
     }
     void Start()
     {
-        
+        if (_grabObject != null)
+        {
+            _grabObject.OnGrab(transform);
+        }
+
         if(_willTurnIntoGuarde)
             PlayerManager.instance.OnGrabFinalObject.AddListener(TurnIntoGuard);
     }
@@ -157,5 +165,16 @@ public class AIScript : MonoBehaviour
         _behavior.AiBrain=this;
         PlayerManager.instance.OnGrabFinalObject.RemoveListener(TurnIntoGuard);
         
+    }
+    [Button]
+    public void DropItem()
+    {
+        if(_grabObject == null) return;
+        _grabObject.OnRelease();
+    }
+
+    public void PlayAudio(SoundState audioState)
+    {
+        AudioManager.instance.PlayRandom(audioState);
     }
 }

@@ -15,7 +15,8 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
 
     int _WanderIndex = 0;
     private bool _isSliding;
-    [SerializeField] private float _fallenTime;
+    
+    [SerializeField,Label("fall duration")] private float _fallenTime;
     bool _canSlip=true;
     
     [SerializeField] private float _ignorePlayerTime=1f;
@@ -146,6 +147,8 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
         _canSlip = false;
         _isGnoringPlayer = true;
         AiBrain._agent.isStopped = true;
+        AiBrain.DropItem();
+        AiBrain.OnFall.Invoke();
         //AiBrain.State = npcState.Slide;
         yield return new WaitForSeconds(_fallenTime);
         _isGnoringPlayer = true;
