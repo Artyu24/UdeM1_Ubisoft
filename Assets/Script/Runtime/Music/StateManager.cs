@@ -27,7 +27,8 @@ public enum SoundState
     SFX_RACOON_IDLE, //
     SFX_RACOON_WALK, //
     SFX_RACOON_HIT, //Hit != Interaction or Same ? -> Both for the moment
-    
+    SFX_JOUEUR_SELECTION,
+
     SFX_GRAB, //
     SFX_TRASH_RUFFLING, // SON DE LA POUBELLE SOIT QUAND LE RACCOON TOMBE DEDANS SOIT QUAND TU PASSE A COTE
     SFX_WATERPUDDLE_APPEAR, //
