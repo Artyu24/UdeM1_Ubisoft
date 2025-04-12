@@ -9,7 +9,8 @@ public class TutoCanvas : MonoBehaviour
     [Header("Text")] 
     [SerializeField] private TextMeshProUGUI _playerOneText;
     [SerializeField] private TextMeshProUGUI _playerTwoText;
-    private string _pressAString = "Press <color=#718E1D>A</color> to be <color=#718E1D>Ready</color>";
+    private string _pressAJoinString = "Press <color=#8BAD24>any button</color> to <color=#8BAD24>Join</color>";
+    private string _pressAReadyString = "Press <color=#8BAD24>A</color> to be <color=#8BAD24>Ready</color>";
     
     [Header("BD")]
     [SerializeField] private CanvasGroup _bdOffset;
@@ -21,23 +22,32 @@ public class TutoCanvas : MonoBehaviour
     [SerializeField] private float _fadeSpeed = 2f;
     [SerializeField] private float _delay = 2f;
 
+    public void InitText()
+    {
+        _playerOneText.text = _pressAJoinString;
+        _playerOneText.DOFade(1f, 1f);
+        
+        _playerTwoText.text = _pressAJoinString;
+        _playerTwoText.DOFade(1f, 1f);
+    }
+    
     public void AppearReadyText(int playerIndex)
     {
         if (playerIndex == 0)
         {
-            _playerOneText.text = _pressAString;
+            _playerOneText.text = _pressAReadyString;
             _playerOneText.DOFade(1f, 1f);
         }
         else if (playerIndex == 1)
         {
-            _playerTwoText.text = _pressAString;
+            _playerTwoText.text = _pressAReadyString;
             _playerTwoText.DOFade(1f, 1f);
         }
     }
     
     public void SwitchText(int playerIndex, bool isReady)
     {
-        string text = _pressAString;
+        string text = _pressAReadyString;
         if (isReady)
         {
             string color = "#63D2FF";
@@ -57,6 +67,14 @@ public class TutoCanvas : MonoBehaviour
             _playerTwoText.text = text;
     }
 
+    public void HideText(int playerIndex)
+    {
+        if(playerIndex == 0)
+            _playerOneText.DOFade(0f, 1f);
+        else if(playerIndex == 1)
+            _playerTwoText.DOFade(0f, 1f);
+    }
+    
     public void HideReadyText()
     {
         _playerOneText.DOFade(0f, 1f);

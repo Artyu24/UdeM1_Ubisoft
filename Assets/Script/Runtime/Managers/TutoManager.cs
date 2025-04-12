@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -27,7 +28,12 @@ public class TutoManager : MonoBehaviour
     
     private int _numberOfPlayerReady;
     private Coroutine _lauchGameCoroutine;
-    
+
+    private void Awake()
+    {
+        _tutoCanvas.InitText();
+    }
+
     public void OnPlayerJoin(PlayerInput playerInput)
     {
         PlayerData pData = playerInput.gameObject.GetComponent<PlayerData>();
@@ -38,6 +44,8 @@ public class TutoManager : MonoBehaviour
             return;
         
         _playerDataList.Add(pData);
+        
+        _tutoCanvas.HideText(pData.PlayerIndex);
         
         if (pData.PlayerIndex == 0)
         {
