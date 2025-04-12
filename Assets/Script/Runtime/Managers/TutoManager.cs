@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,10 +21,10 @@ public class TutoManager : MonoBehaviour
     [SerializeField] private Transform _firstPlayerEndPos;
     [SerializeField] private Transform _secondPlayerInitPos;
     [SerializeField] private Transform _secondPlayerEndPos;
-
+    
     [Header("Move Speed")]
     [SerializeField] private float _speed = 2f;
-
+    
     private int _numberOfPlayerReady;
     private Coroutine _lauchGameCoroutine;
     
@@ -59,6 +60,8 @@ public class TutoManager : MonoBehaviour
             
         playerInput.transform.DOMove(endPos.position, _speed).OnComplete(() =>
         {
+            _tutoCanvas.AppearReadyText(pData.PlayerIndex);
+            
             pData.AnimController.SetFloat("Speed", 0);
             
             pData.PTutorial.OnPlayerAcceptAction += () => SetReady(pData);
@@ -71,6 +74,8 @@ public class TutoManager : MonoBehaviour
         pData.AnimController.applyRootMotion = pData.IsReadyToPlay;
         pData.AnimController.SetBool("IsReady", pData.IsReadyToPlay);
 
+        _tutoCanvas.SwitchText(pData.PlayerIndex, pData.IsReadyToPlay);
+        
         if (pData.IsReadyToPlay)
             _numberOfPlayerReady++;
         else
@@ -94,6 +99,8 @@ public class TutoManager : MonoBehaviour
             pData.PTutorial.OnPlayerAcceptAction = null;
             pData.AnimController.SetBool("IsReady", false);
         }
+        
+        _tutoCanvas.HideReadyText();
         
         HUDManager.instance.FadeInTransition(ShowBD);
     }
