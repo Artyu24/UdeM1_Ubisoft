@@ -7,7 +7,7 @@ public class AIRunAway : AIBehavior
     [SerializeField] private Transform _reactionZone;
     [SerializeField] private Transform _leavePoint;
     [SerializeField] private string _objectType;
-    [field: SerializeField] public bool IsRunningAway { get; set; }
+    public bool IsRunningAway { get; set; }
 
     void Start()
     {
@@ -52,6 +52,7 @@ public class AIRunAway : AIBehavior
         AiBrain._agent.destination = _reactionZone.position;
         AiBrain.State = npcState.leaving;
         IsRunningAway = true;
+        AiBrain.Onflee.Invoke();
         StopAllCoroutines();// kill all action running
         AiBrain.State=npcState.Reacting;
     }
@@ -75,6 +76,7 @@ public class AIRunAway : AIBehavior
         switch(AiBrain.State)
         {
             case npcState.Reacting:
+                AiBrain.OnReachDestination.Invoke();
                 LookForObject(_objectType);
                 break;
 

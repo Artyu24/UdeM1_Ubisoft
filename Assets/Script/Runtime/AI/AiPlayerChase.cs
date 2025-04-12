@@ -132,11 +132,11 @@ public class AiPlayerChase : AIBehavior
     [Button]
     public override void Interact()
     {
-        //OnHited.Invoke();
         if (_grabbedPlayer != null)
         {
             EjectPLayer();
             StartCoroutine(StunnedDelay());
+            AiBrain.OnHited?.Invoke();
             _chaseState=ChaseState.none;
         }
     }
