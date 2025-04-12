@@ -34,6 +34,6 @@ public class HUDManager : MonoBehaviour
 
     private void FadeOutTransition()
     {
-        _transitionEffect.DOLocalMoveX(-2400f, _duration).SetEase(Ease.OutQuint);
+        _transitionEffect.DOLocalMoveX(-2400f, _duration).SetEase(Ease.OutQuint).SetDelay(0.5f);
     }
 }
