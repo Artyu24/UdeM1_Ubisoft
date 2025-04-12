@@ -41,10 +41,14 @@ public class TutoCanvas : MonoBehaviour
         if (isReady)
         {
             string color = "#63D2FF";
+            string name = "Rocco";
             if (playerIndex == 1)
+            {
                 color = "#FF7151";
+                name = "Munch";
+            }
             
-            text = "<color=" + color + ">Player " + (playerIndex + 1) + "</color> is <color=#718E1D>Ready</color>";
+            text = "<color=" + color + ">" + name + "</color> is <color=#718E1D>Ready</color>";
         }
 
         if (playerIndex == 0)
