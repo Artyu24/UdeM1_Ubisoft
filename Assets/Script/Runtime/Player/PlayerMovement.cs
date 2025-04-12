@@ -43,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _data.AnimController.SetFloat("Speed", 1);
 
-            if (_data.DoSound)
+            if (_data.Timer.DoSound)
             {
                 if(AudioManager.instance != null)
                     AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_WALK);
-                _data.DoSound = false;
+                _data.Timer.DoSound = false;
             }
             
             Vector3 camFow = Camera.main.transform.forward;
@@ -70,11 +70,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _data.AnimController.SetFloat("Speed", 0);
             
-            if (_data.DoSound)
+            if (_data.Timer.DoRandomSound)
             {
                 if(AudioManager.instance != null)
                     AudioManager.instance.PlayRandom(SoundState.SFX_RACOON_IDLE);
-                _data.DoSound = false;
+                _data.Timer.DoRandomSound = false;
             }
         }
     }

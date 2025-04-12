@@ -18,6 +18,9 @@ public class WaterPuddle : MonoBehaviour
     public UnityEvent OnDry;
     private void Awake()
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_WATERPUDDLE_APPEAR);
+        
         maxCleanValue = CleanValue; 
         _Watermesh.transform.localScale = Vector3.one * initialScale;
         
@@ -38,6 +41,9 @@ public class WaterPuddle : MonoBehaviour
             {
                 _doesContainsOil = true;
                 _meshRenderer.material.color = Color.blue;
+                
+                if(AudioManager.instance != null)
+                    AudioManager.instance.PlayRandom(SoundState.SFX_MIXWATER_AND_OIL);
             });
         }
     }
