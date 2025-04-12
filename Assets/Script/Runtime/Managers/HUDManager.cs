@@ -26,7 +26,7 @@ public class HUDManager : MonoBehaviour
         
         SceneManager.sceneLoaded += (arg0, mode) => FadeOutTransition();
     }
-
+    
     public void FadeInTransition(Action onFadeOutComplete)
     {
         _transitionEffect.DOLocalMoveX(0, _duration).SetEase(Ease.OutQuint).OnComplete(() => onFadeOutComplete());

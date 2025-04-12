@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.284, y: 0.795}
+  m_AnchoredPosition: {x: -0.284, y: 0.78900003}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4584608598152328436
@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 1893612050060223947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 2118677761287425966}
   - component: {fileID: 5551412895091502330}
   - component: {fileID: 2900377499422469281}
+  - component: {fileID: 8858253537677813035}
   - component: {fileID: 2173970552638608880}
   - component: {fileID: 2839816674879883216}
   - component: {fileID: 4529116526922353093}
@@ -397,9 +398,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.16
-  m_Height: 0.74
+  m_Height: 0.65
   m_Direction: 1
-  m_Center: {x: 0, y: 0.29, z: 0}
+  m_Center: {x: 0, y: 0.325, z: 0}
 --- !u!54 &2118677761287425966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -516,6 +517,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: eedafee7-ba3e-4ca4-9cc6-92c739f5aa00
     m_ActionName: 'Player/Search[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8858253537677813035}
+        m_TargetAssemblyTypeName: PlayerTutorial, Assembly-CSharp
+        m_MethodName: OnPlayerAccept
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 18b529aa-23ed-4e5a-b88b-0ac564edb4b0
+    m_ActionName: 'Player/Accept[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -533,8 +550,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2da401002fd3d4bba4b0177fc67c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMesh: {fileID: 2383748412682635548}
   _anim: {fileID: 1618240685636673211}
+  _pTutorial: {fileID: 8858253537677813035}
   _musicTimer: {fileID: 5005357992562918443}
+--- !u!114 &8858253537677813035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195024159608292087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8f7e3ef4a858a46aaff5d617aa9641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2173970552638608880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +580,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 2900377499422469281}
   _rb: {fileID: 2118677761287425966}
-  _playerMesh: {fileID: 2383748412682635548}
   _moveSpeed: 5
   _pushForce: 300
   _iaPushCD: 2
@@ -559,7 +589,7 @@ MonoBehaviour:
   OnRelease:
     m_PersistentCalls:
       m_Calls: []
-  _canmove: 1
+  _canMove: 1
 --- !u!114 &2839816674879883216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,7 +672,7 @@ Transform:
   m_GameObject: {fileID: 7389812644634210739}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.005999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

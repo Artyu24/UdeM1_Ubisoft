@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")] 
     [SerializeField] private PlayerData _data;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private Transform _playerMesh;
     
     [Header("Data")] 
     [SerializeField] private float _moveSpeed = 5;
@@ -27,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Grab related")]
     public UnityEvent OnGrab;
     public UnityEvent OnRelease;
-    public bool _canmove=true;
+    public bool _canMove = true;
     
 #if UNITY_EDITOR
     private void Awake()
@@ -39,7 +38,10 @@ public class PlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (_movementInput != Vector3.zero && !_isPushed && _canmove)
+        if(_data.IsInTuto)
+            return;
+        
+        if (_movementInput != Vector3.zero && !_isPushed && _canMove)
         {
             _data.AnimController.SetFloat("Speed", 1);
 
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             
             _rb.MovePosition(_rb.position + moveDir * Time.fixedDeltaTime * _moveSpeed);
             
-            _playerMesh.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            _data.PlayerMesh.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
         else
         {
@@ -111,14 +113,14 @@ public class PlayerMovement : MonoBehaviour
             _data.AnimController.SetBool("IAGrab", true);
             
             OnGrab.Invoke();
-            _canmove = false;
+            _canMove = false;
             _rb.isKinematic = true;
         }
         else
         {
             _data.AnimController.SetBool("IAGrab", false);
             
-            _canmove = true;
+            _canMove = true;
             _rb.isKinematic = false;
         }
     }
