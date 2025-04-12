@@ -61,7 +61,7 @@ public class DropWater : MonoBehaviour
                 if (actionState == DropWaterAction.NONE)
                     actionState = DropWaterAction.SPAWN_PUDDLE;
 
-                puddlePos = rayHits[i].point;
+                puddlePos = new Vector3(transform.position.x ,rayHits[i].point.y, transform.position.z);
             }
         }
 

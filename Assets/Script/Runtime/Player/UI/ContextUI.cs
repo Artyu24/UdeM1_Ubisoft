@@ -25,7 +25,7 @@ public class ContextUI : MonoBehaviour
         
         if (other.GetComponent<IInteractable>() != null || _playerInteraction.DoPlayerInteractActionPossible)
         {
-            _image.sprite = _textureX;
+            _image.sprite = _textureB;
             _image.enabled = true;
             
             _interactionContextOn = true;
@@ -33,7 +33,7 @@ public class ContextUI : MonoBehaviour
         }
         else if (other.GetComponent<IGrabbable>() != null && !_interactionContextOn)
         {
-            _image.sprite = _textureB;
+            _image.sprite = _textureX;
             _image.enabled = true;
         }
     }
