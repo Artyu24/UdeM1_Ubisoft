@@ -14,8 +14,15 @@ public class Door : MonoBehaviour
     [ShowIf("_isSlidingDoor"), SerializeField] private Vector3 _defaultPosition;
     [ShowIf("_isSlidingDoor"), SerializeField] private Vector3 _finalPosition;
     
+    private int _playerCount;
+    
     public void OpenDoor()
     {
+        _playerCount++;
+        
+        if(_playerCount > 1)
+            return;
+        
         if(AudioManager.instance != null)
             AudioManager.instance.PlayRandom(SoundState.SFX_PORTE);
         
@@ -27,6 +34,11 @@ public class Door : MonoBehaviour
     
     public void CloseDoor()
     {
+        _playerCount--;
+        
+        if(_playerCount > 0)
+            return;
+        
         if(AudioManager.instance != null)
             AudioManager.instance.PlayRandom(SoundState.SFX_PORTE);
         
