@@ -39,6 +39,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 566911605594937707, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1605808617305515399, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _AiBrain
       value: 
@@ -54,7 +58,7 @@ PrefabInstance:
     - target: {fileID: 3875172577486782589, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 0713d36fcfdcdb1b78d4627e71a8cfd7, type: 2}
+      objectReference: {fileID: 9100000, guid: 27eec8473042afe6083e98b40b09d757, type: 2}
     - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _behavior
       value: 
@@ -186,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AiBrain>k__BackingField: {fileID: 4622550471839979262}
-  _fallenTime: 2
+  _fallenTime: 10
   _ignorePlayerTime: 1
   _chaseState: 0
 --- !u!195 &2363909046023011900 stripped
