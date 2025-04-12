@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4407497376902286874}
   - component: {fileID: 7858484188267639348}
   - component: {fileID: 739179499905420189}
+  - component: {fileID: 5052962084241479333}
   m_Layer: 0
   m_Name: WaterPuddleOffset
   m_TagString: Untagged
@@ -166,6 +167,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5052962084241479333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6491873078981753418}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19, y: 0.22, z: 0.21}
+  m_Center: {x: 0.54, y: 0, z: 0}
 --- !u!1001 &5900418004720814395
 PrefabInstance:
   m_ObjectHideFlags: 0

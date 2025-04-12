@@ -65,6 +65,7 @@ public class WaterPuddle : MonoBehaviour
         if(Sign.TryGetComponent<SlideSign>(out SlideSign sign))
         {
             sign.disappear();
+            Destroy(gameObject);
         }
         OnDry.Invoke();
     }
