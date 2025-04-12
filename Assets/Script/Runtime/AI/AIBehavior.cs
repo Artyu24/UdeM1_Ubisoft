@@ -45,11 +45,12 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     {
         AiBrain._animator.SetTrigger("LookArround");
         AiBrain.State = npcState.LookingArround;
+        AiBrain._agent.isStopped = true;
         transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y + 90, transform.rotation.z), 0.5f);
         yield return new WaitForSeconds(1f);
         transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y - 90, transform.rotation.z), 0.5f);
-        yield return new WaitForSeconds(1f); ;
-
+        yield return new WaitForSeconds(1f);
+        AiBrain._agent.isStopped = false;
 
         AiBrain.State = npcState.wandering;
         _lookingArroundCorou = null;
@@ -149,6 +150,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
         AiBrain._agent.isStopped = true;
         AiBrain.DropItem();
         AiBrain.OnFall.Invoke();
+        AiBrain._animator.SetTrigger("Slide");
         //AiBrain.State = npcState.Slide;
         yield return new WaitForSeconds(_fallenTime);
         _isGnoringPlayer = true;
@@ -158,5 +160,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
         //_rangeColliderPush.enabled = true;
         yield return new WaitForSeconds(_fallenTime);
         _canSlip = true;
+        _isGnoringPlayer = false;
+        
     }
 }
