@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: _playerDistanceBeforePush
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3875172577486782589, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0713d36fcfdcdb1b78d4627e71a8cfd7, type: 2}
     - target: {fileID: 4294519397563726272, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _behavior
       value: 
@@ -183,8 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AiBrain>k__BackingField: {fileID: 4622550471839979262}
   _fallenTime: 2
-  _grabPosition: {fileID: 3390675552061168892}
-  _DropPosition: {fileID: 0}
+  _ignorePlayerTime: 1
   _chaseState: 0
 --- !u!195 &2363909046023011900 stripped
 NavMeshAgent:

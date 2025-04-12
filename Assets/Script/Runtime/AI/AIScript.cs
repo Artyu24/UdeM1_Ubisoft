@@ -1,5 +1,11 @@
+using DG.Tweening;
 using NaughtyAttributes;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.AI.Navigation;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -51,7 +57,7 @@ public class AIScript : MonoBehaviour
     [SerializeField] private LayerMask _viewMak;
     [field:SerializeField, Required] public NavMeshAgent _agent {  get; set; }
     public LineOfSight LineOfSight { get; set; }//auto ref
-
+    public Animator _animator { get; set; }
     public npcState State { get; set; }
 
     [SerializeField,Tooltip("if the npc have an object")]private GrabObject _grabObject;
@@ -113,6 +119,7 @@ public class AIScript : MonoBehaviour
     }
     void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         if (_grabObject != null)
         {
             _grabObject.OnGrab(transform);
@@ -120,6 +127,11 @@ public class AIScript : MonoBehaviour
 
         if(_willTurnIntoGuarde)
             PlayerManager.instance.OnGrabFinalObject.AddListener(TurnIntoGuard);
+    }
+
+    void Update()
+    {
+        _animator.SetFloat("Velocity",_agent.velocity.magnitude);
     }
     void LateUpdate()
     {

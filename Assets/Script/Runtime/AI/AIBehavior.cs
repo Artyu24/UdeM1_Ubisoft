@@ -43,7 +43,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     }
     protected IEnumerator LookArround()
     {
-
+        AiBrain._animator.SetTrigger("LookArround");
         AiBrain.State = npcState.LookingArround;
         transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y + 90, transform.rotation.z), 0.5f);
         yield return new WaitForSeconds(1f);
