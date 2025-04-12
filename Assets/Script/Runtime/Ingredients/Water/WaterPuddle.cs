@@ -25,7 +25,7 @@ public class WaterPuddle : MonoBehaviour
         _Watermesh.transform.localScale = Vector3.one * initialScale;
         
     }
-    private void OnTriggerEnter(Collider other)
+    public void TriggerEnter(Collider other)
     {
         ISlideable slideableCharacter = other.transform.GetComponent<ISlideable>();
         if (slideableCharacter != null)
