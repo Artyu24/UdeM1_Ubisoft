@@ -161,6 +161,8 @@ public class PipeTool : MonoBehaviour
             dropWaterLeak.gameObject.name = "Leak_" + (i + 1);
             _leakDropWaterList.Add(dropWaterLeak);
         }
+        
+        parentObject.transform.localEulerAngles = Vector3.zero;
     }
 
     private (Axis, float) GetMostDistAxis(Vector3 lastPos, Vector3 actualPos)
