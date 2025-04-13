@@ -1,5 +1,4 @@
 using NaughtyAttributes;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,10 +65,12 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
     public void Clean()
     {
         _cleanerState = CleanerState.cleaning;
+        AiBrain._animator.SetBool("Cleaning",true);
         StartCoroutine(CleanCoroutine());
     }
     public void GoToFirstPuddle()
     {
+        AiBrain._animator.SetBool("Cleaning",false);
         if (ToClean.Count > 0)
         {
             AiBrain.SetDestination(ToClean[0].transform.position);
@@ -110,6 +111,7 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
     {
         while(_cleanerState == CleanerState.cleaning)
         {
+            AiBrain._animator.SetBool("Cleaning",true);
             yield return new WaitForSeconds(1f);
             if(ToClean.Count > 0)
             if (ToClean[0].CleanPuddle() < 0)
@@ -118,6 +120,7 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
                 break;
             }
         }
+        AiBrain._animator.SetBool("Cleaning",false);
     }
     private void GoToNextPuddle()
     {
@@ -125,14 +128,18 @@ public class AICleaner : AIBehavior//il netois toujours la premiere de la liste
     }
     public void OncompleteCleaning(WaterPuddle wp)
     {
+        AiBrain._animator.SetBool("Cleaning",false);
         if (ToClean.Contains(wp))
         {
+            
             ToClean.Remove(wp);
             GoToFirstPuddle();
         }
+        
     }
     private void GoToStart()
     {
+        _cleanerState = CleanerState.Leaving;
         AiBrain.SetDestination(_startPoint);
     }
 }
