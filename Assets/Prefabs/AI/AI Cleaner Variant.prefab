@@ -120,6 +120,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3875172577486782589, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: acce2697a889a11a3b9c056c8d692fff, type: 2}
     - target: {fileID: 3990935741444649363, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -400,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AiBrain>k__BackingField: {fileID: 7481013875347575279}
   _fallenTime: 0
+  _ignorePlayerTime: 1
   _cleanerState: 0
   _balise: {fileID: 8014348794740947304, guid: 6aa3d2aa9151d5a48a95c8f48be1282f, type: 3}
   <ToClean>k__BackingField: []
