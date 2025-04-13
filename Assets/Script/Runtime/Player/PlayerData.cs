@@ -7,6 +7,8 @@ public class PlayerData : MonoBehaviour
 {
     [Header("Components")] 
     [SerializeField] private Transform _playerMesh;
+    [SerializeField] private PlayerInteraction _playerInteraction;
+    public PlayerInteraction Interaction => _playerInteraction;
     public Transform PlayerMesh => _playerMesh;
     [SerializeField] private GameObject _rocco;
     [SerializeField] private GameObject _munch;
@@ -40,7 +42,7 @@ public class PlayerData : MonoBehaviour
     [Header("Sound")] 
     [SerializeField] private MusicTimer _musicTimer;
     public MusicTimer Timer => _musicTimer;
-
+    
     public bool SetupPlayerData(int index)
     {
         _index = index;
