@@ -33,6 +33,13 @@ public class ContextUI : MonoBehaviour
         }
         else if (other.GetComponent<IGrabbable>() != null && !_interactionContextOn)
         {
+            IGrabbable grabbable = other.GetComponent<IGrabbable>();
+            if (grabbable.GetIsGrabbed())
+            {
+                HideContextUI();
+                return;
+            }
+            
             _image.sprite = _textureX;
             _image.enabled = true;
         }

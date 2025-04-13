@@ -26,6 +26,8 @@ public class PlayerData : MonoBehaviour
     [Header("Data")]
     private int _index;
     public int PlayerIndex => _index;
+    private bool _isGrabByAI;
+    public bool IsGrabByAI { get => _isGrabByAI; set => _isGrabByAI = value; }
 
     [Header("Tutorial")] 
     [SerializeField] private PlayerTutorial _pTutorial;

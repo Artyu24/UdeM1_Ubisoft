@@ -13,8 +13,16 @@ public class GrabObject : ObjectBase, IGrabbable
         return this;
     }
 
+    public bool GetIsGrabbed()
+    {
+        return _isGrabbed;
+    }
+
     public virtual bool OnGrab(Transform catcher)
     {
+        if (_isGrabbed)
+            return false;
+        
         transform.SetParent(catcher);
         
         if(_rb != null)
@@ -29,6 +37,9 @@ public class GrabObject : ObjectBase, IGrabbable
 
     public virtual void OnRelease()
     {
+        if (!_isGrabbed)
+            return;
+        
         transform.SetParent(null);
         
         if(_rb != null)
