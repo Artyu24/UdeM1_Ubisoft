@@ -21,13 +21,16 @@ public class TutoObject : GrabObject
     public override bool OnGrab(Transform catcher)
     {
         bool isGrab = base.OnGrab(catcher);
+
+        if (!isGrab)
+            return false;
         
         PlayerManager.instance.FreezePlayers();
         
         _canvas.SetActive(true);
         _canvasGroup.DOFade(1f, _fadeTime);
         
-        return isGrab;
+        return true;
     }
 
     public override void OnRelease()
