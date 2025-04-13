@@ -47,6 +47,9 @@ public class TutoManager : MonoBehaviour
         
         _tutoCanvas.HideText(pData.PlayerIndex);
         
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.UI_CLICK);
+        
         if (pData.PlayerIndex == 0)
         {
             PlayerFirstAction(playerInput, pData, _firstPlayerInitPos, _firstPlayerEndPos, new Vector3(-0.5f, 0, 0.5f));
@@ -82,6 +85,9 @@ public class TutoManager : MonoBehaviour
         pData.AnimController.applyRootMotion = pData.IsReadyToPlay;
         pData.AnimController.SetBool("IsReady", pData.IsReadyToPlay);
 
+        if(AudioManager.instance != null && pData.IsReadyToPlay)
+            AudioManager.instance.PlayRandom(SoundState.SFX_JOUEUR_SELECTION);
+        
         _tutoCanvas.SwitchText(pData.PlayerIndex, pData.IsReadyToPlay);
         
         if (pData.IsReadyToPlay)
