@@ -7,6 +7,9 @@ public class ClientIA : MonoBehaviour, ISlideable
 {
     [Header("Sound")] 
     [SerializeField] private MusicTimer _musicTimer;
+
+    [Header("Components")] 
+    [SerializeField] private Animator _animController;
     
     [Header("IA")]
     [SerializeField] private NavMeshAgent _clientAgent;
@@ -19,6 +22,7 @@ public class ClientIA : MonoBehaviour, ISlideable
 
     [Header("Water Slide")] 
     private bool _isSliding;
+    private Coroutine _getUpAfterSlideCoroutine;
     [SerializeField] private Transform _iaMesh;
     [SerializeField] private float _rotationSpeedAnim = 500;
     
@@ -36,10 +40,6 @@ public class ClientIA : MonoBehaviour, ISlideable
                 AudioManager.instance.PlayRandom(SoundState.SFX_HUMAN_VOICES);
             _musicTimer.DoRandomSound = false;
         }
-        
-        //Anim when Sliding
-        if(_isSliding)
-            _iaMesh.Rotate(transform.up * _rotationSpeedAnim * Time.deltaTime);
         
         //Wander btw point
         if(_wanderPoints.Count == 0)
@@ -61,8 +61,12 @@ public class ClientIA : MonoBehaviour, ISlideable
                     //Reset Sliding Anim
                     if (_isSliding)
                     {
-                        _isSliding = false;
-                        _iaMesh.eulerAngles = Vector3.zero;
+                        if (_getUpAfterSlideCoroutine == null)
+                        {
+                            _animController.SetTrigger("GetUp");
+                            _getUpAfterSlideCoroutine = StartCoroutine(IAGetUpAfterSlide());
+                        }
+                        return;
                     }
                     
                     //Next Point
@@ -89,13 +93,15 @@ public class ClientIA : MonoBehaviour, ISlideable
     {
         if(AudioManager.instance != null)
             AudioManager.instance.PlayRandom(SoundState.SFX_HUMAN_SLIP_ON_WATER);
+            
+        _animController.SetTrigger("Fall");
         
         if (!doesContainsOil)
         {
             //Fall
             _clientAgent.isStopped = true;
             _rangeColliderPush.enabled = false;
-
+            
             StartCoroutine(IAFalling());
         }
         else
@@ -113,8 +119,17 @@ public class ClientIA : MonoBehaviour, ISlideable
 
     private IEnumerator IAFalling()
     {
+        yield return new WaitForSeconds(_fallenTime - 1);
+        _animController.SetTrigger("GetUp");
         yield return new WaitForSeconds(_fallenTime);
         _clientAgent.isStopped = false;
         _rangeColliderPush.enabled = true;
+    }
+
+    private IEnumerator IAGetUpAfterSlide()
+    {
+        yield return new WaitForSeconds(2f);
+        _isSliding = false;
+        _getUpAfterSlideCoroutine = null;
     }
 }

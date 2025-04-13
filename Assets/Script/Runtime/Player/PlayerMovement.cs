@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _data.AnimController.SetTrigger("Pushed");
         
+        _rb.linearVelocity = Vector3.zero;
         Vector3 dir = transform.position - iaPos;
         _rb.AddForce(dir.normalized * _pushForce);
         StartCoroutine(PushedCoroutine());
