@@ -27,21 +27,18 @@ public class Grid : MonoBehaviour
     {
         if (!isOpen && currentCount >= requiredObjectCount)
         {
-            Open();
+            Open(currentCount);
         }
     }
 
-    void Open()
+    void Open(int currentCount)
     {
         Debug.Log(gameObject.name + " is opening!");
         isOpen = true;
 
-        //Vector3 direction = new Vector3(0, -1, 0);
-        //transform.Translate(direction);
-
         transform.DOMove(transform.position + Vector3.down, 2f).SetEase(Ease.InOutCirc).Loops();
 
-        if (teleportHitbox != null)
+        if (teleportHitbox != null && currentCount == requiredObjectCount)
             teleportHitbox.SetActive(true);
 
         //gameObject.SetActive(false);
