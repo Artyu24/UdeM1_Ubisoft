@@ -125,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
             
             _data.IsGrabByAI = false;
             _rb.isKinematic = false;
+            transform.eulerAngles = Vector3.zero;
         }
     }
 }
