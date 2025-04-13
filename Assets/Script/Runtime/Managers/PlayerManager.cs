@@ -130,7 +130,9 @@ public class PlayerManager : MonoBehaviour
     {
         foreach (PlayerData pData in _playerList)
         {
+            pData.Movement.SetIsGrabed(false);
             pData.transform.parent = null;
+            DontDestroyOnLoad(pData);
             pData.Interaction.ReleaseObject();
         }
     }

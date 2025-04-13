@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,9 +6,17 @@ public class ReloadScene : MonoBehaviour
 {
     void Update()
     {
-        PlayerManager.instance.ReloadPlayer();
-        
+
         if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        {
+            PlayerManager.instance.ReloadPlayer();
+            StartCoroutine(Delay());
+        }
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.05f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
