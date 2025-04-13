@@ -683,6 +683,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6180030832911167072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &539621663813562101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5585475163332420001}
+    m_Modifications:
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25827754
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25827754
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25827754
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.7265658e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0004863107
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00011436139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.36513513
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.37711966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6114923
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.59205943
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208441296584306127, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: m_Name
+      value: necklace
+      objectReference: {fileID: 0}
+    - target: {fileID: 6803063287192291901, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1db49bf75805e944c852bb1ae5576cf7, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+--- !u!4 &4425376561404454768 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4185822635259349381, guid: c780048b9e7d57d4ea9f48b22baee1e7, type: 3}
+  m_PrefabInstance: {fileID: 539621663813562101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2161496417908231842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -782,6 +864,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5799710098955775747, guid: a651e8646e8b9824f8f35565b7a606f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4425376561404454768}
     - targetCorrespondingSourceObject: {fileID: 5799710098955775747, guid: a651e8646e8b9824f8f35565b7a606f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5587980274278028906}
