@@ -17,7 +17,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     private bool _isSliding;
     
     [SerializeField,Label("fall duration")] private float _fallenTime;
-    bool _canSlip=true;
+    [SerializeField]bool _canSlip=true;
 
     [SerializeField] private float _ignorePlayerTime=1f;
     void Start()

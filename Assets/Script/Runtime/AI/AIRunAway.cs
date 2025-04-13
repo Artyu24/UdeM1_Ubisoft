@@ -42,6 +42,7 @@ public class AIRunAway : AIBehavior
     }
     protected IEnumerator PushPlayer(PlayerMovement playerMovement)
     {
+        AiBrain._animator.SetTrigger("Push");
         playerMovement.OnIAPush(transform.position);
         yield return new WaitForSeconds(1f);
         _reactionCoroutine = null;
