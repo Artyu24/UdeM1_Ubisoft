@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +5,9 @@ using UnityEngine.AI;
 
 public class ClientIA : MonoBehaviour, ISlideable
 {
+    [Header("Sound")] 
+    [SerializeField] private MusicTimer _musicTimer;
+    
     [Header("IA")]
     [SerializeField] private NavMeshAgent _clientAgent;
     [SerializeField] private Collider _rangeColliderPush;
@@ -28,6 +30,13 @@ public class ClientIA : MonoBehaviour, ISlideable
     
     private void Update()
     {
+        if (_musicTimer.DoRandomSound)
+        {
+            if(AudioManager.instance != null)
+                AudioManager.instance.PlayRandom(SoundState.SFX_HUMAN_VOICES);
+            _musicTimer.DoRandomSound = false;
+        }
+        
         //Anim when Sliding
         if(_isSliding)
             _iaMesh.Rotate(transform.up * _rotationSpeedAnim * Time.deltaTime);
@@ -35,6 +44,13 @@ public class ClientIA : MonoBehaviour, ISlideable
         //Wander btw point
         if(_wanderPoints.Count == 0)
             return;
+        
+        if (_musicTimer.DoSound)
+        {
+            if(AudioManager.instance != null)
+                AudioManager.instance.PlayRandom(SoundState.SFX_HUMAN_FOOTSTEPS);
+            _musicTimer.DoSound = false;
+        }
         
         if (!_clientAgent.pathPending)
         {
@@ -71,6 +87,9 @@ public class ClientIA : MonoBehaviour, ISlideable
 
     public void OnSlide(bool doesContainsOil)
     {
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_HUMAN_SLIP_ON_WATER);
+        
         if (!doesContainsOil)
         {
             //Fall
@@ -89,7 +108,6 @@ public class ClientIA : MonoBehaviour, ISlideable
                 _isSliding = true;
                 _wanderIndex--;
             }
-            return;
         }
     }
 
@@ -99,5 +117,4 @@ public class ClientIA : MonoBehaviour, ISlideable
         _clientAgent.isStopped = false;
         _rangeColliderPush.enabled = true;
     }
-    
 }

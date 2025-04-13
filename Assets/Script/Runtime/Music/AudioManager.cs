@@ -8,12 +8,19 @@ using Unity.VisualScripting;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
+    
     public Sound[] sounds;
     
     private Dictionary<SoundState, List<Sound>> DicoActualSound = new Dictionary<SoundState, List<Sound>>();
     
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+        
        foreach (Sound s in sounds)
        {
             s.Source = gameObject.AddComponent<AudioSource>();
@@ -83,7 +90,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            throw new ArgumentNullException();
+            Debug.Log("No Sound of type : " + soundState.ToString());
         }   
     }
 }

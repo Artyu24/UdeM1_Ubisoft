@@ -58,6 +58,9 @@ public class TeleportPlayers : MonoBehaviour
         //Launch TP
         if(HUDManager.instance != null)
             HUDManager.instance.FadeInTransition(LoadScene);
+        
+        if(AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.SFX_TRANSITION_PIPEWALKING);
     }
 
     private void LoadScene()

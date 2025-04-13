@@ -68,46 +68,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e21b7ff145e4d547baf0c6ad72fe567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectTypeEnum: 0
   _interactEvents:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AIEventDispatcher, Assembly-CSharp
-        m_MethodName: AARunAway
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PipeTool, Assembly-CSharp
-        m_MethodName: PipeEffect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _valve: {fileID: 2595152922725417258}
+  _pipeTool: {fileID: 0}
+  _dropPuddleAtEnd: 0
 --- !u!1 &7205632962565603973
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,10 +237,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 5498ed45e724141c097698070cfd798b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61452bf3d1ea140d1acd130190ab7384, type: 2}
+    - target: {fileID: -1439730007547781893, guid: 5498ed45e724141c097698070cfd798b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61452bf3d1ea140d1acd130190ab7384, type: 2}
+    - target: {fileID: 882129737928793925, guid: 5498ed45e724141c097698070cfd798b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61452bf3d1ea140d1acd130190ab7384, type: 2}
     - target: {fileID: 919132149155446097, guid: 5498ed45e724141c097698070cfd798b, type: 3}
       propertyPath: m_Name
       value: TuyauPourValve
       objectReference: {fileID: 0}
+    - target: {fileID: 3280927520727180574, guid: 5498ed45e724141c097698070cfd798b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61452bf3d1ea140d1acd130190ab7384, type: 2}
+    - target: {fileID: 6944656104360116776, guid: 5498ed45e724141c097698070cfd798b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61452bf3d1ea140d1acd130190ab7384, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

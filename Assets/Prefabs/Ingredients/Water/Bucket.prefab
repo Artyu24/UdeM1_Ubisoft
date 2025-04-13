@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4946456676277021991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.289, z: 0}
+  m_LocalPosition: {x: 0, y: 0.75600004, z: 0}
   m_LocalScale: {x: 1, y: -0.02, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,7 +148,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &4136752662385255211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2162369784407394348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,9 +182,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdda50b68fe51b34a99d4ca4aae74b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectTypeEnum: 0
   _rb: {fileID: 1409929009258802300}
   _col: {fileID: 4136752662385255211}
   _waterLevel: {fileID: 4946456676277021991}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
   _waterPuddlePrefab: {fileID: 7858484188267639348, guid: c3b8dd297ce722a409782506e8d8f2a8, type: 3}
 --- !u!1001 &8271399162590435092
 PrefabInstance:
@@ -212,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 93864bb5364664325bed0b6d7e24762a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.467
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 93864bb5364664325bed0b6d7e24762a, type: 3}
       propertyPath: m_LocalPosition.z

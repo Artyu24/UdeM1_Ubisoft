@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -12,10 +13,21 @@ public class PlayerManager : MonoBehaviour
 
     //Object Search
     private bool _isObjectInHand = false;
-    public bool IsObjectInHand { get => _isObjectInHand; set => _isObjectInHand = value; }
+    public bool IsObjectInHand 
+    {
+        get
+        {
+            return _isObjectInHand;
+        } 
+        set 
+        {
+            _isObjectInHand = value;
+            if (value) { OnGrabFinalObject.Invoke(); }
+        } 
+    }
     private TeleportPlayers _teleportPlayersObject;
     public TeleportPlayers TeleportPlayersObject => _teleportPlayersObject;
-
+    public UnityEvent OnGrabFinalObject;
     private void Awake()
     {
         
@@ -92,9 +104,9 @@ public class PlayerManager : MonoBehaviour
         if(GameObject.FindFirstObjectByType(typeof(HubManager)))
             return;
         
-        foreach (PlayerInput player in _playerList)
+        for (int i = 0; i < _playerList.Count; i++)
         {
-            player.transform.position = position;
+            _playerList[i].transform.position = position + new Vector3(0.75f * i, 0, 0.75f * i);
         }
     }
 }
