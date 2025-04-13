@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4477756602862098058}
   - component: {fileID: 1260268777868402568}
   - component: {fileID: 2709130902803264268}
+  - component: {fileID: -6947138570293727968}
   m_Layer: 0
   m_Name: SnapBucket
   m_TagString: Untagged
@@ -69,6 +70,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.65, y: 0.13, z: 0.65}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6947138570293727968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740998409556787241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &3235771832361140125
 GameObject:
   m_ObjectHideFlags: 0
