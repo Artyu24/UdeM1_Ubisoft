@@ -658,6 +658,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 315009348031155396, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 08b9e228afc35d6f89da8c892ae60b43, type: 2}
     - target: {fileID: 774808009351230364, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
       propertyPath: m_IsKinematic
       value: 1
@@ -682,6 +686,10 @@ PrefabInstance:
       propertyPath: _sightStart
       value: 
       objectReference: {fileID: 837951932}
+    - target: {fileID: 2641019440301844769, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3471273400500187805, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -704,6 +712,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4598665726925740470, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676918290585024136, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676918290585024136, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676918290585024136, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676918290585024136, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9135514610823762173, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
@@ -746,7 +770,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6025251823558361554, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -944,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154915719473561306, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3125225638202281539, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
       propertyPath: m_Layer
