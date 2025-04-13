@@ -1,15 +1,8 @@
-using DG.Tweening;
 using NaughtyAttributes;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.AI.Navigation;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 public enum npcState
 {
