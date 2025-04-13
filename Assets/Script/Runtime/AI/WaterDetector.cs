@@ -14,7 +14,6 @@ public class WaterDetector : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if(!other.gameObject.TryGetComponent<WaterPuddle>(out WaterPuddle wp)) return;
-
         if(!_currentPuddle.Contains(wp))
         {
             _currentPuddle.Add(wp);
@@ -25,11 +24,5 @@ public class WaterDetector : MonoBehaviour
     void Start()
     {
         onWaterDetected += _cleaner.AddWater;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
