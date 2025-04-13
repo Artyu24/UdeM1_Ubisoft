@@ -125,4 +125,15 @@ public class PlayerManager : MonoBehaviour
             pData.IsInTuto = false;
         }
     }
+
+    public void ReloadPlayer()
+    {
+        foreach (PlayerData pData in _playerList)
+        {
+            pData.Movement.SetIsGrabed(false);
+            pData.transform.parent = null;
+            DontDestroyOnLoad(pData);
+            pData.Interaction.ReleaseObject();
+        }
+    }
 }

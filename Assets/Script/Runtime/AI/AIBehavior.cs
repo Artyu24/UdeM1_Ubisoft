@@ -126,7 +126,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
 
             StartCoroutine(IAFalling());
         }
-        else
+        else if(doesContainsOil)
         {
             //Slide
             RaycastHit hit;
