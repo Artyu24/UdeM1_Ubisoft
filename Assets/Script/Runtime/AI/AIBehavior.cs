@@ -18,7 +18,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
     
     [SerializeField,Label("fall duration")] private float _fallenTime;
     bool _canSlip=true;
-    
+
     [SerializeField] private float _ignorePlayerTime=1f;
     void Start()
     {
@@ -118,10 +118,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
 
     public void OnSlide(bool doesContainsOil)
     {
-        if (!_canSlip)
-            return;
-
-        if (!doesContainsOil)
+        if (!doesContainsOil && _canSlip)
         {
             //Fall
             AiBrain._agent.isStopped = true;
@@ -137,7 +134,7 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
             {
                 AiBrain._agent.destination = hit.point;
                 _isSliding = true;
-                
+                StartCoroutine(IASlide());
             }
             return;
         }
@@ -161,6 +158,24 @@ public class AIBehavior : MonoBehaviour, IInteractable, ISlideable
         yield return new WaitForSeconds(_fallenTime);
         _canSlip = true;
         _isGnoringPlayer = false;
-        
+    }
+    private IEnumerator IASlide()
+    {
+        AiBrain.State = npcState.Slide;
+        _canSlip = false;
+        _isGnoringPlayer = true;
+        float OGSpeed = AiBrain._agent.speed;
+        //AiBrain._agent.speed *= 20;
+        AiBrain.DropItem();
+        AiBrain.OnFall.Invoke();
+        AiBrain._animator.SetTrigger("Slide");
+        yield return new WaitForSeconds(_fallenTime);
+        _isGnoringPlayer = true;
+        yield return new WaitForSeconds(_fallenTime*0.10f);
+        _canSlip = true;
+        _isGnoringPlayer = false;
+        AiBrain._agent.speed = OGSpeed;
+        AiBrain.State = npcState.wandering;
+        Wander();
     }
 }
