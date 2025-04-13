@@ -662,6 +662,30 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1776443965930526123, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.49189946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776443965930526123, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.49189946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776443965930526123, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.49189946
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776443965930526123, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.422
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969835212645338992, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: _sightStart
+      value: 
+      objectReference: {fileID: 837951932}
+    - target: {fileID: 3471273400500187805, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2333023306942667890, guid: 22ad98bed429a6146996a2bfdec3fb9f, type: 3}
     - target: {fileID: 3929261473754698551, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
       propertyPath: '<WanderPoints>k__BackingField.Array.data[0]'
       value: 
@@ -918,6 +942,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI CHASE Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2154915719473561306, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3125225638202281539, guid: 02b84d7963adc0347b11a61be3678b3e, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -1067,6 +1095,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &837951932 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2902425993733545076, guid: 017ad5b888d92ab4fa21b6c7fcfeb591, type: 3}
+  m_PrefabInstance: {fileID: 318693015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &965689462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,7 +1411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858484188267639348, guid: c3b8dd297ce722a409782506e8d8f2a8, type: 3}
       propertyPath: _doesContainsOil
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
