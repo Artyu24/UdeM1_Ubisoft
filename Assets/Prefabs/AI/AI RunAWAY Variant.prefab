@@ -39,6 +39,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 566911605594937707, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1605808617305515399, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
       propertyPath: _rangePlayerView
       value: 2
@@ -209,7 +213,6 @@ MonoBehaviour:
   _reactionZone: {fileID: 0}
   _leavePoint: {fileID: 0}
   _objectType: A
-  <IsRunningAway>k__BackingField: 0
 --- !u!4 &5998470564135560522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8327681990949139391, guid: e4c1a6f5ae58e8341a6b5a6dcaeb9cc0, type: 3}
