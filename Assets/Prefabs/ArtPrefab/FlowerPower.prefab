@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8171138544364733176}
-  m_Layer: 0
+  - component: {fileID: 7269864875694619940}
+  m_Layer: 7
   m_Name: FlowerPower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,6 +36,27 @@ Transform:
   - {fileID: 7074812348182096960}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7269864875694619940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486242075411611717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.4, y: 7.4, z: 5.04}
+  m_Center: {x: 302.74, y: 157.4, z: -36.256}
 --- !u!1001 &1826426142812093411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,9 +183,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: b549b73a25c0c44ada0d1dd7bf4230cd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: b549b73a25c0c44ada0d1dd7bf4230cd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b549b73a25c0c44ada0d1dd7bf4230cd, type: 3}
       propertyPath: m_Name
       value: Fleur 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b549b73a25c0c44ada0d1dd7bf4230cd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: b549b73a25c0c44ada0d1dd7bf4230cd, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -223,9 +261,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: ed93319438a3e40c99083382bcd22dbb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: ed93319438a3e40c99083382bcd22dbb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ed93319438a3e40c99083382bcd22dbb, type: 3}
       propertyPath: m_Name
       value: Fleur
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed93319438a3e40c99083382bcd22dbb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: ed93319438a3e40c99083382bcd22dbb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -285,9 +339,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8380157826906577798, guid: d8b32a0eb059b44cfad85f34b793e519, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6733177361254619370, guid: d8b32a0eb059b44cfad85f34b793e519, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d8b32a0eb059b44cfad85f34b793e519, type: 3}
       propertyPath: m_Name
       value: Fleur1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d8b32a0eb059b44cfad85f34b793e519, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424396828587804706, guid: d8b32a0eb059b44cfad85f34b793e519, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

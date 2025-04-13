@@ -8,6 +8,9 @@ public class Credits : MonoBehaviour
     [Button]
     public void Back()
     {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayRandom(SoundState.UI_CLICK);
+
         // load game scene
         SceneManager.LoadScene(SceneName);
     }
