@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1409929009258802300}
   - component: {fileID: 4136752662385255211}
   - component: {fileID: 2162369784407394348}
+  - component: {fileID: 7266519293170029752}
   m_Layer: 0
   m_Name: Bucket
   m_TagString: Untagged
@@ -190,6 +191,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _waterPuddlePrefab: {fileID: 7858484188267639348, guid: c3b8dd297ce722a409782506e8d8f2a8, type: 3}
+--- !u!114 &7266519293170029752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416522021767612046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &8271399162590435092
 PrefabInstance:
   m_ObjectHideFlags: 0

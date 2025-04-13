@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
     private float _interactTimer;
     private bool _canInteract;
     //Check if in Interact CD / Object Grabbed / Action Possible
-    public bool CanInteract => _canInteract && _grabbedObj == null && _canDoGrab;
+    public bool CanInteract => _canInteract && _grabbedObj == null && _canDoGrab && !_data.IsGrabByAI;
     public bool DoPlayerInteractActionPossible => OnPlayerInteractAction != null;
 
     [Header("Search Object")] 
@@ -69,7 +69,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ctx.started)
         {
-            if(!_canDoGrab)
+            if(!_canDoGrab || _data.IsGrabByAI)
                 return;
             
             if (_grabbedObj != null)
@@ -106,11 +106,14 @@ public class PlayerInteraction : MonoBehaviour
 
         if(AudioManager.instance != null)
             AudioManager.instance.PlayRandom(SoundState.SFX_GRAB);
-        
-        if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
+
+        if (PlayerManager.instance.TeleportPlayersObject != null)
         {
-            PlayerManager.instance.IsObjectInHand = true;
-            _hasRightObjectInHand = true;
+            if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
+            {
+                PlayerManager.instance.IsObjectInHand = true;
+                _hasRightObjectInHand = true;
+            }
         }
         
         _grabbedObj = objectGrab;
@@ -144,6 +147,9 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ctx.started)
         {
+            if(_data.IsGrabByAI)
+                return;
+            
             //If an Action is possible
             if (OnPlayerInteractAction != null)
             {
@@ -184,7 +190,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ctx.started)
         {
-            if(PlayerManager.instance.TeleportPlayersObject == null || !_canFindTarget)
+            if(PlayerManager.instance.TeleportPlayersObject == null || !_canFindTarget || _data.IsGrabByAI)
                 return;
 
             FindTarget _findTarget = Instantiate(_findTargetPrefab, transform.position, Quaternion.identity);

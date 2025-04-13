@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    public List<PlayerInput> _playerList {  get; private set; }
+    public List<PlayerData> _playerList {  get; private set; }
 
     //Object Search
     private bool _isObjectInHand = false;
@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
             return;
         }
 
-        _playerList = new List<PlayerInput>();
+        _playerList = new List<PlayerData>();
     }
 
     private void Start()
@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
 
         playerInput.transform.position = transform.position;
         
-        _playerList.Add(playerInput);
+        _playerList.Add(pData);
     }
 
     private void SceneLoadedInit()
@@ -107,6 +107,22 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < _playerList.Count; i++)
         {
             _playerList[i].transform.position = position + new Vector3(0.75f * i, 0, 0.75f * i);
+        }
+    }
+
+    public void FreezePlayers()
+    {
+        foreach (PlayerData pData in _playerList)
+        {
+            pData.IsInTuto = true;
+        }
+    }
+
+    public void UnFreezePlayers()
+    {
+        foreach (PlayerData pData in _playerList)
+        {
+            pData.IsInTuto = false;
         }
     }
 }

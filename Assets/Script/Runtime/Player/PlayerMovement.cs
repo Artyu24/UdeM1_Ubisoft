@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Grab related")]
     public UnityEvent OnGrab;
     public UnityEvent OnRelease;
-    public bool _canMove = true;
     
 #if UNITY_EDITOR
     private void Awake()
@@ -41,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         if(_data.IsInTuto)
             return;
         
-        if (_movementInput != Vector3.zero && !_isPushed && _canMove)
+        if (_movementInput != Vector3.zero && !_isPushed && !_data.IsGrabByAI)
         {
             _data.AnimController.SetFloat("Speed", 1);
 
@@ -99,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _data.AnimController.SetTrigger("Pushed");
         
+        _rb.linearVelocity = Vector3.zero;
         Vector3 dir = transform.position - iaPos;
         _rb.AddForce(dir.normalized * _pushForce);
         StartCoroutine(PushedCoroutine());
@@ -117,15 +117,16 @@ public class PlayerMovement : MonoBehaviour
             _data.AnimController.SetBool("IAGrab", true);
             
             OnGrab.Invoke();
-            _canMove = false;
+            _data.IsGrabByAI = true;
             _rb.isKinematic = true;
         }
         else
         {
             _data.AnimController.SetBool("IAGrab", false);
             
-            _canMove = true;
+            _data.IsGrabByAI = false;
             _rb.isKinematic = false;
+            transform.eulerAngles = Vector3.zero;
         }
     }
 }
