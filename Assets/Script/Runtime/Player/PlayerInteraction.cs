@@ -106,11 +106,14 @@ public class PlayerInteraction : MonoBehaviour
 
         if(AudioManager.instance != null)
             AudioManager.instance.PlayRandom(SoundState.SFX_GRAB);
-        
-        if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
+
+        if (PlayerManager.instance.TeleportPlayersObject != null)
         {
-            PlayerManager.instance.IsObjectInHand = true;
-            _hasRightObjectInHand = true;
+            if (ReferenceEquals(PlayerManager.instance.TeleportPlayersObject.ObjectToGet, objectGrab))
+            {
+                PlayerManager.instance.IsObjectInHand = true;
+                _hasRightObjectInHand = true;
+            }
         }
         
         _grabbedObj = objectGrab;
