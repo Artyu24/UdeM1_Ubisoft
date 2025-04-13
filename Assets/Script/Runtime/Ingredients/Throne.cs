@@ -31,6 +31,7 @@ public class Throne : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += (arg0, mode) => SceneLoadedInit();
+        OnThroneUpdated?.Invoke(ObjectCounter);
     }
     
     private void AddObject()

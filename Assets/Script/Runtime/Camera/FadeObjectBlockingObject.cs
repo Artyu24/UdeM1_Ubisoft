@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FadeObjectBlockingObject : MonoBehaviour
 {
+    [SerializeField] private float _xBox = 0.1f;
+    [SerializeField] private float _yBox = 0.5f;
+    
     [SerializeField]
     private LayerMask LayerMask;
     [SerializeField]
@@ -34,10 +37,20 @@ public class FadeObjectBlockingObject : MonoBehaviour
     {
         while (true)
         {
-            int hits = Physics.RaycastNonAlloc(
+            //int hits = Physics.RaycastNonAlloc(
+            //    Camera.main.transform.position,
+            //    (Target.transform.position + TargetPositionOffset - Camera.main.transform.position).normalized,
+            //    Hits,
+            //    Vector3.Distance(Camera.main.transform.position, Target.transform.position + TargetPositionOffset),
+            //    LayerMask
+            //);
+            
+            int hits = Physics.BoxCastNonAlloc(
                 Camera.main.transform.position,
+                new Vector3(_xBox, _yBox, 0.01f),
                 (Target.transform.position + TargetPositionOffset - Camera.main.transform.position).normalized,
                 Hits,
+                Quaternion.identity,
                 Vector3.Distance(Camera.main.transform.position, Target.transform.position + TargetPositionOffset),
                 LayerMask
             );
