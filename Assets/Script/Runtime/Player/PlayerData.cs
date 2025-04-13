@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerData : MonoBehaviour
@@ -7,8 +8,20 @@ public class PlayerData : MonoBehaviour
     [Header("Components")] 
     [SerializeField] private Transform _playerMesh;
     public Transform PlayerMesh => _playerMesh;
-    [SerializeField] private Animator _anim;
-    public Animator AnimController => _anim;
+    [SerializeField] private GameObject _rocco;
+    [SerializeField] private GameObject _munch;
+    [SerializeField] private Animator _roccoAnim;
+    [SerializeField] private Animator _munchAnim;
+    public Animator AnimController
+    {
+        get
+        {
+            if(_index == 0)
+                return _roccoAnim;
+                
+            return _munchAnim;
+        }
+    }
 
     [Header("Data")]
     private int _index;
@@ -31,6 +44,11 @@ public class PlayerData : MonoBehaviour
         _index = index;
 
         name = "Player_" + (index + 1);
+
+        if (_index == 0)
+            _rocco.SetActive(true);
+        else if(_index == 1)
+            _munch.SetActive(true);
         
         return true;
     }
